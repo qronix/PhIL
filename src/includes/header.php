@@ -20,7 +20,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <?php
     session_start();
-    $_SESSION['username'] = 'admin';
+//    $_SESSION['username'] = 'admin';
     if(isset($_SESSION['username'])&&!empty($_SESSION['username'])){
         echo("<nav class='navbar navbar-expand-lg navbar-dark'>
           <a class='navbar-brand' href='#'><img src='img/logo.svg' id='navLogo'><p id='philLogoNav'>PhIL</p></a>

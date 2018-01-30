@@ -1,52 +1,61 @@
 <?php
 include("includes/header.php");
-include("user.php");
-
-$errormsg = "";
-$username = "";
-$password = "";
-$user = new User();
-
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    if(isset($_POST['username'])&&!empty($_POST['username'])){
-        $username = filter_input(INPUT_POST,'username');
-    }else{
-        $errormsg = "Username cannot be empty";
-    }
-    if(isset($_POST['password'])&&!empty($_POST['password'])){
-        $password = filter_input(INPUT_POST,'password');
-    }else{
-        $errormsg .= "\nPassword cannot be empty";
-
-    }
-    if(!empty($username) && !empty($password) && empty($errormsg)){
-        $errormsg = $user->login($username,$password);
-    }
-
-}
+session_destroy();
+//print_r($_SESSION);
+//include("user.php");
+//
+//$errormsg = "";
+//$username = "";
+//$password = "";
+//$user = new User();
+//
+//if($_SERVER['REQUEST_METHOD']=='POST'){
+//    if(isset($_POST['username'])&&!empty($_POST['username'])){
+//        $username = filter_input(INPUT_POST,'username');
+//    }else{
+//        $errormsg = "Username cannot be empty";
+//    }
+//    if(isset($_POST['password'])&&!empty($_POST['password'])){
+//        $password = filter_input(INPUT_POST,'password');
+//    }else{
+//        $errormsg .= "\nPassword cannot be empty";
+//
+//    }
+//    if(!empty($username) && !empty($password)){
+//        $errormsg = "Got data";
+//    }
+////    if(!empty($username) && !empty($password) && empty($errormsg)){
+////        $errormsg = $user->login($username,$password);
+////    }
+//
+//    echo $errormsg;
+//}
 
 ?>
 <div class="container main col-md-6">
-    <?php if(!empty($errormsg)){
+<!--    --><?php //if(!empty($errormsg)){
+//
+//        $alert = "<div class='alert alert-danger'>";
+//        $alert .= $errormsg;
+//        $alert .= "</div>";
+//        echo $alert;
+//    }?>
+    <div class="container" id="form-message">
 
-        $alert = "<div class='alert alert-danger'>";
-        $alert .= $errormsg;
-        $alert .= "</div>";
-        echo $alert;
-    }?>
+    </div>
     <div class="container logo">
         <img class="image" src="img/logo.svg">
         <p id="philLogo">PhIL</p>
     </div>
     <div class="container" id="loginArea">
-        <form action="" method="POST">
-            <div class="form-group">
+        <form id="login-form" action="login.php" method="POST">
+            <div class="form-group" id="username-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="password-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name="password">
+                <input type="password" class="form-control" name="password" id="password">
             </div>
             <button type="submit" class="btn">Submit</button>
             <a href="forgot.php" id="forgotLink">Forgot password?</a>
@@ -58,6 +67,44 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $(".main").fadeIn(2000);
     });
 
+    $(function(){
+        var form=$('#login-form');
+        var formMessage =$('#form-message');
+
+        $(form).submit(function(event){
+
+        $('.alert').remove();
+           var formData = {
+               'username' : $('input[name=username]').val(),
+               'password' : $('input[name=password').val()
+           };
+
+            $.ajax({
+                type:'POST',
+                url:$(form).attr('action'),
+                data: formData,
+                dataType: 'json',
+                encode: true
+        }).done(function(data){
+                if(data.errors){
+                    if(data.errors.username){
+                        $('#username-group').append("<div class='alert alert-danger'>"+data.errors.username+"</div>");
+                    }
+                    if(data.errors.password){
+                        $('#password-group').append("<div class='alert alert-danger'>"+data.errors.password+"</div>");
+                    }
+                    if(data.errors.login){
+                        $(formMessage).append("<div class='alert alert-danger'>"+data.errors.login+"</div>");
+                    }
+                }
+            });
+            $('#username').val('');
+            $('#password').val('');
+
+            event.preventDefault();
+        });
+
+    });
 </script>
   </body>
 </html>

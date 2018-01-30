@@ -1,29 +1,35 @@
 <?php
-
 include("user.php");
 
-$errormsg = "";
 $username = "";
 $password = "";
+$user = new User();
+$data = array(); //return data for AJAX request
+$errors = array(); //Error array to pass to AJAX data
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['username'])&&!empty($_POST['username'])){
         $username = filter_input(INPUT_POST,'username');
     }else{
-        $errormsg = "<div class='alert alert-danger' role='alert'>";
-        $errormsg .= "Username cannot be empty";
-        $errormsg .= "</div>";
+        $errors['username'] = "Username cannot be empty";
     }
     if(isset($_POST['password'])&&!empty($_POST['password'])){
         $password = filter_input(INPUT_POST,'password');
     }else{
-        $errormsg = "<div class='alert alert-danger' role='alert'>";
-        $errormsg .= "Password cannot be empty";
-        $errormsg .= "</div>";
+        $errors['password'] = "Password cannot be empty";
+
+    }
+    if(!empty($username) && !empty($password)){
+        $data['message'] = "Got data";
     }
     if(!empty($username) && !empty($password) && empty($errormsg)){
-        $errormsg = login($username,$password);
+        $errors['login'] = $user->login($username,$password);
+    }
+    if(!sizeof($errors)==0){
+        $data['errors'] = $errors;
     }
 
+    echo json_encode($data);
 }
 
+?>
