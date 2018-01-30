@@ -1,37 +1,8 @@
 <?php
 include("includes/header.php");
-session_destroy();
-//print_r($_SESSION);
-//include("user.php");
-//
-//$errormsg = "";
-//$username = "";
-//$password = "";
-//$user = new User();
-//
-//if($_SERVER['REQUEST_METHOD']=='POST'){
-//    if(isset($_POST['username'])&&!empty($_POST['username'])){
-//        $username = filter_input(INPUT_POST,'username');
-//    }else{
-//        $errormsg = "Username cannot be empty";
-//    }
-//    if(isset($_POST['password'])&&!empty($_POST['password'])){
-//        $password = filter_input(INPUT_POST,'password');
-//    }else{
-//        $errormsg .= "\nPassword cannot be empty";
-//
-//    }
-//    if(!empty($username) && !empty($password)){
-//        $errormsg = "Got data";
-//    }
-////    if(!empty($username) && !empty($password) && empty($errormsg)){
-////        $errormsg = $user->login($username,$password);
-////    }
-//
-//    echo $errormsg;
-//}
 
 ?>
+
 <div class="container main col-md-6">
     <div class="container" id="form-message">
 
@@ -41,14 +12,30 @@ session_destroy();
         <p id="philLogo">PhIL</p>
     </div>
     <div class="container" id="loginArea">
-        <form id="login-form" action="login.php" method="POST">
+        <form id="login-form" action="createuser.php" method="POST">
             <div class="form-group" id="username-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
             </div>
             <div class="form-group" id="password-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password">
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div class="form-group" id="passwordverify-group">
+                <label for="passwordverify">Verify password</label>
+                <input type="password" class="form-control" name="passwordverify" id="passwordverify" required>
+            </div>
+            <div class="form-group" id="email-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="enter email" required>
+            </div>
+            <div class="form-group" id="role-group">
+                <label for="role">Role</label>
+                <select id="role" class="form-control" name="role">
+                    <option selected>user</option>
+                    <option>manager</option>
+                    <option>admin</option>
+                </select>
             </div>
             <button type="submit" class="btn">Submit</button>
             <a href="forgot.php" id="forgotLink">Forgot password?</a>
@@ -66,19 +53,21 @@ session_destroy();
 
         $(form).submit(function(event){
 
-        $('.alert').remove();
-           var formData = {
-               'username' : $('input[name=username]').val(),
-               'password' : $('input[name=password').val()
-           };
-
+            $('.alert').remove();
+            var formData = {
+                'username' : $('input[name=username]').val(),
+                'password' : $('input[name=password').val(),
+                'passwordverify' : $('input[name=passwordverify]').val(),
+                'email' : $('input[name=email]').val(),
+                'role' : $('input[name=role]').val()
+            };
             $.ajax({
                 type:'POST',
                 url:$(form).attr('action'),
                 data: formData,
                 dataType: 'json',
                 encode: true
-        }).done(function(data){
+            }).done(function(data){
                 if(data.errors){
                     if(data.errors.username){
                         $('#username-group').append("<div class='alert alert-danger'>"+data.errors.username+"</div>");
@@ -96,8 +85,7 @@ session_destroy();
 
             event.preventDefault();
         });
-
     });
 </script>
-  </body>
+</body>
 </html>
