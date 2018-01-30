@@ -1,7 +1,15 @@
 <?php
 include("includes/header.php");
+include("user.php");
 
+$user = new User();
 ?>
+
+<div id="userlist">
+    <?php $user->displayUsers();?>
+</div>
+
+
 
 <div class="container main col-md-6">
     <div class="container" id="form-message">
@@ -27,7 +35,7 @@ include("includes/header.php");
             </div>
             <div class="form-group" id="email-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="enter email" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
             </div>
             <div class="form-group" id="role-group">
                 <label for="role">Role</label>
@@ -59,7 +67,7 @@ include("includes/header.php");
                 'password' : $('input[name=password').val(),
                 'passwordverify' : $('input[name=passwordverify]').val(),
                 'email' : $('input[name=email]').val(),
-                'role' : $('input[name=role]').val()
+                'role' : document.querySelector("#role").value
             };
             $.ajax({
                 type:'POST',
@@ -68,22 +76,39 @@ include("includes/header.php");
                 dataType: 'json',
                 encode: true
             }).done(function(data){
-                if(data.errors){
-                    if(data.errors.username){
+                console.log(data);
+                if(data.errors!==undefined){
+                    if(data.errors.username!==undefined){
                         $('#username-group').append("<div class='alert alert-danger'>"+data.errors.username+"</div>");
                     }
-                    if(data.errors.password){
+                    if(data.errors.password!==undefined){
                         $('#password-group').append("<div class='alert alert-danger'>"+data.errors.password+"</div>");
                     }
-                    if(data.errors.login){
-                        $(formMessage).append("<div class='alert alert-danger'>"+data.errors.login+"</div>");
+                    if(data.errors.passwordverify!==undefined){
+                        $('#passwordverify-group').append("<div class='alert alert-danger'>"+data.errors.passwordverify+"</div>");
                     }
+                    if(data.errors.email!==undefined){
+                        $('#email-group').append("<div class='alert alert-danger'>"+data.errors.email+"</div>");
+                    }
+                    if(data.errors.role!==undefined){
+                        $('#role-group').append("<div class='alert alert-danger'>"+data.errors.role+"</div>");
+                    }
+                }
+                if(data.message!==undefined){
+                    $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
                 }
             });
             $('#username').val('');
             $('#password').val('');
+            $('#passwordverify').val('');
+            $('#email').val('');
+            $('#role').val('user');
+
 
             event.preventDefault();
+            $.ajax({url:"getusers.php"}).done(function(html){
+               $("#userlist").append(html);
+            });
         });
     });
 </script>

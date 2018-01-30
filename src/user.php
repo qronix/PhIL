@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 
 include("includes/dbcon.php");
 
@@ -57,6 +59,80 @@ function login($username,$password){
 }
 
 
+//<div class='container userrow col-md-8'>
+//<div class='row'>
+//<div class='col-md-1 userdata'>
+//<p>ID: 3</p>
+//</div>
+//<div class='col-md-3 userdata'> X
+//<p>Username: a284927</p> X
+//</div> X
+//<div class='col-md-3 userdata'>X
+//<p>Email: bigjim22@bby.com</p>X
+//</div>X
+//<div class='col-md-2 userdata'> X
+//<p>Role: admin</p> X
+//</div>X
+//<div class='col-md-1 userdata'>X
+//<p>Active: 1</p>X
+//</div>X
+//<div class='col-md-2 btngrp'> X
+//<button class='btn userbtn'><i class='fa fa-pencil' aria-hidden='true'></i>edit</button>X
+//<button class='btn userbtn'><i class='fa fa-trash' aria-hidden='true'></i>delete</button>X
+//</div>
+//</div>
+//</div>
+
+
+
+function displayUsers(){
+        $_SESSION['role'] = "admin";
+        if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
+            if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"){
+                try{
+                    $sql = "SELECT * FROM users";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->execute();
+
+                    while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                        $display =  "<div class='container userrow col-md-8'>";
+                        $display .= "<div class='row'>";
+                        $display .= "<div class='col-md-1 userdata'>";
+                        $display .= "<p>ID: ".$result['id']."</p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-3 userdata'>";
+                        $display .= "<p>Username: ".$result['username']."</p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-3 userdata'>";
+                        $display .= "<p>Email: ".$result['email']."</p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-2 userdata'>";
+                        $display .= "<p>Role: ".$result['role']."</p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-1 userdata'>";
+                        $display .= "<p>Active: ".$result['activeaccount']."</p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-2 btngrp'>";
+                        $display .= "<button class='btn userbtn useredit'><i class='fa fa-pencil' aria-hidden='true'></i>edit</button>";
+                        $display .= "<button class='btn userbtn userdelete'><i class='fa fa-trash' aria-hidden='true'></i>delete</button>";
+                        $display .= "</div>";
+                        $display .= "</div>";
+                        $display .= "</div>";
+
+                        echo $display;
+                    }
+
+                }catch (PDOException $exc){
+                    echo "<div class='alert alert-danger'>Users could not be displayed</div>";
+                }
+            }else{
+                echo "<div class='alert alert-warning'>You cannot view users</div>";
+            }
+        }else{
+            echo "<div class='alert alert-warning'>You are not logged in</div>";
+        }
+}
+
 function createUser($username, $password, $passwordVerify, $email, $role){
 
         //ENSURE THESE VARIABLES ARE SANITIZED!
@@ -77,7 +153,7 @@ function createUser($username, $password, $passwordVerify, $email, $role){
             // 0 : id
 
             //user does not exist
-            if(($id=$statement->fetchColumn(0))!==true){
+            if(!($id=$statement->fetchColumn(0))>0){
                 //if all values have content
                 if(!empty($username)&&!empty($password)&&!empty($passwordVerify)&&
                 !empty($email)&&!empty($role)){
@@ -104,12 +180,13 @@ function createUser($username, $password, $passwordVerify, $email, $role){
                         }
                     }
                 }
+                return("User successfully created");
+            }else{
+                return("User already exists");
             }
-            return("User successfully created");
         }else{
             return("You do not have permission to create a user");
         }
-
 }
 
 function resetPassword($username){

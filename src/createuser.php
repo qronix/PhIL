@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
 
 include("user.php");
 
@@ -36,7 +38,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $errors['passwordverify'] = "Password verification cannot be blank";
         }
         if($havepassword && $havepassverify){
-            if($password!==$passwordverify){
+            if($password!=$passwordverify){
                 $errors['passwordverify'] = "Passwords do not match";
             }
         }
@@ -60,9 +62,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }else{
         $errors['message'] = "You do not have permission to create a user";
     }
-    if(!sizeof($errors)!==0){
+    if(!sizeof($errors)==0){
         $data['errors']=$errors;
     }
+
     echo json_encode($data);
 }
 

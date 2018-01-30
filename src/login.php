@@ -17,7 +17,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $password = filter_input(INPUT_POST,'password');
     }else{
         $errors['password'] = "Password cannot be empty";
-
     }
     if(!empty($username) && !empty($password)){
         $data['message'] = "Got data";

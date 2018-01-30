@@ -1,6 +1,5 @@
 <?php
 include("includes/header.php");
-session_destroy();
 //print_r($_SESSION);
 //include("user.php");
 //
@@ -55,6 +54,30 @@ session_destroy();
         </form>
     </div>
 </div>
+
+<div class="container userrow col-md-8">
+    <div class="row">
+        <div class="col-md-1 userdata">
+            <p>ID: 3</p>
+        </div>
+        <div class="col-md-3 userdata">
+            <p>Username: a284927</p>
+        </div>
+        <div class="col-md-3 userdata">
+            <p>Email: bigjim22@bby.com</p>
+        </div>
+        <div class="col-md-2 userdata">
+            <p>Role: admin</p>
+        </div>
+        <div class="col-md-1 userdata">
+            <p>Active: 1</p>
+        </div>
+        <div class="col-md-2 btngrp">
+            <button class="btn userbtn"><i class="fa fa-pencil" aria-hidden="true"></i>edit</button>
+            <button class="btn userbtn"><i class="fa fa-trash" aria-hidden="true"></i>delete</button>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function(){
         $(".main").fadeIn(2000);
@@ -80,6 +103,7 @@ session_destroy();
                 encode: true
         }).done(function(data){
                 if(data.errors){
+                    console.log(data.errors);
                     if(data.errors.username){
                         $('#username-group').append("<div class='alert alert-danger'>"+data.errors.username+"</div>");
                     }

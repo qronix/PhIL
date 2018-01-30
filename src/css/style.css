@@ -28,7 +28,35 @@ html{
     padding: 2px 10px;
     border-radius: 20px;
 }
+.userbtn{
+    float: left;
+    display: inline-block;
+    margin-right: 4px;
+}
+/**********************/
+/********ICONS*********/
+/**********************/
 
+.fa{
+    margin-right:4px;
+}
+/**********************/
+/********USERS*********/
+/**********************/
+
+.userdata{
+    display: inline;
+}
+.userrow{
+    background-color: #003B64;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 5px 0px 5px;
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
 
 /**********************/
 /********NAVBAR*********/
