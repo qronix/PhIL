@@ -88,6 +88,39 @@ html{
     text-align: center;
     font-size: 400%;
 }
+
+.editinput{
+    display: inline-block;
+    float: left;
+    border: 1px solid greenyellow;
+    max-width: 200px;
+    width: 16.66%;
+
+}
+#editUserArea{
+    text-align: center;
+    align-content: center;
+    vertical-align: center;
+    float: left;
+    margin: 0 auto;
+}
+.container{
+    border: 1px solid red;
+}
+.editusercontainer{
+    background-color: #002640;
+    color: white;
+    margin: 0 auto;
+    height: 20vh;
+}
+.editusercontainer h2{
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn{
+    border: 1px solid purple;
+}
 /**********************/
 /********NAVBAR*********/
 /**********************/

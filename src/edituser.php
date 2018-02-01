@@ -15,17 +15,17 @@ $error = "";
 $user = new User();
 $userdata = array();
 $message = "";
-//$_SESSION['role'] = "admin";
 $userid = "";
 
 if(isset($_GET['userid'])&&!empty($_GET['userid'])){
     if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
         if($_GET['userid']==$_SESSION['userid']){
             $error = "<div class='alert alert-danger'>Cannot edit active account</div>";
+        }else{
+            $userid = filter_input(INPUT_GET,'userid');
+            $_SESSION['edituserid'] = $userid;
+            $userdata = $user->loadUser($userid);
         }
-        $userid = filter_input(INPUT_GET,'userid');
-        $_SESSION['edituserid'] = $userid;
-        $userdata = $user->loadUser($userid);
     }else{
         $error = "<div class='alert alert-danger'>Access denied</div>";
     }
@@ -55,10 +55,10 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
         }else{
             $error = "Email cannot be empty";
         }
-        if(isset($_POST['activeaccount'])&&!empty($_POST['activeaccount'])){
+        if($_POST['activeaccount']==="1"||$_POST['activeaccount']==="0"){
             $activeaccount= filter_input(INPUT_POST,'activeaccount');
         }else{
-            $error = "Active account cannot be empty";
+            $error = "Active account value is invalid";
         }
         if(isset($_POST['role'])&&!empty($_POST['role'])){
             $role = filter_input(INPUT_POST,'role');
@@ -66,7 +66,6 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
             $error = "Role cannot be empty";
         }
         if($error==""){
-            echo "Doing it";
             $message = $user->updateUser($userid,$username,$role,$email,$activeaccount);
             //$user->loadUser($userid);
             header("Location: edituser.php?userid=".$userid);
@@ -103,7 +102,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
                         <div class='form-group' id='role-group'>
                                 <label for='role'>Role</label>
                                 <select id='role' class='form-control' name='role'>
-                                        <option selected><?php if(!empty($userdata)){echo $userdata['role'];}?></option>
+<!--                                        <option selected>--><?php //if(!empty($userdata)){echo $userdata['role'];}?><!--</option>-->
                                         <option>manager</option>
                                         <option>admin</option>
                                         <option>user</option>

@@ -1,0 +1,6 @@
+<?php
+
+
+function __construct(){
+
+}

@@ -63,6 +63,28 @@ function login($username,$password){
     }
 }
 
+function deleteUser($userid){
+        try{
+            if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
+                if($_SESSION['role']=="admin"&&$_SESSION['userid']!=$userid){
+                    $sql = "DELETE FROM users WHERE id=:id LIMIT 1";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue('id',$userid);
+                    $statement->execute();
+                }else{
+                    return("Access denied");
+                }
+            }else{
+                return("Invalid session");
+            }
+            return("User deleted");
+        }catch (PDOException $exc){
+            echo "An error occurred while deleting user. Assume not deleted.";
+            header("HTTP/1/0 500 DB ERROR");
+            header("Location: index.php");
+        }
+}
+
 
 //<div class='container userrow col-md-8'>
 //<div class='row'>
@@ -91,7 +113,6 @@ function login($username,$password){
 
 
 function displayUsers(){
-        $_SESSION['role'] = "admin";
         if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
             if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"){
                 try{
@@ -119,7 +140,7 @@ function displayUsers(){
                         $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
                         $display .= "<a href='edituser.php?userid=".$result['id']." class='btn userbtn useredit'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a>";
-                        $display .= "<button class='btn userbtn userdelete'><i class='fa fa-trash' aria-hidden='true'></i>delete</button>";
+                        $display .= "<a href='deleteuser.php?userid=".$result['id']." class='btn userbtn userdelete'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";

@@ -1,5 +1,6 @@
 <?php
 include("includes/header.php");
+print_r($_SESSION);
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
     header("Location: dashboard.php");
 }
