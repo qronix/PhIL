@@ -74,7 +74,9 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
 }
 ?>
 
-<div class="container editUserFormArea col-md-6">
+<?if($error!=""){header("Refresh:2;url=dashboard.php");}?>
+
+<div class="container editUserFormArea <?php if($error!=""){echo " hidden \"";}?>col-md-6">
 
         <div class='container' id='form-message'>
             <?if($error!=""){echo "<div class='alert alert-danger'>".$error."</div>";}?>
@@ -112,7 +114,6 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
                 </form>
         </div>
 </div>
-
 </body>
 </html>
 

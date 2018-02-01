@@ -1,6 +1,5 @@
 <?php
 session_start();
-print_r($_SESSION);
 if(!isset($_SESSION['role'])||empty($_SESSION['role'])){
     header("Location: index.php");
 }
@@ -20,6 +19,49 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admi
 $user = new User();
 ?>
 
+<div class="container editusercontainer col-sm-10">
+    <div class="row">
+        <div class="container" id="form-message">
+
+        </div>
+    </div>
+    <div class="row">
+        <h2>Add new user</h2>
+    </div>
+    <div class="row">
+        <div class="container" id="editUserArea">
+            <form id="edit-form" action="createuser.php" method="POST">
+                <div class="form-group editinput" id="username-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group editinput" id="password-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+                <div class="form-group editinput" id="passwordverify-group">
+                    <label for="passwordverify">Verify password</label>
+                    <input type="password" class="form-control" name="passwordverify" id="passwordverify" required>
+                </div>
+                <div class="form-group editinput" id="email-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group editinput" id="role-group">
+                    <label for="role">Role</label>
+                    <select id="role" class="form-control" name="role">
+                        <option selected>user</option>
+                        <option>manager</option>
+                        <option>admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="editUserBtn" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div id="userlist">
     <?php
     if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin") {
@@ -40,43 +82,43 @@ $user = new User();
 
 
 
-<div class="container editusercontainer col-md-10">
-    <div class="container" id="form-message">
-
-    </div>
-    <h2>Add new user</h2>
-    <div class="container-fluid" id="editUserArea">
-        <form id="edit-form" action="createuser.php" method="POST">
-            <div class="form-group editinput" id="username-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
-            </div>
-            <div class="form-group editinput" id="password-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" required>
-            </div>
-            <div class="form-group editinput" id="passwordverify-group">
-                <label for="passwordverify">Verify password</label>
-                <input type="password" class="form-control" name="passwordverify" id="passwordverify" required>
-            </div>
-            <div class="form-group editinput" id="email-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
-            </div>
-            <div class="form-group editinput" id="role-group">
-                <label for="role">Role</label>
-                <select id="role" class="form-control" name="role">
-                    <option selected>user</option>
-                    <option>manager</option>
-                    <option>admin</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="submit" id="editUserBtn" class="btn">Submit</button>
-            </div>
-        </form>
-    </div>
-</div>
+<!--<div class="container editusercontainer col-md-10">-->
+<!--    <div class="container" id="form-message">-->
+<!---->
+<!--    </div>-->
+<!--    <h2>Add new user</h2>-->
+<!--    <div class="container-fluid" id="editUserArea">-->
+<!--        <form id="edit-form" action="createuser.php" method="POST">-->
+<!--            <div class="form-group editinput" id="username-group">-->
+<!--                <label for="username">Username</label>-->
+<!--                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>-->
+<!--            </div>-->
+<!--            <div class="form-group editinput" id="password-group">-->
+<!--                <label for="password">Password</label>-->
+<!--                <input type="password" class="form-control" name="password" id="password" required>-->
+<!--            </div>-->
+<!--            <div class="form-group editinput" id="passwordverify-group">-->
+<!--                <label for="passwordverify">Verify password</label>-->
+<!--                <input type="password" class="form-control" name="passwordverify" id="passwordverify" required>-->
+<!--            </div>-->
+<!--            <div class="form-group editinput" id="email-group">-->
+<!--                <label for="email">Email</label>-->
+<!--                <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>-->
+<!--            </div>-->
+<!--            <div class="form-group editinput" id="role-group">-->
+<!--                <label for="role">Role</label>-->
+<!--                <select id="role" class="form-control" name="role">-->
+<!--                    <option selected>user</option>-->
+<!--                    <option>manager</option>-->
+<!--                    <option>admin</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <button type="submit" id="editUserBtn" class="btn">Submit</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
 <script type="text/javascript">
     $(document).ready(function(){
         $(".main").fadeIn(2000);

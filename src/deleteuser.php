@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("user.php");
+include("includes/header.php");
 $user = new User();
 $errormsg = "";
 
@@ -16,16 +17,16 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                 $errormsg = $user->deleteUser($userid);
                 header("Location: registeruser.php");
             }else{
-                $errormsg= "<div class='alert alert-danger'>Cannot delete your own account</div>";
+                $errormsg= "<div class='container'><div class='alert alert-danger'>Cannot delete your own account</div></div>";
             }
         }else{
-            $errormsg= "<div class='alert alert-danger'>Invalid user id</div>";
+            $errormsg= "<div class='container'><div class='alert alert-danger'>Invalid user id</div></div>";
         }
     }else{
-        $errormsg= "<div class='alert alert-danger'>Access denied</div>";
+        $errormsg= "<div class='container'><div class='alert alert-danger'>Access denied</div></div>";
     }
 }
 ?>
 <div class='container'>
-    <?php if($errormsg){echo $errormsg;}?>
+    <?php if($errormsg){header("Refresh: 3; url=dashboard.php");echo $errormsg;}?>
 </div>
