@@ -72,7 +72,7 @@ $user = new User();
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" id="editUserBtn" class="btn">Submit</button>
             </div>
         </form>
     </div>

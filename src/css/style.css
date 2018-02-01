@@ -44,8 +44,8 @@ html{
 /********USERS*********/
 /**********************/
 
-.userdata{
-    display: inline;
+.active{
+    margin-left: 16px;
 }
 .userrow{
     background-color: #003B64;
@@ -65,6 +65,36 @@ html{
     margin-top: 5vh;
     margin-left: 8%;
 }
+.fa-pencil{
+    color:#fe9000;
+    /*background-color: #fe9000;*/
+}
+.fa-trash{
+    color: darkred;
+}
+.useredit{
+    color: #ccc;
+    /*transform: scale(100);*/
+    margin-left: 10px;
+    transition: all 0.4s;
+}
+.useredit:hover{
+    text-decoration: none;
+    color: #FFF200;
+}
+
+.userdelete{
+    color: #ccc;
+    /*transform: scale(100);*/
+    margin-left: 10px;
+    transition: all 0.4s;
+}
+
+.userdelete:hover{
+    text-decoration: none;
+    color: #FFF200;
+}
+
 /**********************/
 /********EDIT USERS*********/
 /**********************/
@@ -92,9 +122,10 @@ html{
 .editinput{
     display: inline-block;
     float: left;
-    border: 1px solid greenyellow;
+    /*border: 1px solid greenyellow;*/
     max-width: 200px;
     width: 16.66%;
+    margin-right: 5px;
 
 }
 #editUserArea{
@@ -103,9 +134,10 @@ html{
     vertical-align: center;
     float: left;
     margin: 0 auto;
+    margin-top: 30px;
 }
 .container{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .editusercontainer{
     background-color: #002640;
@@ -119,7 +151,11 @@ html{
 }
 
 .btn{
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
+}
+
+#editUserBtn{
+    margin-top: 45px;
 }
 /**********************/
 /********NAVBAR*********/
