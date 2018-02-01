@@ -27,17 +27,16 @@ function login($username,$password){
         // 3: needpasschange
         // 4: activeaccount
 
-        if(($id = $statement->fetchColumn(0))!==false){
+        if(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
             //if account is enabled
-            if(($activeaccount = $statement->fetchColumn(4))!=1) {
-                $password_hash = $statement->fetchColumn(1);
+            if($result['activeaccount']==1) {
+                $password_hash = $result['password'];
                 //if password is correct
                 if(password_verify($password,$password_hash)){
-                    $_SESSION['username'] = $username;
-                    $_SESSION['password'] = $password;
-                    $_SESSION['role'] = $statement->fetchColumn(2);
+                    $_SESSION['username'] = $result['username'];
+                    $_SESSION['role'] = $result['role'];
                     //if account password is not default
-                    if(($needpasschange=$statement->fetchColumn(3))!=1){
+                    if($result['needpasschange']!=1){
                         //send to dashboard
                     }else{
                         header("Location: changepass.php");
@@ -95,7 +94,7 @@ function displayUsers(){
                     $statement->execute();
 
                     while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
-                        $display =  "<div class='container userrow col-md-8'>";
+                        $display =  "<div class='container userrow col-md-9'>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='col-md-1 userdata'>";
                         $display .= "<p>ID: ".$result['id']."</p>";
@@ -113,7 +112,7 @@ function displayUsers(){
                         $display .= "<p>Active: ".$result['activeaccount']."</p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
-                        $display .= "<button class='btn userbtn useredit'><i class='fa fa-pencil' aria-hidden='true'></i>edit</button>";
+                        $display .= "<a href='edituser.php?userid=".$result['id']." class='btn userbtn useredit'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a>";
                         $display .= "<button class='btn userbtn userdelete'><i class='fa fa-trash' aria-hidden='true'></i>delete</button>";
                         $display .= "</div>";
                         $display .= "</div>";
@@ -165,8 +164,7 @@ function createUser($username, $password, $passwordVerify, $email, $role){
                             $statement = $this->pdo->prepare($sql);
                             $password_hash=password_hash(
                                 $password,
-                                PASSWORD_DEFAULT,
-                                ['cost'=>12]
+                                PASSWORD_DEFAULT
                             );
                             $statement->bindValue(':username',$username);
                             $statement->bindValue(':password',$password_hash);
@@ -187,6 +185,63 @@ function createUser($username, $password, $passwordVerify, $email, $role){
         }else{
             return("You do not have permission to create a user");
         }
+}
+
+function loadUser($id){
+
+        $userdata = array();
+
+        if(isset($_SESSION['role'])&&$_SESSION['role']==='admin'){
+            try{
+                if($id!==false&&$id!==null&&!empty($id)){
+                    $sql = "SELECT username, role, email, activeaccount FROM users WHERE id=:id";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue(':id',$id);
+                    $statement->execute();
+
+                    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+                    $userdata['username'] = $result['username'];
+                    $userdata['role'] = $result['role'];
+                    $userdata['email'] = $result['email'];
+                    $userdata['activeaccount'] = $result['activeaccount'];
+                    $userdata['message'] = "User successfully loaded";
+                }
+            }catch (PDOException $exc){
+                $userdata['message'] = 'Failed to load user';
+            }
+        }else{
+            $userdata['username'] = 'NULL';
+            $userdata['email'] = 'NULL';
+            $userdata['role'] = 'NULL';
+            $userdata['message'] = 'You do not have permission';
+        }
+        return $userdata;
+}
+
+function updateUser($id,$username,$role,$email,$activeaccount){
+
+        $message = "";
+
+        if(isset($_SESSION['role'])&&$_SESSION['role']==='admin'){
+            try{
+                $sql = "UPDATE users SET username=:username, role=:role,email=:email,activeaccount=:activeaccount WHERE id=:id";
+                $statement = $this->pdo->prepare($sql);
+                $statement->bindValue(':id',$id);
+                $statement->bindValue(':username',$username);
+                $statement->bindValue(':role',$role);
+                $statement->bindValue(':email',$email);
+                $statement->bindValue(':activeaccount',$activeaccount);
+                $statement->execute();
+            }catch (PDOException $exc){
+                $message = 'An error occurred during update';
+            }
+            $message =  'User successfully updated';
+
+        }else{
+            $message = 'You do not have permission';
+        }
+        return $message;
 }
 
 function resetPassword($username){

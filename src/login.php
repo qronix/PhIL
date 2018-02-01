@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $errors['username'] = "Username cannot be empty";
     }
     if(isset($_POST['password'])&&!empty($_POST['password'])){
-        $password = filter_input(INPUT_POST,'password');
+        $password = $_POST['password']; //hashed therefore sanitation not required
     }else{
         $errors['password'] = "Password cannot be empty";
     }

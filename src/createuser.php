@@ -26,13 +26,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             $errors['username'] = "Username cannot be empty";
         }
         if(isset($_POST['password'])&&!empty($_POST['password'])){
-            $password = filter_input(INPUT_POST,'password');
+            $password = $_POST['password'];
             $havepassword = true;
         }else{
             $errors['password'] = "Password cannot be empty";
         }
         if(isset($_POST['passwordverify'])&&!empty($_POST['passwordverify'])){
-            $passwordverify = filter_input(INPUT_POST,'passwordverify');
+            $passwordverify = $_POST['passwordverify'];
             $havepassverify = true;
         }else{
             $errors['passwordverify'] = "Password verification cannot be blank";

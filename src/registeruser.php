@@ -1,5 +1,6 @@
 <?php
 include("includes/header.php");
+include("includes/sidebar.php");
 include("user.php");
 
 $user = new User();

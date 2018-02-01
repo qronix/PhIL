@@ -56,13 +56,44 @@ html{
     align-content: center;
     text-align: center;
     vertical-align: middle;
+    transition: all 0.2s;
+}
+.userrow:hover{
+    transform: scale(1.1);
+}
+#userlist{
+    margin-top: 5vh;
+    margin-left: 8%;
+}
+/**********************/
+/********EDIT USERS*********/
+/**********************/
+.editUserFormArea{
+    margin: 0 auto;
+    margin-top:26vh;
+    border-radius: 10px;
+    width: 40%;
+    max-width: 380px;
+    background-color: #002640;
+    padding-bottom: 40px;
+    color:white;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+    -moz-box-shadow:    0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+    box-shadow:         0px 10px 20px 0px rgba(150, 150, 150, 0.22);
 }
 
+.formHeader{
+    align-content: center;
+    margin:0 auto;
+    text-align: center;
+    font-size: 400%;
+}
 /**********************/
 /********NAVBAR*********/
 /**********************/
 .navbar{
     background-color: #003B64;
+    /*border-bottom: 1px solid rgba(255,255,255,0.6);*/
 }
 .navbar-brand{
     color: #fff;
@@ -82,7 +113,7 @@ html{
 }
 
 /**********************/
-/********NAVBAR*********/
+/********SIDENAVBAR*********/
 /**********************/
 
 #sideNav{
@@ -91,6 +122,47 @@ html{
     float: left;
     height: 90vh;
     color:white;
+}
+.sideNavLink{
+    list-style: none;
+    display: inline-block;
+    float: left;
+    border: 1px solid red;
+    margin: 0;
+    /*margin-left: -40% ;*/
+    text-align: left;
+    vertical-align: middle;
+    color: white;
+    text-decoration: none;
+}
+li a{
+    color: #fff;
+    transition: color 0.4s;
+}
+li a:hover{
+    text-decoration: none;
+    color: #FFF200;
+}
+#sideNavLinks{
+    float: left;
+    margin: 0;
+    border: 1px solid green;
+    text-align: left;
+    padding: 0;
+    vertical-align: middle;
+    color: white;
+}
+.sideNavIcon{
+    display: inline-block;
+    float: left;
+    text-align: left;
+    vertical-align: middle;
+    padding-top: 6px;
+    margin-right: 10px;
+}
+.largerIcon{
+    transform: scale(1.6);
+    padding-left: 2px;
 }
 /**********************/
 /********LOGIN*********/
