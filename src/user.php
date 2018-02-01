@@ -85,33 +85,6 @@ function deleteUser($userid){
         }
 }
 
-
-//<div class='container userrow col-md-8'>
-//<div class='row'>
-//<div class='col-md-1 userdata'>
-//<p>ID: 3</p>
-//</div>
-//<div class='col-md-3 userdata'> X
-//<p>Username: a284927</p> X
-//</div> X
-//<div class='col-md-3 userdata'>X
-//<p>Email: bigjim22@bby.com</p>X
-//</div>X
-//<div class='col-md-2 userdata'> X
-//<p>Role: admin</p> X
-//</div>X
-//<div class='col-md-1 userdata'>X
-//<p>Active: 1</p>X
-//</div>X
-//<div class='col-md-2 btngrp'> X
-//<button class='btn userbtn'><i class='fa fa-pencil' aria-hidden='true'></i>edit</button>X
-//<button class='btn userbtn'><i class='fa fa-trash' aria-hidden='true'></i>delete</button>X
-//</div>
-//</div>
-//</div>
-
-
-
 function displayUsers(){
         if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
             if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"){

@@ -5,14 +5,14 @@ if(!isset($_SESSION['role'])||empty($_SESSION['role'])){
 }
 include("includes/header.php");
 include("includes/sidebar.php");
-include("user.php");
+include("phone.php");
 
 
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admin"){
     header("Location: dashboard.php");
 }
 
-$user = new User();
+$phone = new Phone();
 ?>
 
 <div class="container editusercontainer col-sm-10">
@@ -22,14 +22,14 @@ $user = new User();
         </div>
     </div>
     <div class="row">
-        <h2>Add new user</h2>
+        <h2>Add new phone</h2>
     </div>
     <div class="row">
-        <div class="container" id="editUserArea">
-            <form id="edit-form" action="createuser.php" method="POST">
+        <div class="container" id="editPhoneArea">
+            <form id="edit-form" action="createphone.php" method="POST">
                 <div class="form-group editinput" id="username-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>
+                    <label for="vendor">Vendor</label>
+                    <input type="text" class="form-control" name="vendor" id="vendor" required>
                 </div>
                 <div class="form-group editinput" id="password-group">
                     <label for="password">Password</label>
@@ -64,15 +64,15 @@ $user = new User();
         ?>
         <script type="text/javascript">
             function clearUsers(){
-                var userrows = document.querySelectorAll(".userrow");
+                var userrows = document.querySelectorAll(".phonerow");
                 userrows.forEach(function(user){
                     user.parentNode.removeChild(user);
                 });
             }
             //clearUsers();
         </script>
-    <?php
-        $user->displayUsers();
+        <?php
+        $phone->displayPhones();
     }?>
 </div>
 <script type="text/javascript">
@@ -131,8 +131,8 @@ $user = new User();
 
             event.preventDefault();
             $(".userrow").remove();
-            $.ajax({url:"getusers.php"}).done(function(html){
-               $("#userlist").append(html);
+            $.ajax({url:"getphones.php"}).done(function(html){
+                $("#userlist").append(html);
             });
             $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
                 $("#form-message").slideUp(500);

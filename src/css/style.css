@@ -66,6 +66,29 @@ html{
     margin-right:4px;
 }
 /**********************/
+/********PHONES*********/
+/**********************/
+
+.phonerow{
+    background-color: #003B64;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 5px 0px 5px;
+    align-content: center;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.2s;
+}
+.phonerow:hover{
+    transform: scale(1.1);
+}
+.phonedata{
+    /*border: 1px solid green;*/
+}
+
+
+/**********************/
 /********USERS*********/
 /**********************/
 
