@@ -33,11 +33,17 @@ function login($username,$password){
                 $password_hash = $result['password'];
                 //if password is correct
                 if(password_verify($password,$password_hash)){
-                    $_SESSION['username'] = $result['username'];
+                    $_SESSION['username'] = $username;
                     $_SESSION['role'] = $result['role'];
+                    $_SESSION['userid'] = $result['id'];
                     //if account password is not default
                     if($result['needpasschange']!=1){
-                        //send to dashboard
+                        $URL="dashboard.php";
+                        //return "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+                        //echo "<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">";
+                        //header("Location: dashboard.php");
+                        return("login");
+
                     }else{
                         header("Location: changepass.php");
                     }
@@ -164,7 +170,8 @@ function createUser($username, $password, $passwordVerify, $email, $role){
                             $statement = $this->pdo->prepare($sql);
                             $password_hash=password_hash(
                                 $password,
-                                PASSWORD_DEFAULT
+                                PASSWORD_DEFAULT,
+                                ['cost'=>12]
                             );
                             $statement->bindValue(':username',$username);
                             $statement->bindValue(':password',$password_hash);

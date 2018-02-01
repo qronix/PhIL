@@ -1,5 +1,9 @@
 <?php
 include("includes/header.php");
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
+    header("Location: dashboard.php");
+}
+//session_destroy();
 //print_r($_SESSION);
 //include("user.php");
 //
@@ -55,29 +59,29 @@ include("includes/header.php");
     </div>
 </div>
 
-<div class="container userrow col-md-8">
-    <div class="row">
-        <div class="col-md-1 userdata">
-            <p>ID: 3</p>
-        </div>
-        <div class="col-md-3 userdata">
-            <p>Username: a284927</p>
-        </div>
-        <div class="col-md-3 userdata">
-            <p>Email: bigjim22@bby.com</p>
-        </div>
-        <div class="col-md-2 userdata">
-            <p>Role: admin</p>
-        </div>
-        <div class="col-md-1 userdata">
-            <p>Active: 1</p>
-        </div>
-        <div class="col-md-2 btngrp">
-            <button class="btn userbtn"><i class="fa fa-pencil" aria-hidden="true"></i>edit</button>
-            <button class="btn userbtn"><i class="fa fa-trash" aria-hidden="true"></i>delete</button>
-        </div>
-    </div>
-</div>
+<!--<div class="container userrow col-md-8">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-1 userdata">-->
+<!--            <p>ID: 3</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-3 userdata">-->
+<!--            <p>Username: a284927</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-3 userdata">-->
+<!--            <p>Email: bigjim22@bby.com</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-2 userdata">-->
+<!--            <p>Role: admin</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-1 userdata">-->
+<!--            <p>Active: 1</p>-->
+<!--        </div>-->
+<!--        <div class="col-md-2 btngrp">-->
+<!--            <button class="btn userbtn"><i class="fa fa-pencil" aria-hidden="true"></i>edit</button>-->
+<!--            <button class="btn userbtn"><i class="fa fa-trash" aria-hidden="true"></i>delete</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <script type="text/javascript">
     $(document).ready(function(){
         $(".main").fadeIn(2000);
@@ -100,7 +104,14 @@ include("includes/header.php");
                 url:$(form).attr('action'),
                 data: formData,
                 dataType: 'json',
-                encode: true
+                encode: true,
+                success: function(data){
+                    console.log(data);
+                    if(data.errors.login==="login"){
+                        window.location.href = 'dashboard.php';
+                    }
+                    //window.location.href = 'dashboard.php'
+                }
         }).done(function(data){
                 if(data.errors){
                     console.log(data.errors);
@@ -110,7 +121,7 @@ include("includes/header.php");
                     if(data.errors.password){
                         $('#password-group').append("<div class='alert alert-danger'>"+data.errors.password+"</div>");
                     }
-                    if(data.errors.login){
+                    if(data.errors.login&&data.errors.login!=="login"){
                         $(formMessage).append("<div class='alert alert-danger'>"+data.errors.login+"</div>");
                     }
                 }

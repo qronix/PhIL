@@ -1,7 +1,20 @@
 <?php
+session_start();
+if(!isset($_SESSION['role'])||empty($_SESSION['role'])){
+    header("Location: index.php");
+}
 include("includes/header.php");
 include("includes/sidebar.php");
 include("user.php");
+
+//if(!isset($_SESSION)){
+//    session_start();
+//}
+
+
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admin"){
+    header("Location: dashboard.php");
+}
 
 $user = new User();
 ?>

@@ -1,60 +1,33 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['role'])||empty($_SESSION['role'])){
+    header("Location: index.php");
+}
 include("includes/header.php");
+include ("includes/sidebar.php");
 include("user.php");
+
 if(!isset($_SESSION)){
     session_start();
 }
+
 $error = "";
 $user = new User();
 $userdata = array();
 $message = "";
-$_SESSION['role'] = "admin";
+//$_SESSION['role'] = "admin";
 $userid = "";
 
 if(isset($_GET['userid'])&&!empty($_GET['userid'])){
     if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
+        if($_GET['userid']==$_SESSION['userid']){
+            $error = "<div class='alert alert-danger'>Cannot edit active account</div>";
+        }
         $userid = filter_input(INPUT_GET,'userid');
         $_SESSION['edituserid'] = $userid;
         $userdata = $user->loadUser($userid);
-
-//        echo "<div class='container main col-md-6'>
-//    <div class='container' id='form-message'>
-//
-//    </div>
-//    <div class='container logo'>
-//        <img class='image' src='img/logo.svg'>
-//        <p id='philLogo'>PhIL</p>
-//    </div>
-//    <div class='container' id='loginArea'>
-//        <form id='login-form' action='createuser.php' method='POST'>
-//            <div class='form-group' id='username-group'>
-//                <label for='username'>Username</label>
-//                <input type='text' class='form-control' name='username' id='username' value=".$userdata['username']." required>
-//            </div>
-//            <div class='form-group' id='email-group'>
-//                <label for='email'>Email</label>
-//                <input type='email' class='form-control' name='email' id='email' value=".$userdata['email']." required>
-//            </div>
-//            <div class='form-group' id='activeaccount-group'>
-//                <label for='activeaccount'>Active account</label>
-//                <input type='text' class='form-control' name='activeaccount' id='activeaccount' value=".$userdata['activeaccount']." required>
-//            </div>
-//            <div class='form-group' id='role-group'>
-//                <label for='role'>Role</label>
-//                <select id='role' class='form-control' name='role'>
-//                    <option selected>".$userdata['role']."</option>
-//                    <option>manager</option>
-//                    <option>admin</option>
-//                    <option>user</option>
-//                </select>
-//            </div>
-//            <button type='submit' class='btn'>Submit</button>
-//        </form>
-//    </div>
-//</div>";
     }else{
-        $error = "<div class='alert alert-danger'>You do not have access for this area</div>";
+        $error = "<div class='alert alert-danger'>Access denied</div>";
     }
 }else{
     $error = "<div class='alert alert-danger'>User id not specified</div>";
@@ -111,26 +84,26 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
         <?if($message!=""){echo "<div class='alert alert-success'>".$message."</div>";}?>
     </div>
     <div class="container formHeader">
-        <h2>Edit <?php echo $userdata['username'];?></h2>
+        <h2>Edit <?php if(!empty($userdata)){echo $userdata['username'];}?></h2>
     </div>
         <div class='container' id='loginArea'>
                 <form id='login-form' action='' method='POST'>
                         <div class='form-group' id='username-group'>
                                 <label for='username'>Username</label>
-                                <input type='text' class='form-control' name='username' id='username' value=<?php echo $userdata['username'];?> required>
+                                <input type='text' class='form-control' name='username' id='username' value=<?php if(!empty($userdata)){echo $userdata['username'];}?> required>
                         </div>
                         <div class='form-group' id='email-group'>
                                 <label for='email'>Email</label>
-                                <input type='email' class='form-control' name='email' id='email' value=<?php echo $userdata['email'];?> required>
+                                <input type='email' class='form-control' name='email' id='email' value=<?php if(!empty($userdata)){echo $userdata['email'];}?> required>
                         </div>
                         <div class='form-group' id='activeaccount-group'>
                                 <label for='activeaccount'>Active account</label>
-                                <input type='text' class='form-control' name='activeaccount' id='activeaccount' value=<?php echo $userdata['activeaccount'];?> required>
+                                <input type='text' class='form-control' name='activeaccount' id='activeaccount' value=<?php if(!empty($userdata)){echo $userdata['activeaccount'];}?> required>
                         </div>
                         <div class='form-group' id='role-group'>
                                 <label for='role'>Role</label>
                                 <select id='role' class='form-control' name='role'>
-                                        <option selected><?php echo $userdata['role'];?></option>
+                                        <option selected><?php if(!empty($userdata)){echo $userdata['role'];}?></option>
                                         <option>manager</option>
                                         <option>admin</option>
                                         <option>user</option>
