@@ -43,13 +43,15 @@ $phone = new Phone();
                     <label for="imei">IMEI</label>
                     <input type="text" class="form-control" name="imei" id="imei" required>
                 </div>
-                <div class="form-group phoneedit" id="employee-group">
-                    <label for="employee">Employee</label>
-                    <input type="text" id="employee" class="form-control" name="employee">
-                </div>
+<!--                <div class="form-group phoneedit" id="employee-group">-->
+<!--                    <label for="employee">Employee</label>-->
+<!--                    <input type="text" id="employee" class="form-control" name="employee">-->
+<!--                </div>-->
                 <div class="form-group phoneedit" id="manager-group">
                     <label for="manager">Manager</label>
                     <input type="text" id="manager" class="form-control" name="manager">
+                    <label for="manager">Manager Password</label>
+                    <input type="password" id="managerPassword" class="form-control" name="managerPassword">
                 </div>
 <!--                <div class="form-group editinput" id="date-group">-->
 <!--                    <label for="date">Date</label>-->
@@ -122,8 +124,9 @@ $phone = new Phone();
                 'carrier' : $('input[name=carrier').val(),
                 'phone' : $('input[name=phone]').val(),
                 'imei' : $('input[name=imei]').val(),
-                'employee' : $('input[name=employee]').val(),
+                // 'employee' : $('input[name=employee]').val(),
                 'manager' : $('input[name=manager]').val(),
+                'managerPassword' : $('input[name=managerPassword]').val(),
                 'designation' : $('input[name=designation]:checked').val()
             };
             $.ajax({
@@ -155,17 +158,18 @@ $phone = new Phone();
                     $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
                 }
             });
-            $('#username').val('');
-            $('#password').val('');
-            $('#passwordverify').val('');
-            $('#email').val('');
-            $('#role').val('user');
+            $('#vendor').val('');
+            $('#carrier').val('');
+            $('#phone').val('');
+            $('#imei').val('');
+            $('#employee').val('');
+            $('#manager').val('');
 
             event.preventDefault();
-            $(".userrow").remove();
-            $.ajax({url:"getphones.php"}).done(function(html){
-                $("#userlist").append(html);
-            });
+            // $(".userrow").remove();
+            // $.ajax({url:"getphones.php"}).done(function(html){
+            //     $("#userlist").append(html);
+            // });
             $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
                 $("#form-message").slideUp(500);
             });

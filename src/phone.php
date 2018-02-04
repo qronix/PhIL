@@ -6,16 +6,20 @@ if(!isset($_SESSION)){
 }
 
 include("includes/dbcon.php");
+include("user.php");
+
 
 class Phone
 {
     private $dbCon;
     private $pdo;
+    private $user;
 
     function __construct()
     {
         $this->dbCon = new DBConn();
         $this->pdo = $this->dbCon->getInstance();
+        $this->user = new User();
     }
 
     function displayPhones(){
@@ -75,6 +79,41 @@ class Phone
             }
         }else{
             echo "<div class='alert alert-warning'>You are not logged in</div>";
+        }
+    }
+
+    function createPhone($phoneData){
+        $isRealManager = $this->user->verifyManager($phoneData['manager'],$phoneData['managerPassword']);
+        if($isRealManager){
+            $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
+            if(!$phoneExists){
+                $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar) VALUES ()";
+            }else{
+                return("Phone already exists!");
+            }
+        }else{
+            return("Could not verify manager " .$phoneData['manager']. " phone not added.");
+        }
+
+    }
+
+    function checkPhoneExists($vendor,$carrier,$imei){
+        try{
+            $sql = "SELECT * FROM phones WHERE vendor=:vendor, carrier=:carrier, imei=:imei LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement ->bindValue('vendor',$vendor);
+            $statement -> bindValue('carrier',$carrier);
+            $statement -> bindValue('imei',$imei);
+            $statement -> execute();
+
+            if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
+                return (false);
+            }else{
+                return (true); //phone exists
+            }
+
+        }catch (PDOException $exc){
+            return ("error");
         }
     }
 }

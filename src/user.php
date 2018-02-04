@@ -245,6 +245,38 @@ function updateUser($id,$username,$role,$email,$activeaccount){
         return $message;
 }
 
+function verifyManager($managerName, $managerPassword){
+
+        try{
+            $sql = "SELECT * FROM users WHERE username=:username LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('username',$managerName);
+
+            while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+
+                if(!password_verify($managerPassword,$result['password'])){
+                    return (false);
+                }
+                else if($result['role']!=="admin"||$result['role']!=="manager"){
+                    return (false);
+                }
+                else if($result['activeaccount']!==1){
+                    return(false);
+                }
+                else if($result['needspasschange']===1){
+                    return (false);
+                }
+                else{
+                    return (true);
+                }
+            }
+        }catch (PDOException $exc){
+            return (false);
+        }
+}
+
+function verifyUser($username)
+
 function resetPassword($username){
 
 }
