@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-include("includes/dbcon.php");
+//include("includes/dbcon.php");
 include("user.php");
 
 
@@ -87,14 +87,37 @@ class Phone
         if($isRealManager){
             $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
             if(!$phoneExists){
-                $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar) VALUES ()";
+                try{
+                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar)
+                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar)";
+                    $statement = $this->pdo->prepare($sql);
+
+                    if($phoneData['designation']==="pickup"){
+                        $statement->bindValue('storepickup',"1");
+                        $statement->bindValue('brightstar',"0");
+                    }else{
+                        $statement->bindValue('storepickup',"0");
+                        $statement->bindValue('brightstar',"1");
+                    }
+                    $statement->bindValue('date',date("m/d/Y h:i:s A"));
+                    $statement->bindValue('vendor',$phoneData['vendor']);
+                    $statement->bindValue('carrier',$phoneData['carrier']);
+                    $statement->bindValue('phonetype',$phoneData['phone']);
+                    $statement->bindValue('imei',$phoneData['imei']);
+                    $statement->bindValue('employee',$phoneData['employee']);
+                    $statement->bindValue('manager',$phoneData['manager']);
+                    $statement->execute();
+
+                    return ("Phone was successfully added");
+                }catch(PDOException $exc){
+                    return ("An error occurred. Phone was not entered.");
+                }
             }else{
                 return("Phone already exists!");
             }
         }else{
             return("Could not verify manager " .$phoneData['manager']. " phone not added.");
         }
-
     }
 
     function checkPhoneExists($vendor,$carrier,$imei){

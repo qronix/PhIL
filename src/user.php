@@ -275,7 +275,6 @@ function verifyManager($managerName, $managerPassword){
         }
 }
 
-function verifyUser($username)
 
 function resetPassword($username){
 

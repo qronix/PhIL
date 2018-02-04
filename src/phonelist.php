@@ -50,6 +50,8 @@ $phone = new Phone();
                 <div class="form-group phoneedit" id="manager-group">
                     <label for="manager">Manager</label>
                     <input type="text" id="manager" class="form-control" name="manager">
+                </div>
+                <div class="form-group phoneedit" id="manager-password-group">
                     <label for="manager">Manager Password</label>
                     <input type="password" id="managerPassword" class="form-control" name="managerPassword">
                 </div>
@@ -57,7 +59,7 @@ $phone = new Phone();
 <!--                    <label for="date">Date</label>-->
 <!--                    <input type="text" id="date" class="form-control" name="date">-->
 <!--                </div>-->
-                <div class="form-group phoneedit" id="designation">
+                <div class="form-group phoneedit" id="designation-group">
                     <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>
                     <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>
                 </div>
@@ -138,20 +140,26 @@ $phone = new Phone();
             }).done(function(data){
                 console.log(data);
                 if(data.errors!==undefined){
-                    if(data.errors.username!==undefined){
-                        $('#username-group').append("<div class='alert alert-danger'>"+data.errors.username+"</div>");
+                    if(data.errors.vendor!==undefined){
+                        $('#vendor-group').append("<div class='alert alert-danger'>"+data.errors.vendor+"</div>");
                     }
-                    if(data.errors.password!==undefined){
-                        $('#password-group').append("<div class='alert alert-danger'>"+data.errors.password+"</div>");
+                    if(data.errors.carrier!==undefined){
+                        $('#carrier-group').append("<div class='alert alert-danger'>"+data.errors.carrier+"</div>");
                     }
-                    if(data.errors.passwordverify!==undefined){
-                        $('#passwordverify-group').append("<div class='alert alert-danger'>"+data.errors.passwordverify+"</div>");
+                    if(data.errors.phone!==undefined){
+                        $('#phone-group').append("<div class='alert alert-danger'>"+data.errors.phone+"</div>");
                     }
-                    if(data.errors.email!==undefined){
-                        $('#email-group').append("<div class='alert alert-danger'>"+data.errors.email+"</div>");
+                    if(data.errors.imei!==undefined){
+                        $('#imei-group').append("<div class='alert alert-danger'>"+data.errors.imei+"</div>");
                     }
-                    if(data.errors.role!==undefined){
-                        $('#role-group').append("<div class='alert alert-danger'>"+data.errors.role+"</div>");
+                    if(data.errors.manager!==undefined){
+                        $('#manager-group').append("<div class='alert alert-danger'>"+data.errors.manager+"</div>");
+                    }
+                    if(data.errors.managerPassword!==undefined){
+                        $('#manager-password-group').append("<div class='alert alert-danger'>"+data.errors.managerPassword+"</div>");
+                    }
+                    if(data.errors.designation!==undefined){
+                        $('#designation-group').append("<div class='alert alert-danger'>"+data.errors.designation+"</div>");
                     }
                 }
                 if(data.message!==undefined){
