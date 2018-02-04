@@ -25,34 +25,64 @@ $phone = new Phone();
         <h2>Add new phone</h2>
     </div>
     <div class="row">
-        <div class="container" id="editPhoneArea">
-            <form id="edit-form" action="createphone.php" method="POST">
-                <div class="form-group editinput" id="username-group">
+        <div class="container col-md-12" id="editPhoneArea">
+            <form id="edit-form-phone" class="col-md-12" action="createphone.php" method="POST">
+                <div class="form-group phoneedit" id="vendor-group">
                     <label for="vendor">Vendor</label>
                     <input type="text" class="form-control" name="vendor" id="vendor" required>
                 </div>
-                <div class="form-group editinput" id="password-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" required>
+                <div class="form-group phoneedit" id="carrier-group">
+                    <label for="carrier">Carrier</label>
+                    <input type="text" class="form-control" name="carrier" id="carrier" required>
                 </div>
-                <div class="form-group editinput" id="passwordverify-group">
-                    <label for="passwordverify">Verify password</label>
-                    <input type="password" class="form-control" name="passwordverify" id="passwordverify" required>
+                <div class="form-group phoneedit" id="phone-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="phone" required>
                 </div>
-                <div class="form-group editinput" id="email-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
+                <div class="form-group phoneedit" id="imei-group">
+                    <label for="imei">IMEI</label>
+                    <input type="text" class="form-control" name="imei" id="imei" required>
                 </div>
-                <div class="form-group editinput" id="role-group">
-                    <label for="role">Role</label>
-                    <select id="role" class="form-control" name="role">
-                        <option selected>user</option>
-                        <option>manager</option>
-                        <option>admin</option>
-                    </select>
+                <div class="form-group phoneedit" id="employee-group">
+                    <label for="employee">Employee</label>
+                    <input type="text" id="employee" class="form-control" name="employee">
+                </div>
+                <div class="form-group phoneedit" id="manager-group">
+                    <label for="manager">Manager</label>
+                    <input type="text" id="manager" class="form-control" name="manager">
+                </div>
+<!--                <div class="form-group editinput" id="date-group">-->
+<!--                    <label for="date">Date</label>-->
+<!--                    <input type="text" id="date" class="form-control" name="date">-->
+<!--                </div>-->
+                <div class="form-group phoneedit" id="designation">
+                    <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>
+                    <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="editUserBtn" class="btn">Submit</button>
+                    <button type="submit" id="addPhoneBtn" class="btn">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container editusercontainer col-sm-10">
+    <div class="row">
+        <div class="container" id="form-message">
+
+        </div>
+    </div>
+    <div class="row">
+        <h2>Phone list</h2>
+    </div>
+    <div class="row">
+        <div class="container col-md-6" id="searchPhoneArea">
+            <form id="phone-search" class="col-md-12" action="createphone.php" method="POST">
+                <div class="form-group phonesearch" id="phonesearch">
+                    <input class="text form-control" name="phonesearch" id="phonesearch" placeholder="imei, employee, phone...">
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="phonesearchBtn" class="btn"><i class="fa fa-search"></i>Search</button>
                 </div>
             </form>
         </div>
@@ -81,18 +111,20 @@ $phone = new Phone();
     });
 
     $(function(){
-        var form=$('#edit-form');
+        var form=$('#edit-form-phone');
         var formMessage =$('#form-message');
 
         $(form).submit(function(event){
 
             $('.alert').remove();
             var formData = {
-                'username' : $('input[name=username]').val(),
-                'password' : $('input[name=password').val(),
-                'passwordverify' : $('input[name=passwordverify]').val(),
-                'email' : $('input[name=email]').val(),
-                'role' : document.querySelector("#role").value
+                'vendor' : $('input[name=vendor]').val(),
+                'carrier' : $('input[name=carrier').val(),
+                'phone' : $('input[name=phone]').val(),
+                'imei' : $('input[name=imei]').val(),
+                'employee' : $('input[name=employee]').val(),
+                'manager' : $('input[name=manager]').val(),
+                'designation' : $('input[name=designation]:checked').val()
             };
             $.ajax({
                 type:'POST',

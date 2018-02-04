@@ -78,13 +78,83 @@ html{
     align-content: center;
     text-align: center;
     vertical-align: middle;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
     transition: all 0.2s;
+    /*font-size: 1px !important;*/
+}
+
+@keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 .phonerow:hover{
     transform: scale(1.1);
 }
 .phonedata{
-    /*border: 1px solid green;*/
+    border: 1px solid green;
+    font-size: 10px;
+}
+
+/*.phonedata p{*/
+    /*font-size: 12px;*/
+/*}*/
+
+.phonedataTitle{
+    font-size: 12px;
+}
+
+.phoneedit,
+.phonedelete{
+    font-size: 14px;
+}
+.form-group{
+    /*border: 1px solid red;*/
+}
+.phoneedit{
+    /*float: left;*/
+    display: inline-block;
+}
+
+.phoneedit label{
+    font-size: 20px;
+}
+
+.phoneedit input{
+    padding: 2px;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.phoneedit span{
+    margin-right: 10px;
+}
+#edit-form-phone .form-group{
+    margin-right: 10px;
+}
+.phone-search{
+    text-align: center;
+}
+#searchPhoneArea{
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+}
+#phone-search div{
+    display: inline-block;
+}
+
+#phonesearch{
+    margin-right: 10px;
+    vertical-align: center;
+    padding: 2px;
+}
+#phonesearchBtn{
+    vertical-align: center;
+    margin-bottom: 5px;
 }
 
 

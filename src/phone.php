@@ -22,7 +22,7 @@ class Phone
         if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
             if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"||$_SESSION['role']!=="user"){
                 try{
-                    $sql = "SELECT * FROM phones";
+                    $sql = "SELECT * FROM phones ORDER BY date desc LIMIT 20";
                     $statement = $this->pdo->prepare($sql);
                     $statement->execute();
 
@@ -31,35 +31,35 @@ class Phone
                         $display =  "<div class='container phonerow col-md-9'>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Carrier: </br><span class='phonedata'>".$result['carrier']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Carrier: </br><span class='phonedata'>".$result['carrier']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Phone: </br><span class='phonedata'>".$result['phonetype']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Phone: </br><span class='phonedata'>".$result['phonetype']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>IMEI: </br><span class='phonedata'>".$result['imei']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>IMEI: </br><span class='phonedata'>".$result['imei']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Employee: </br><span class='active'>".$result['employee']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Employee: </br><span class='phonedata'>".$result['employee']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Manager: </br><span class='active'>".$result['manager']."</span></p>";
-                        $display .= "</div>";
-                        $display .= "<div class='col-md-2 phonedata'>";
-                        $display .= "<p>Date: </br><span class='active'>".$result['date']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Manager: </br><span class='phonedata'>".$result['manager']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Pickup: </br><span class='active'>".$result['storepickup']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Date: </br><span class='phonedata'>".$result['date']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p>Brightstar: </br><span class='active'>".$result['brightstar']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Pickup: </br><span class='phonedata'>".$result['storepickup']."</span></p>";
+                        $display .= "</div>";
+                        $display .= "<div class='col-md-1 phonedata'>";
+                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
-                        $display .= "<a class='userbtn useredit' href='editphone.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
-                        $display .= "<a class='userbtn userdelete' href='deletephone.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
+                        $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
+                        $display .= "<a class='userbtn userdelete phonedelete' href='deletephone.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
