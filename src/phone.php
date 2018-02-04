@@ -83,6 +83,8 @@ class Phone
     }
 
     function createPhone($phoneData){
+        $message = "";
+
         $isRealManager = $this->user->verifyManager($phoneData['manager'],$phoneData['managerPassword']);
         if($isRealManager){
             $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
@@ -99,7 +101,7 @@ class Phone
                         $statement->bindValue('storepickup',"0");
                         $statement->bindValue('brightstar',"1");
                     }
-                    $statement->bindValue('date',date("m/d/Y h:i:s A"));
+                    $statement->bindValue('date',date("Y-m-d H:i:s"));
                     $statement->bindValue('vendor',$phoneData['vendor']);
                     $statement->bindValue('carrier',$phoneData['carrier']);
                     $statement->bindValue('phonetype',$phoneData['phone']);
@@ -108,16 +110,20 @@ class Phone
                     $statement->bindValue('manager',$phoneData['manager']);
                     $statement->execute();
 
-                    return ("Phone was successfully added");
+                    $message = "Phone was successfully added";
                 }catch(PDOException $exc){
-                    return ("An error occurred. Phone was not entered.");
+                    $message = "An error occurred. Phone was not entered.";
                 }
             }else{
-                return("Phone already exists!");
+                $message = "Phone already exists!";
             }
         }else{
-            return("Could not verify manager " .$phoneData['manager']. " phone not added.");
+            $message = "Could not verify manager " .$phoneData['manager']. " phone not added.";
+//            $message = $isRealManager;
+
         }
+
+        return $message;
     }
 
     function checkPhoneExists($vendor,$carrier,$imei){
@@ -137,6 +143,59 @@ class Phone
 
         }catch (PDOException $exc){
             return ("error");
+        }
+    }
+
+    function getVendors(){
+        try{
+            $sql = "SELECT DISTINCT vendor FROM phones";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+
+            $vendors = array();
+
+            while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+                array_push($vendors,$result['vendor']);
+            }
+            return $vendors;
+        }catch(PDOException $exc){
+            return $error['vendors'] = ['error','error','error'];
+        }
+    }
+
+    function getCarriers($vendor){
+        try{
+            $sql = "SELECT DISTINCT carrier FROM phones WHERE vendor=:vendor";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':vendor',$vendor);
+            $statement->execute();
+
+            $carriers = array();
+
+            while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+                array_push($carriers,$result['carrier']);
+            }
+            return $carriers;
+        }catch(PDOException $exc){
+            return $error = ['error','error','error'];
+        }
+    }
+    function getPhones($vendor,$carrier){
+        try{
+            $sql = "SELECT DISTINCT phonetype FROM phones WHERE vendor=:vendor AND carrier=:carrier";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':vendor',$vendor);
+            $statement->bindValue(':carrier',$carrier);
+            $statement->execute();
+
+            $phones = array();
+
+            while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+                array_push($phones,$result['phonetype']);
+            }
+            return $phones;
+        }catch(PDOException $exc){
+            return $error = ['error','error','error'];
         }
     }
 }

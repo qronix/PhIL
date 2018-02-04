@@ -248,26 +248,32 @@ function updateUser($id,$username,$role,$email,$activeaccount){
 function verifyManager($managerName, $managerPassword){
 
         try{
-            $sql = "SELECT * FROM users WHERE username=:username LIMIT 1";
+            $sql = "SELECT * FROM users WHERE username=:username";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue('username',$managerName);
+            $statement ->execute();
 
-            while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+            if(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
 
+                //print_r($result);
                 if(!password_verify($managerPassword,$result['password'])){
+                    //echo "Bad password";
                     return (false);
                 }
-                else if($result['role']!=="admin"||$result['role']!=="manager"){
+                else if($result['role']!="admin"&&$result['role']!="manager"){
+                    //echo "Bad permissions";
                     return (false);
                 }
-                else if($result['activeaccount']!==1){
+                else if($result['activeaccount']!="1"){
+                    //echo "Bad account";
                     return(false);
                 }
-                else if($result['needspasschange']===1){
+                else if($result['needpasschange']=="1"){
+                    //echo "Bad password status";
                     return (false);
                 }
                 else{
-                    return (true);
+                    return ("good");
                 }
             }
         }catch (PDOException $exc){

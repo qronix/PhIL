@@ -49,11 +49,11 @@ $phone = new Phone();
 <!--                </div>-->
                 <div class="form-group phoneedit" id="manager-group">
                     <label for="manager">Manager</label>
-                    <input type="text" id="manager" class="form-control" name="manager">
+                    <input type="text" id="manager" class="form-control" name="manager" required>
                 </div>
                 <div class="form-group phoneedit" id="manager-password-group">
                     <label for="manager">Manager Password</label>
-                    <input type="password" id="managerPassword" class="form-control" name="managerPassword">
+                    <input type="password" id="managerPassword" class="form-control" name="managerPassword" required>
                 </div>
 <!--                <div class="form-group editinput" id="date-group">-->
 <!--                    <label for="date">Date</label>-->
@@ -62,6 +62,7 @@ $phone = new Phone();
                 <div class="form-group phoneedit" id="designation-group">
                     <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>
                     <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>
+                    <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Walk-in</span>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="addPhoneBtn" class="btn">Add</button>
@@ -163,6 +164,7 @@ $phone = new Phone();
                     }
                 }
                 if(data.message!==undefined){
+                    console.log("here");
                     $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
                 }
             });
@@ -172,6 +174,7 @@ $phone = new Phone();
             $('#imei').val('');
             $('#employee').val('');
             $('#manager').val('');
+            $('#managerPassword').val('');
 
             event.preventDefault();
             // $(".userrow").remove();

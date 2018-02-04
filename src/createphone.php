@@ -38,7 +38,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
         }else{
             $errors['imei'] = "Imei cannot be empty";
         }
-        if(isset($_SESSION['username'])&&!empty($_POST['username'])){
+        if(isset($_SESSION['username'])&&!empty($_SESSION['username'])){
             $phoneData['employee'] = $_SESSION['username'];
 
         }else{
@@ -52,7 +52,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
         }
         if(isset($_POST['managerPassword'])&&!empty($_POST['managerPassword'])){
             $phoneData['managerPassword'] = $_POST['managerPassword'];
-
         }else{
             $errors['managerPassword'] = "Manager password cannot be empty";
         }
@@ -78,7 +77,8 @@ else if(sizeof($errors)!==0){
     $data['errors'] = $errors;
 }
 
-return(json_encode($data));
+//print_r($data);
+echo json_encode($data);
 
 
 
