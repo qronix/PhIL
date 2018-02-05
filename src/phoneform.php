@@ -1,34 +1,11 @@
 
 <?php
 
-include ("phone.php");
-include ("includes/header.php");
+//include ("phone.php");
+//include ("includes/header.php");
 
 
 $phone = new Phone();
-//$vendors = array();
-//$selectedCarrier = "";
-//$selectedVendor = "apple";
-//$vendors = $phone->getVendors();
-//$carriers = $phone->getCarriers($selectedVendor);
-//
-//$phones = array();
-
-//if($_SERVER["REQUEST_METHOD"]=="POST"){
-//    if(isset($_POST['vendor'])&&!empty($_POST['vendor'])){
-//        $selectedVendor= filter_input(INPUT_POST,'vendor');
-//        $carriers = $phone->getCarriers($selectedVendor);
-//    }
-//    if(isset($_POST['carrier'])&&!empty($_POST['carrier'])){
-//        $selectedCarrier= filter_input(INPUT_POST,'carrier');
-//    }
-////    if($selectedCarrier!=""&&$selectedVendor!=""){
-////        $phones = $phone->getPhones();
-////    }
-////    $message['carrier'] = strip_tags($selectedVendor);
-////    echo json_encode($message);
-//}
-
 
 ?>
 
@@ -46,7 +23,6 @@ $phone = new Phone();
             <form id="edit-form-phone" class="col-md-12" action="createphone.php" method="POST">
                 <div class="form-group phoneedit" id="vendor-group">
                     <label for="vendor">Vendor</label>
-<!--                    <input type="text" class="form-control" name="vendor" id="vendor" required>-->
                         <select class='form-control' name='vendor' id="vendor" required>
                             <?php
                                 echo $phone->getVendors();
@@ -55,14 +31,14 @@ $phone = new Phone();
                 </div>
                 <div class="form-group phoneedit" id="carrier-group">
                     <label for="carrier">Carrier</label>
-<!--                    <input type="text" class="form-control" name="carrier" id="carrier" required>-->
+
                     <select id='carrier' class='form-control' name='carrier' required>
 
                     </select>
                 </div>
                 <div class="form-group phoneedit" id="phone-group">
                     <label for="phone">Phone</label>
-<!--                    <input type="text" class="form-control" name="phone" id="phone" required>-->
+
                     <select id='phone' class='form-control' name='phone' required>
 
                     </select>
@@ -71,10 +47,7 @@ $phone = new Phone();
                     <label for="imei">IMEI</label>
                     <input type="text" class="form-control" name="imei" id="imei" required>
                 </div>
-                <!--                <div class="form-group phoneedit" id="employee-group">-->
-                <!--                    <label for="employee">Employee</label>-->
-                <!--                    <input type="text" id="employee" class="form-control" name="employee">-->
-                <!--                </div>-->
+
                 <div class="form-group phoneedit" id="manager-group">
                     <label for="manager">Manager</label>
                     <input type="text" id="manager" class="form-control" name="manager" required>
@@ -83,14 +56,11 @@ $phone = new Phone();
                     <label for="manager">Manager Password</label>
                     <input type="password" id="managerPassword" class="form-control" name="managerPassword" required>
                 </div>
-                <!--                <div class="form-group editinput" id="date-group">-->
-                <!--                    <label for="date">Date</label>-->
-                <!--                    <input type="text" id="date" class="form-control" name="date">-->
-                <!--                </div>-->
+
                 <div class="form-group phoneedit" id="designation-group">
                     <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>
                     <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>
-                    <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Walk-in</span>
+                    <input class="phoneradio" type="radio" name="designation" value="walkin"><span>Walk-in</span>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="addPhoneBtn" class="btn">Add</button>
@@ -129,4 +99,5 @@ $('#carrier').change(function(){
         $("#phone").html(data);
     });
 });
+
 </script>

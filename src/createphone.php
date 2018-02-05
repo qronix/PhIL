@@ -56,7 +56,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
             $errors['managerPassword'] = "Manager password cannot be empty";
         }
         if(isset($_POST['designation'])&&!empty($_POST['designation'])){
-            if($_POST['designation'] === "pickup"|| $_POST['designation']==="brightstar"){
+            if($_POST['designation'] === "pickup"|| $_POST['designation']==="brightstar"
+                ||$_POST['designation']==="walkin"){
                 $phoneData['designation'] = filter_input(INPUT_POST,'designation');
             }else{
                 $errors['designation'] = "Designation is not valid";

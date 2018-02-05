@@ -29,10 +29,11 @@ class Phone
                     $sql = "SELECT * FROM phones ORDER BY date desc LIMIT 20";
                     $statement = $this->pdo->prepare($sql);
                     $statement->execute();
+                    $returnData = "";
 
                     while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
                         //$date = date_format($result['date'],"d/m/Y");
-                        $display =  "<div class='container phonerow col-md-9'>";
+                        $display =  "<div class='container phonerow col-md-10'>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='col-md-1 phonedata'>";
                         $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
@@ -68,17 +69,21 @@ class Phone
                         $display .= "</div>";
                         $display .= "</div>";
 
-                        echo $display;
+//                        echo $display;
+                        $returnData.= $display;
                     }
-
+                    return $returnData;
                 }catch (PDOException $exc){
-                    echo "<div class='alert alert-danger'>Users could not be displayed</div>";
+//                    echo "<div class='alert alert-danger'>Users could not be displayed</div>";
+                    return "<div class='alert alert-danger'>Users could not be displayed</div>";
                 }
             }else{
-                echo "<div class='alert alert-warning'>You cannot view users</div>";
+//                echo "<div class='alert alert-warning'>You cannot view users</div>";
+                return "<div class='alert alert-warning'>You cannot view users</div>";
             }
         }else{
-            echo "<div class='alert alert-warning'>You are not logged in</div>";
+//            echo "<div class='alert alert-warning'>You are not logged in</div>";
+            return "<div class='alert alert-warning'>You are not logged in</div>";
         }
     }
 
@@ -90,16 +95,22 @@ class Phone
             $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
             if(!$phoneExists){
                 try{
-                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar)
-                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar)";
+                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar,walkin)
+                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar,:walkin)";
                     $statement = $this->pdo->prepare($sql);
 
                     if($phoneData['designation']==="pickup"){
                         $statement->bindValue('storepickup',"1");
                         $statement->bindValue('brightstar',"0");
+                        $statement->bindValue('walkin',"0");
+                    }elseif($phoneData['designation']==="brightstar"){
+                        $statement->bindValue('storepickup',"0");
+                        $statement->bindValue('walkin',"0");
+                        $statement->bindValue('brightstar',"1");
                     }else{
                         $statement->bindValue('storepickup',"0");
-                        $statement->bindValue('brightstar',"1");
+                        $statement->bindValue('walkin',"1");
+                        $statement->bindValue('brightstar',"0");
                     }
                     $statement->bindValue('date',date("Y-m-d H:i:s"));
                     $statement->bindValue('vendor',$phoneData['vendor']);
@@ -177,7 +188,7 @@ class Phone
             $statement->execute();
 
             $carriers = array();
-            $returnData = "";
+            $returnData = "<option>Select...</option>";
 
             while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
                 array_push($carriers,$result['carrier']);
@@ -199,11 +210,15 @@ class Phone
             $statement->execute();
 
             $phones = array();
+            $returnData = "";
 
             while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
                 array_push($phones,$result['phonetype']);
             }
-            return $phones;
+            foreach ($phones as $phone){
+                $returnData.="<option>".$phone."</option>";
+            }
+            return $returnData;
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
         }

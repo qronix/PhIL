@@ -69,6 +69,10 @@ html{
 /********PHONES*********/
 /**********************/
 
+#phonelist{
+    margin-top: 5vh;
+    margin-left: 14%
+}
 .phonerow{
     background-color: #003B64;
     color: white;
@@ -95,8 +99,8 @@ html{
     transform: scale(1.1);
 }
 .phonedata{
-    border: 1px solid green;
-    font-size: 10px;
+    /*border: 1px solid green;*/
+    font-size: 16px;
 }
 
 /*.phonedata p{*/
@@ -104,12 +108,12 @@ html{
 /*}*/
 
 .phonedataTitle{
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .phoneedit,
 .phonedelete{
-    font-size: 14px;
+    font-size: 16px;
 }
 .form-group{
     /*border: 1px solid red;*/
