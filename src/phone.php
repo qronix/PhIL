@@ -282,10 +282,10 @@ class Phone
             preg_match($walkinRegex,$searchTerm,$walkinTerm);
         }
         try{
-//            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor, carrier LIKE :carrier, phonetype LIKE :phonetype, imei LIKE :imei,
-//                    employee LIKE :employee, manager LIKE :manager, date LIKE :date, storepickup LIKE :storepickup,
-//                      brightstar LIKE :brightstar, walkin LIKE :walkin";
-            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor";
+            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier AND phonetype LIKE :phonetype AND imei LIKE :imei AND
+                    employee LIKE :employee AND manager LIKE :manager AND date LIKE :date AND storepickup LIKE :storepickup AND
+                      brightstar LIKE :brightstar AND walkin LIKE :walkin";
+//            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier";
             $statement = $this->pdo->prepare($sql);
 
             if(!empty($vendorTerm)){
@@ -293,44 +293,44 @@ class Phone
             }else{
                 $statement->bindValue(':vendor',"%");
             }
-            if(!empty($carrierTerm!="")){
+            if(!empty($carrierTerm)){
                 $statement->bindValue(':carrier',$carrierTerm[0]);
             }else{
                 $statement->bindValue(':carrier',"%");
             }
-            if(!empty($phonetypeTerm!="")){
+            if(!empty($phonetypeTerm)){
                 $statement->bindValue(':phonetype', $phonetypeTerm[0]);
             }else{
                 $statement->bindValue(':phonetype',"%");
             }
-            if(!empty($imeiTerm!="")){
+            if(!empty($imeiTerm)){
                 $statement->bindValue(':imei',$imeiTerm[0]);
             }else{
                 $statement->bindValue(':imei',"%");
             }
-            if(!empty($employeeTerm!="")){
+            if(!empty($employeeTerm)){
                 $statement->bindValue(':employee',$employeeTerm[0]);
             }else{
                 $statement->bindValue(':employee',"%");
             }
-            if(!empty($managerTerm!="")){
+            if(!empty($managerTerm)){
                 $statement->bindValue(':manager',$managerTerm[0]);
             }else{
                 $statement->bindValue(':manager',"%");
             }
-            if(!empty($dateTerm!="")){
+            if(!empty($dateTerm)){
                 $statement->bindValue(':date',$dateTerm[0]);
             }else{
                 $statement->bindValue(':date',"%");
-            }if(!empty($storepickupTerm!="")){
+            }if(!empty($storepickupTerm)){
                 $statement->bindValue(':storepickup',$storepickupTerm[0]);
             }else{
                 $statement->bindValue(':storepickup',"%");
-            }if(!empty($brightstarTerm!="")){
+            }if(!empty($brightstarTerm)){
                 $statement->bindValue(':brightstar',$brightstarTerm[0]);
             }else{
                 $statement->bindValue(':brightstar',"%");
-            }if(!empty($walkinTerm!="")){
+            }if(!empty($walkinTerm)){
                 $statement->bindValue(':walkin',$walkinTerm[0]);
             }else{
                 $statement->bindValue(':walkin',"%");

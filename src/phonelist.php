@@ -31,9 +31,9 @@ $phone = new Phone();
     </div>
     <div class="row">
         <div class="container col-md-6" id="searchPhoneArea">
-            <form id="phone-search" class="col-md-12" action="createphone.php" method="POST">
+            <form id="phone-search" class="col-md-12" action="phonesearch.php" method="POST">
                 <div class="form-group phonesearch" id="phonesearch">
-                    <input class="text form-control" name="phonesearch" id="phonesearch" placeholder="imei, employee, phone...">
+                    <input class="text form-control" name="phonesearch" id="phonesearchEntry" placeholder="imei, employee, phone...">
                 </div>
                 <div class="form-group">
                     <button type="submit" id="phonesearchBtn" class="btn"><i class="fa fa-search"></i>Search</button>
@@ -64,7 +64,19 @@ $phone = new Phone();
         $(".main").fadeIn(1000);
         loadPhones();
     });
-
+    $("#phone-search").submit(function(event) {
+        var searchTerm = document.querySelector("#phonesearchEntry").value;
+        console.log(searchTerm);
+        $.ajax({
+           type:'POST',
+           url:"phonesearch.php",
+           data:{'searchterm': searchTerm},
+           encode:true
+        }).done(function(data){
+            $("#phonelist").html(data);
+        });
+        event.preventDefault();
+    });
    function loadPhones(){
        $.ajax({
           type:'POST',
