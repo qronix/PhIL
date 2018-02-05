@@ -75,11 +75,11 @@ class Phone
                     return $returnData;
                 }catch (PDOException $exc){
 //                    echo "<div class='alert alert-danger'>Users could not be displayed</div>";
-                    return "<div class='alert alert-danger'>Users could not be displayed</div>";
+                    return "<div class='alert alert-danger'>Phones could not be displayed</div>";
                 }
             }else{
 //                echo "<div class='alert alert-warning'>You cannot view users</div>";
-                return "<div class='alert alert-warning'>You cannot view users</div>";
+                return "<div class='alert alert-warning'>You cannot view phones</div>";
             }
         }else{
 //            echo "<div class='alert alert-warning'>You are not logged in</div>";
@@ -222,5 +222,172 @@ class Phone
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
         }
+    }
+    function searchPhone($searchTerm){
+
+        $returnData = "";
+
+        $vendorTerm = "";
+        $carrierTerm = "";
+        $phonetypeTerm = "";
+        $imeiTerm = "";
+        $employeeTerm = "";
+        $managerTerm = "";
+        $dateTerm = "";
+        $storepickupTerm = "";
+        $brightstarTerm = "";
+        $walkinTerm = "";
+
+        //regexs
+        $vendorRegex = '/(?<=vendor:)(\s?.\S*)/';
+        $carrierRegex = '/(?<=carrier:)(\s?.\S*)/';
+        $imeiRegex='/(?<=imei:)(\s?.\S*)/';
+        $phonetypeRegex='/(?<=phonetype:)(\s?.\S*)/';
+        $employeeRegex='/(?<=employee:)(\s?.\S*)/';
+        $managerRegex='/(?<=manager:)(\s?.\S*)/';
+        $dateRegex='/(?<=date:)(\s?.\S*)/';
+        $storePickRegex='/(?<=storepickup:)(\s?.\S*)/';
+        $brightstarRegex='/(?<=brightstar:)(\s?.\S*)/';
+        $walkinRegex='/(?<=walkin:)(\s?.\S*)/';
+
+
+        if(strpos($searchTerm, 'vendor:')!==false){
+            preg_match($vendorRegex,$searchTerm,$vendorTerm);
+        }
+        if(strpos($searchTerm, 'carrier:')!==false){
+            preg_match($carrierRegex,$searchTerm,$carrierTerm);
+        }
+        if(strpos($searchTerm, 'phone:')!==false){
+            preg_match($phonetypeRegex,$searchTerm,$phonetypeTerm);
+        }
+        if(strpos($searchTerm, 'imei:')!==false){
+            preg_match($imeiRegex,$searchTerm,$imeiTerm);
+        }
+        if(strpos($searchTerm, 'employee:')!==false){
+            preg_match($employeeRegex,$searchTerm,$employeeTerm);
+        }
+        if(strpos($searchTerm, 'manager:')!==false){
+            preg_match($managerRegex,$searchTerm,$managerTerm);
+        }
+        if(strpos($searchTerm, 'date:')!==false){
+            preg_match($dateRegex,$searchTerm,$dateTerm);
+        }
+        if(strpos($searchTerm, 'storepickup:')!==false){
+            preg_match($storePickRegex,$searchTerm,$storepickupTerm);
+        }
+        if(strpos($searchTerm, 'brightstar:')!==false){
+            preg_match($brightstarRegex,$searchTerm,$brightstarTerm);
+        }
+        if(strpos($searchTerm, 'walkin:')!==false){
+            preg_match($walkinRegex,$searchTerm,$walkinTerm);
+        }
+        try{
+//            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor, carrier LIKE :carrier, phonetype LIKE :phonetype, imei LIKE :imei,
+//                    employee LIKE :employee, manager LIKE :manager, date LIKE :date, storepickup LIKE :storepickup,
+//                      brightstar LIKE :brightstar, walkin LIKE :walkin";
+            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor";
+            $statement = $this->pdo->prepare($sql);
+
+            if(!empty($vendorTerm)){
+                $statement->bindValue(':vendor',$vendorTerm[0]);
+            }else{
+                $statement->bindValue(':vendor',"%");
+            }
+            if(!empty($carrierTerm!="")){
+                $statement->bindValue(':carrier',$carrierTerm[0]);
+            }else{
+                $statement->bindValue(':carrier',"%");
+            }
+            if(!empty($phonetypeTerm!="")){
+                $statement->bindValue(':phonetype', $phonetypeTerm[0]);
+            }else{
+                $statement->bindValue(':phonetype',"%");
+            }
+            if(!empty($imeiTerm!="")){
+                $statement->bindValue(':imei',$imeiTerm[0]);
+            }else{
+                $statement->bindValue(':imei',"%");
+            }
+            if(!empty($employeeTerm!="")){
+                $statement->bindValue(':employee',$employeeTerm[0]);
+            }else{
+                $statement->bindValue(':employee',"%");
+            }
+            if(!empty($managerTerm!="")){
+                $statement->bindValue(':manager',$managerTerm[0]);
+            }else{
+                $statement->bindValue(':manager',"%");
+            }
+            if(!empty($dateTerm!="")){
+                $statement->bindValue(':date',$dateTerm[0]);
+            }else{
+                $statement->bindValue(':date',"%");
+            }if(!empty($storepickupTerm!="")){
+                $statement->bindValue(':storepickup',$storepickupTerm[0]);
+            }else{
+                $statement->bindValue(':storepickup',"%");
+            }if(!empty($brightstarTerm!="")){
+                $statement->bindValue(':brightstar',$brightstarTerm[0]);
+            }else{
+                $statement->bindValue(':brightstar',"%");
+            }if(!empty($walkinTerm!="")){
+                $statement->bindValue(':walkin',$walkinTerm[0]);
+            }else{
+                $statement->bindValue(':walkin',"%");
+            }
+
+            $statement ->execute();
+
+
+            while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                //$date = date_format($result['date'],"d/m/Y");
+                $display =  "<div class='container phonerow col-md-10'>";
+                $display .= "<div class='row'>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Carrier: </br><span class='phonedata'>".$result['carrier']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Phone: </br><span class='phonedata'>".$result['phonetype']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>IMEI: </br><span class='phonedata'>".$result['imei']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Employee: </br><span class='phonedata'>".$result['employee']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Manager: </br><span class='phonedata'>".$result['manager']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Date: </br><span class='phonedata'>".$result['date']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Pickup: </br><span class='phonedata'>".$result['storepickup']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-2 btngrp'>";
+                $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
+                $display .= "<a class='userbtn userdelete phonedelete' href='deletephone.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
+                $display .= "</div>";
+                $display .= "</div>";
+                $display .= "</div>";
+
+//                        echo $display;
+                $returnData.= $display;
+            }
+            return $returnData;
+
+
+
+        }catch (PDOException $exc){
+            $returnData = "<div class='alert alert-danger'>Search could not be completed.</div>";
+        }
+
+        return($returnData);
     }
 }
