@@ -33,7 +33,7 @@ class Phone
 
                     while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
                         //$date = date_format($result['date'],"d/m/Y");
-                        $display =  "<div class='container phonerow col-md-10'>";
+                        $display =  "<div class='container phonerow col-md-12'>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='col-md-1 phonedata'>";
                         $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
@@ -62,9 +62,12 @@ class Phone
                         $display .= "<div class='col-md-1 phonedata'>";
                         $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
                         $display .= "</div>";
+                        $display .= "<div class='col-md-1 phonedata'>";
+                        $display .= "<p class='phonedataTitle'>Pulled: </br><span class='phonedata'>".$result['pulled']."</span></p>";
+                        $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
-                        $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
-                        $display .= "<a class='userbtn userdelete phonedelete' href='deletephone.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
+                        $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
+                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
@@ -95,8 +98,8 @@ class Phone
             $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
             if(!$phoneExists){
                 try{
-                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar,walkin)
-                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar,:walkin)";
+                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar,walkin,pulled)
+                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar,:walkin,:pulled)";
                     $statement = $this->pdo->prepare($sql);
 
                     if($phoneData['designation']==="pickup"){
@@ -119,6 +122,7 @@ class Phone
                     $statement->bindValue('imei',$phoneData['imei']);
                     $statement->bindValue('employee',$phoneData['employee']);
                     $statement->bindValue('manager',$phoneData['manager']);
+                    $statement->bindValue('pulled','1');
                     $statement->execute();
 
                     $message = "Phone was successfully added";
@@ -341,7 +345,7 @@ class Phone
 
             while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
                 //$date = date_format($result['date'],"d/m/Y");
-                $display =  "<div class='container phonerow col-md-10'>";
+                $display =  "<div class='container phonerow col-md-12'>";
                 $display .= "<div class='row'>";
                 $display .= "<div class='col-md-1 phonedata'>";
                 $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
@@ -370,9 +374,12 @@ class Phone
                 $display .= "<div class='col-md-1 phonedata'>";
                 $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
                 $display .= "</div>";
+                $display .= "<div class='col-md-1 phonedata'>";
+                $display .= "<p class='phonedataTitle'>Pulled: </br><span class='phonedata'>".$result['pulled']."</span></p>";
+                $display .= "</div>";
                 $display .= "<div class='col-md-2 btngrp'>";
-                $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
-                $display .= "<a class='userbtn userdelete phonedelete' href='deletephone.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
+                $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
+                $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";
@@ -389,5 +396,37 @@ class Phone
         }
 
         return($returnData);
+    }
+    function pullPhone($phoneid){
+
+        $returnData = "";
+
+        try{
+            $sql = "UPDATE phones SET pulled = :pulled WHERE id=:id LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':pulled','1');
+            $statement->bindValue('id',$phoneid);
+            $statement->execute();
+
+        }catch (PDOException $exc){
+            $returnData = "<div class='alert alert-danger'>Could not update phone</div>";
+        }
+        return ($returnData);
+    }
+    function noPullPhone($phoneid){
+
+        $returnData = "";
+
+        try{
+            $sql = "UPDATE phones SET pulled = :pulled WHERE id=:id LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':pulled','0');
+            $statement->bindValue('id',$phoneid);
+            $statement->execute();
+
+        }catch (PDOException $exc){
+            $returnData = "<div class='alert alert-danger'>Could not update phone</div>";
+        }
+        return ($returnData);
     }
 }

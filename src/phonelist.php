@@ -1,16 +1,16 @@
 <?php
 session_start();
 if(!isset($_SESSION['role'])||empty($_SESSION['role'])){
-    header("Location: index.php");
+    header("Location: dashboard.php");
 }
 include("includes/header.php");
 include("includes/sidebar.php");
 include("phone.php");
 
 
-if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admin"){
-    header("Location: dashboard.php");
-}
+//if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admin"){
+//    header("Location: dashboard.php");
+//}
 
 $phone = new Phone();
 
@@ -20,7 +20,7 @@ $phone = new Phone();
 
 <?php include ("phoneform.php");?>
 
-<div class="container editusercontainer col-sm-10">
+<div class="container editusercontainer col-sm-11">
     <div class="row">
         <div class="container" id="form-message">
 

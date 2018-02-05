@@ -171,7 +171,7 @@ function createUser($username, $password, $passwordVerify, $email, $role){
                             $statement->bindValue(':password',$password_hash);
                             $statement->bindValue(':email',$email);
                             $statement->bindValue(':role',$role);
-                            $statement->bindValue(':needpasschange',1);
+                            $statement->bindValue(':needpasschange',0);
                             $statement->bindValue(':activeaccount',1);
                             $statement->execute();
                         }catch (PDOException $exc){

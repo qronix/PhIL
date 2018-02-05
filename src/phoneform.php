@@ -9,7 +9,7 @@ $phone = new Phone();
 
 ?>
 
-<div class="container editusercontainer col-sm-10">
+<div class="container editusercontainer col-sm-11">
     <div class="row">
         <div class="container" id="form-message">
 
