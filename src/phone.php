@@ -154,10 +154,16 @@ class Phone
 
             $vendors = array();
 
+            $resultData = "<option>Select..</option>";
+
             while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
                 array_push($vendors,$result['vendor']);
             }
-            return $vendors;
+
+            foreach($vendors as $vendor){
+                $resultData.="<option>".$vendor."</option>";
+            }
+            return $resultData;
         }catch(PDOException $exc){
             return $error['vendors'] = ['error','error','error'];
         }
@@ -171,11 +177,15 @@ class Phone
             $statement->execute();
 
             $carriers = array();
+            $returnData = "";
 
             while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
                 array_push($carriers,$result['carrier']);
             }
-            return $carriers;
+            foreach ($carriers as $carrier){
+                $returnData.= "<option>".$carrier."</option>";
+            }
+            return $returnData;
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
         }

@@ -4,29 +4,30 @@
 include ("phone.php");
 include ("includes/header.php");
 
+
 $phone = new Phone();
-$vendors = array();
-$selectedCarrier = "";
-$selectedVendor = "apple";
-$vendors = $phone->getVendors();
-$carriers = $phone->getCarriers($selectedVendor);
+//$vendors = array();
+//$selectedCarrier = "";
+//$selectedVendor = "apple";
+//$vendors = $phone->getVendors();
+//$carriers = $phone->getCarriers($selectedVendor);
+//
+//$phones = array();
 
-$phones = array();
-
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    if(isset($_POST['vendor'])&&!empty($_POST['vendor'])){
-        $selectedVendor= filter_input(INPUT_POST,'vendor');
-        $carriers = $phone->getCarriers($selectedVendor);
-    }
-    if(isset($_POST['carrier'])&&!empty($_POST['carrier'])){
-        $selectedCarrier= filter_input(INPUT_POST,'carrier');
-    }
-//    if($selectedCarrier!=""&&$selectedVendor!=""){
-//        $phones = $phone->getPhones();
+//if($_SERVER["REQUEST_METHOD"]=="POST"){
+//    if(isset($_POST['vendor'])&&!empty($_POST['vendor'])){
+//        $selectedVendor= filter_input(INPUT_POST,'vendor');
+//        $carriers = $phone->getCarriers($selectedVendor);
 //    }
-//    $message['carrier'] = strip_tags($selectedVendor);
-//    echo json_encode($message);
-}
+//    if(isset($_POST['carrier'])&&!empty($_POST['carrier'])){
+//        $selectedCarrier= filter_input(INPUT_POST,'carrier');
+//    }
+////    if($selectedCarrier!=""&&$selectedVendor!=""){
+////        $phones = $phone->getPhones();
+////    }
+////    $message['carrier'] = strip_tags($selectedVendor);
+////    echo json_encode($message);
+//}
 
 
 ?>
@@ -47,13 +48,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                     <label for="vendor">Vendor</label>
 <!--                    <input type="text" class="form-control" name="vendor" id="vendor" required>-->
                         <select class='form-control' name='vendor' id="vendor" required>
-
-                            <?php foreach ($vendors as $vendor){
-                                echo "<option>".$vendor."</option>";
-                            }?>
-<!--                            <option>manager</option>-->
-<!--                            <option>admin</option>-->
-<!--                            <option>user</option>-->
+                            <?php
+                                echo $phone->getVendors();
+                            ?>
                         </select>
                 </div>
                 <div class="form-group phoneedit" id="carrier-group">
@@ -61,14 +58,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <!--                    <input type="text" class="form-control" name="carrier" id="carrier" required>-->
                     <select id='carrier' class='form-control' name='carrier' required>
 
-                        <?php
-                        $carriers = $phone->getCarriers($selectedVendor);
-                        foreach ($carriers as $carrier){
-                            echo "<option>".$carrier."</option>";
-                        }?>
-                        <!--                            <option>manager</option>-->
-                        <!--                            <option>admin</option>-->
-                        <!--                            <option>user</option>-->
                     </select>
                 </div>
                 <div class="form-group phoneedit" id="phone-group">
@@ -76,16 +65,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <!--                    <input type="text" class="form-control" name="phone" id="phone" required>-->
                     <select id='phone' class='form-control' name='phone' required>
 
-                        <?php
-                        if($selectedCarrier!=""&&$selectedVendor!=""){
-                            $phones = $phone->getPhones();
-                        }
-                        foreach ($phones as $phoneObj){
-                            echo "<option>".$phoneObj."</option>";
-                        }?>
-                        <!--                            <option>manager</option>-->
-                        <!--                            <option>admin</option>-->
-                        <!--                            <option>user</option>-->
                     </select>
                 </div>
                 <div class="form-group phoneedit" id="imei-group">
@@ -127,30 +106,27 @@ $('#vendor').change(function(){
     };
     $.ajax({
         type:'POST',
-        url:'phoneform.php',
+        url:'loadphoneform.php',
         data: formData,
-        dataType: 'json',
+        // dataType: 'json',
         encode: true
     }).done(function(data){
-       console.log(data);
-       // if(data.success){
-       //     $("#carrier-group-group").load(" #carrier-group");
-       // }
+       $("#carrier").html(data);
     });
-     $("#carrier-group").load(" #carrier-group");
 });
 $('#carrier').change(function(){
     var formData={
+        'vendor' : document.querySelector("#vendor").value,
         'carrier' : document.querySelector("#carrier").value
     };
     $.ajax({
         type:'POST',
-        url:'phoneform.php',
+        url:'loadphoneform.php',
         data: formData,
-        dataType: 'json',
+        // dataType: 'json',
         encode: true
     }).done(function(data){
-        console.log(data);
+        $("#phone").html(data);
     });
 });
 </script>
