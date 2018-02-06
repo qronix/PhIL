@@ -57,17 +57,17 @@ class Phone
                         $display .= "<p class='phonedataTitle'>Date: </br><span class='phonedata'>".$result['date']."</span></p>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p class='phonedataTitle'>Pickup: </br><span class='phonedata'>".$result['storepickup']."</span></p>";
+                        $display .= "<p class='phonedataTitle'>Designation: </br><span class='phonedata'>".$result['designation']."</span></p>";
                         $display .= "</div>";
-                        $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
-                        $display .= "</div>";
-                        $display .= "<div class='col-md-1 phonedata'>";
-                        $display .= "<p class='phonedataTitle'>Pulled: </br><span class='phonedata'>".$result['pulled']."</span></p>";
-                        $display .= "</div>";
+//                        $display .= "<div class='col-md-1 phonedata'>";
+//                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
+//                        $display .= "</div>";
+//                        $display .= "<div class='col-md-1 phonedata'>";
+//                        $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
+//                        $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
-                        $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
-                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
+//                        $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
+//                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
@@ -95,26 +95,20 @@ class Phone
 
         $isRealManager = $this->user->verifyManager($phoneData['manager'],$phoneData['managerPassword']);
         if($isRealManager){
-            $phoneExists = $this->checkPhoneExists($phoneData['vendor'],$phoneData['carrier'],$phoneData['imei']);
+            $phoneExists = $this->checkPhoneExists($phoneData['imei']);
             if(!$phoneExists){
                 try{
-                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,storepickup,brightstar,walkin,pulled)
-                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:storepickup,:brightstar,:walkin,:pulled)";
+                    $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,designation)
+                        VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:designation)";
                     $statement = $this->pdo->prepare($sql);
-
-                    if($phoneData['designation']==="pickup"){
-                        $statement->bindValue('storepickup',"1");
-                        $statement->bindValue('brightstar',"0");
-                        $statement->bindValue('walkin',"0");
-                    }elseif($phoneData['designation']==="brightstar"){
-                        $statement->bindValue('storepickup',"0");
-                        $statement->bindValue('walkin',"0");
-                        $statement->bindValue('brightstar',"1");
-                    }else{
-                        $statement->bindValue('storepickup',"0");
-                        $statement->bindValue('walkin',"1");
-                        $statement->bindValue('brightstar',"0");
-                    }
+//
+//                    if($phoneData['designation']==="pickup"){
+//                        $statement->bindValue(':designation',"pickup");
+//                    }elseif($phoneData['designation']==="brightstar"){
+//                        $statement->bindValue(':designation',"brightstar");
+//                    }elseif($phoneData['designation']==="walkin"){
+//                        $statement->bindValue(':designation',"walkin");
+//                    }elseif($phoneData)
                     $statement->bindValue('date',date("Y-m-d H:i:s"));
                     $statement->bindValue('vendor',$phoneData['vendor']);
                     $statement->bindValue('carrier',$phoneData['carrier']);
@@ -122,10 +116,14 @@ class Phone
                     $statement->bindValue('imei',$phoneData['imei']);
                     $statement->bindValue('employee',$phoneData['employee']);
                     $statement->bindValue('manager',$phoneData['manager']);
-                    $statement->bindValue('pulled','1');
-                    $statement->execute();
+                    $statement->bindValue('designation','inventory');
+                    $success = $statement->execute();
 
-                    $message = "Phone was successfully added";
+                    if($success){
+                        $message = "Phone was successfully added";
+                    }else{
+                        $message = "Could not add phone.";
+                    }
                 }catch(PDOException $exc){
                     $message = "An error occurred. Phone was not entered.";
                 }
@@ -141,14 +139,13 @@ class Phone
         return $message;
     }
 
-    function checkPhoneExists($vendor,$carrier,$imei){
+    function checkPhoneExists($imei){
         try{
-            $sql = "SELECT * FROM phones WHERE vendor=:vendor, carrier=:carrier, imei=:imei LIMIT 1";
+            $sql = "SELECT * FROM phones WHERE imei=:imei LIMIT 1";
             $statement = $this->pdo->prepare($sql);
-            $statement ->bindValue('vendor',$vendor);
-            $statement -> bindValue('carrier',$carrier);
-            $statement -> bindValue('imei',$imei);
+            $statement -> bindValue(':imei',$imei);
             $statement -> execute();
+
 
             if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
                 return (false);
@@ -238,9 +235,9 @@ class Phone
         $employeeTerm = "";
         $managerTerm = "";
         $dateTerm = "";
-        $storepickupTerm = "";
-        $brightstarTerm = "";
-        $walkinTerm = "";
+        $designationTerm = "";
+//        $brightstarTerm = "";
+//        $walkinTerm = "";
 
         //regexs
         $vendorRegex = '/(?<=vendor:)(\s?.\S*)/';
@@ -250,9 +247,9 @@ class Phone
         $employeeRegex='/(?<=employee:)(\s?.\S*)/';
         $managerRegex='/(?<=manager:)(\s?.\S*)/';
         $dateRegex='/(?<=date:)(\s?.\S*)/';
-        $storePickRegex='/(?<=storepickup:)(\s?.\S*)/';
-        $brightstarRegex='/(?<=brightstar:)(\s?.\S*)/';
-        $walkinRegex='/(?<=walkin:)(\s?.\S*)/';
+        $designationRegex='/(?<=designation:)(\s?.\S*)/';
+//        $brightstarRegex='/(?<=brightstar:)(\s?.\S*)/';
+//        $walkinRegex='/(?<=walkin:)(\s?.\S*)/';
 
 
         if(strpos($searchTerm, 'vendor:')!==false){
@@ -276,19 +273,18 @@ class Phone
         if(strpos($searchTerm, 'date:')!==false){
             preg_match($dateRegex,$searchTerm,$dateTerm);
         }
-        if(strpos($searchTerm, 'storepickup:')!==false){
-            preg_match($storePickRegex,$searchTerm,$storepickupTerm);
+        if(strpos($searchTerm, 'designation:')!==false){
+            preg_match($designationRegex,$searchTerm,$designationTerm);
         }
-        if(strpos($searchTerm, 'brightstar:')!==false){
-            preg_match($brightstarRegex,$searchTerm,$brightstarTerm);
-        }
-        if(strpos($searchTerm, 'walkin:')!==false){
-            preg_match($walkinRegex,$searchTerm,$walkinTerm);
-        }
+//        if(strpos($searchTerm, 'brightstar:')!==false){
+//            preg_match($brightstarRegex,$searchTerm,$brightstarTerm);
+//        }
+//        if(strpos($searchTerm, 'walkin:')!==false){
+//            preg_match($walkinRegex,$searchTerm,$walkinTerm);
+//        }
         try{
             $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier AND phonetype LIKE :phonetype AND imei LIKE :imei AND
-                    employee LIKE :employee AND manager LIKE :manager AND date LIKE :date AND storepickup LIKE :storepickup AND
-                      brightstar LIKE :brightstar AND walkin LIKE :walkin";
+                    employee LIKE :employee AND manager LIKE :manager AND date LIKE :date AND designation LIKE :designation";
 //            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier";
             $statement = $this->pdo->prepare($sql);
 
@@ -326,19 +322,19 @@ class Phone
                 $statement->bindValue(':date',$dateTerm[0]);
             }else{
                 $statement->bindValue(':date',"%");
-            }if(!empty($storepickupTerm)){
-                $statement->bindValue(':storepickup',$storepickupTerm[0]);
+            }if(!empty($designationTerm)){
+                $statement->bindValue(':designation',$designationTerm[0]);
             }else{
-                $statement->bindValue(':storepickup',"%");
-            }if(!empty($brightstarTerm)){
-                $statement->bindValue(':brightstar',$brightstarTerm[0]);
-            }else{
-                $statement->bindValue(':brightstar',"%");
-            }if(!empty($walkinTerm)){
-                $statement->bindValue(':walkin',$walkinTerm[0]);
-            }else{
-                $statement->bindValue(':walkin',"%");
-            }
+                $statement->bindValue(':designation',"%");
+            }//if(!empty($brightstarTerm)){
+//                $statement->bindValue(':brightstar',$brightstarTerm[0]);
+//            }else{
+//                $statement->bindValue(':brightstar',"%");
+//            }if(!empty($walkinTerm)){
+//                $statement->bindValue(':walkin',$walkinTerm[0]);
+//            }else{
+//                $statement->bindValue(':walkin',"%");
+//            }
 
             $statement ->execute();
 
@@ -369,17 +365,17 @@ class Phone
                 $display .= "<p class='phonedataTitle'>Date: </br><span class='phonedata'>".$result['date']."</span></p>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Pickup: </br><span class='phonedata'>".$result['storepickup']."</span></p>";
+                $display .= "<p class='phonedataTitle'>Designation: </br><span class='phonedata'>".$result['designation']."</span></p>";
                 $display .= "</div>";
-                $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
-                $display .= "</div>";
-                $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Pulled: </br><span class='phonedata'>".$result['pulled']."</span></p>";
-                $display .= "</div>";
+//                $display .= "<div class='col-md-1 phonedata'>";
+//                $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
+//                $display .= "</div>";
+//                $display .= "<div class='col-md-1 phonedata'>";
+//                $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
+//                $display .= "</div>";
                 $display .= "<div class='col-md-2 btngrp'>";
-                $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
-                $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
+//                $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
+//                $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";

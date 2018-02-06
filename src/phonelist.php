@@ -43,21 +43,6 @@ $phone = new Phone();
     </div>
 </div>
 <div class="container col-md-10" id="phonelist">
-<!--    --><?php
-//    if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin") {
-//        ?>
-<!--        <script type="text/javascript">-->
-<!--            function clearUsers(){-->
-<!--                var userrows = document.querySelectorAll(".phonerow");-->
-<!--                userrows.forEach(function(user){-->
-<!--                    user.parentNode.removeChild(user);-->
-<!--                });-->
-<!--            }-->
-<!--            //clearUsers();-->
-<!--        </script>-->
-<!--        --><?php
-//        $phone->displayPhones();
-//    }?>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){

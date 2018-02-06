@@ -33,8 +33,13 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
             $errors['phone'] = "Phone cannot be empty";
         }
         if(isset($_POST['imei'])&&!empty($_POST['imei'])){
-            $phoneData['imei'] = filter_input(INPUT_POST,'imei');
 
+            $testImei = filter_input(INPUT_POST,'imei');
+            if(is_numeric($testImei)){
+                $phoneData['imei'] = $testImei;
+            }else{
+                $errors['imei'] = "Not a valid imei";
+            }
         }else{
             $errors['imei'] = "Imei cannot be empty";
         }

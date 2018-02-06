@@ -69,9 +69,26 @@ html{
 /********PHONES*********/
 /**********************/
 
-.fa-check{
-    color: green;
+.selectbox{
+    /*padding: 0;*/
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 0.5em;
+    float: left;
+    margin-left: -10%;
+    /*width: ;*/
+    transform: scale(0.8);
 }
+
+/*#vendor-group label,*/
+/*#carrier-group label,*/
+/*#phone-group label{*/
+    /*!*position: relative;*!*/
+    /*top: 7px;*/
+/*}*/
+/*.fa-check{*/
+    /*color: green;*/
+/*}*/
 
 #phonelist{
     margin-top: 5vh;
@@ -81,6 +98,8 @@ html{
     background-color: #003B64;
     color: white;
     border-radius: 5px;
+    margin-left: 8.33%;
+    max-width: 86%;
     margin-bottom: 10px;
     padding: 10px 5px 0px 5px;
     align-content: center;
@@ -124,18 +143,24 @@ html{
 }
 .phoneedit{
     /*float: left;*/
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .phoneedit label{
     font-size: 20px;
+    /*horiz-align: left;*/
 }
 
 .phoneedit input{
     padding: 2px;
     margin-right: 10px;
     font-size: 18px;
+    position: relative;
+    top:-3px;
+    max-width: 401.44px;
+    /*horiz-align: left;*/
 }
+
 
 .phoneedit span{
     margin-right: 10px;
@@ -164,8 +189,16 @@ html{
     vertical-align: center;
     margin-bottom: 5px;
 }
+#phonesearchEntry{
+    padding: 2px;
+    margin-right: 10px;
+    font-size: 18px;
+}
 
-
+#phonelist .alert{
+    margin-left: 8.33%;
+    max-width: 83.33%;
+}
 
 /**********************/
 /********USERS*********/
@@ -271,12 +304,15 @@ html{
     margin-right: 5px;
     /*padding-bottom: 20px;*/
     /*height: 100%;*/
+    max-width: 83.33%;
 
 }
 .editusercontainer h2{
     text-align: center;
     margin: 0 auto;
     margin-bottom: 20px;
+    font-size: 1.4em;
+    margin-top: 10px;
 }
 
 .btn{
