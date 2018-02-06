@@ -337,6 +337,7 @@ display: block;
     height: 90vh;
     color:white;
     display: inline-block;
+    overflow: hidden;
 }
 .sideNavLink{
     list-style: none;
@@ -348,6 +349,9 @@ display: block;
     vertical-align: middle;
     color: white;
     text-decoration: none;
+}
+.sideNavLink a{
+    font-size: 0.8em;
 }
 .sideNavLink:first-child{
     margin-top: 10px;
