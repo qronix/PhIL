@@ -105,6 +105,7 @@ html{
     align-content: center;
     text-align: center;
     vertical-align: middle;
+    padding-left: 3%;
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 2s; /* Firefox < 16 */
     -ms-animation: fadein 2s; /* Internet Explorer */
@@ -122,8 +123,17 @@ html{
     transform: scale(1.1);
 }
 .phonedata{
-    /*border: 1px solid green;*/
-    font-size: 16px;
+    border: 1px solid green;
+    /*font-size: 16px;*/
+     /*font-size: 0.8em;*/
+    /*padding: 10px;*/
+    /*text-align: center;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+    display: block;
+    vertical-align: center;
+    horiz-align: left;
 }
 
 /*.phonedata p{*/
@@ -131,7 +141,32 @@ html{
 /*}*/
 
 .phonedataTitle{
-    font-size: 18px;
+    /*font-size: 18px;*/
+    /*margin-right: 10px;*/
+    /*font-size: 1em;*/
+    /*padding: 10px;*/
+    border:1px solid red;
+    /*text-align: center;*/
+    display: block;
+    vertical-align: center;
+    horiz-align: left;
+}
+
+@media (max-width: 1024px){
+    .phonedataTitle{
+        font-size: 0.5em;
+        /*text-align: left;*/
+        padding: 0;
+        /*margin-right: 20px;*/
+        /*padding-right: 30px;*/
+    }
+    .phonedata{
+        /*text-align: left;*/
+        padding: 0;
+        margin: 0 auto;
+        font-size: 0.5em;
+        /*margin-right: 20px;*/
+    }
 }
 
 .phoneedit,
