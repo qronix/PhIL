@@ -40,7 +40,7 @@ class Phone
                         $display .= "<p class='phonedataTitle'>Vendor:</p>";
                         $display .= "</div>";
                         $display .= "<div class='row container'>";
-                        $display .= "<span class='phonedata'>".$result['vendor']."</span>";
+                        $display .= "<span class='phonedata clearfix'>".$result['vendor']."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
@@ -72,7 +72,7 @@ class Phone
                         $display .= "<p class='phonedataTitle'>Employee:</p>";
                         $display .= "</div>";
                         $display .= "<div class='row container'>";
-                        $display .= "<span class='phonedata'>".$result['employee']."</span>";
+                        $display .= "<span class='phonedata clearfix'>".$result['employee']."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";

@@ -102,10 +102,10 @@ html{
     max-width: 86%;
     margin-bottom: 10px;
     padding: 10px 5px 0px 5px;
-    align-content: center;
-    text-align: center;
-    vertical-align: middle;
-    padding-left: 3%;
+    /*align-content: center;*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*padding-left: 3%;*/
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 2s; /* Firefox < 16 */
     -ms-animation: fadein 2s; /* Internet Explorer */
@@ -113,6 +113,13 @@ html{
     animation: fadein 2s;
     transition: all 0.2s;
     /*font-size: 1px !important;*/
+}
+.phonedata .row{
+    display: flex;
+    align-items: left;
+    text-align: left;
+    align-content: left;
+    /*padding: 0;*/
 }
 
 @keyframes fadein {
@@ -123,7 +130,7 @@ html{
     transform: scale(1.1);
 }
 .phonedata{
-    border: 1px solid green;
+    /*border: 1px solid green;*/
     /*font-size: 16px;*/
      /*font-size: 0.8em;*/
     /*padding: 10px;*/
@@ -131,9 +138,13 @@ html{
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
+    /*display: block;*/
+    /*vertical-align: center;*/
+    /*horiz-align: left;*/
+    padding: 0;
+    /*align-content: left;*/
+    /*float: left;*/
     display: block;
-    vertical-align: center;
-    horiz-align: left;
 }
 
 /*.phonedata p{*/
@@ -145,11 +156,11 @@ html{
     /*margin-right: 10px;*/
     /*font-size: 1em;*/
     /*padding: 10px;*/
-    border:1px solid red;
+    /*border:1px solid red;*/
     /*text-align: center;*/
-    display: block;
-    vertical-align: center;
-    horiz-align: left;
+    /*display: block;*/
+    /*vertical-align: center;*/
+    /*horiz-align: left;*/
 }
 
 @media (max-width: 1024px){
@@ -167,8 +178,122 @@ html{
         font-size: 0.5em;
         /*margin-right: 20px;*/
     }
+    .phoneedit input{
+        padding: 2px;
+        margin-right: 10px;
+        font-size: 18px;
+        position: relative;
+        top:-3px;
+        max-width: 205.68px;
+        /*horiz-align: left;*/
+    }
+    .editusercontainer h2{
+        font-size: 0.8em;
+    }
+    #phonesearchEntry{
+        transform: scale(0.6);
+        margin-right: -100px;
+        /*padding: 5px;*/
+    }
+    #phonesearchBtn{
+        transform: scale(0.5);
+        margin-left: -70px;
+        margin-top: 2px;
+    }
+    #editPhoneArea select{
+        transform: scale(0.6);
+        /*float: left;*/
+        margin-left: -30px;
+    }
+    #editPhoneArea input{
+        transform: scale(0.8);
+        /*float: left;*/
+    }
+    #editPhoneArea label{
+        font-size: 0.8em;
+        /*float: left;*/
+        margin-left: 20px;
+    }
+
+    #addPhoneBtn{
+        /*transform: scale(0.7);*/
+        font-size: 0.8em;
+    }
+    .sideNavLink{
+        font-size: 0.8em;
+    }
+
 }
 
+@media (max-width: 768px){
+    .phoneedit input{
+        padding: 2px;
+        margin-right: 10px;
+        font-size: 18px;
+        position: relative;
+        top:-3px;
+        max-width: 148.79px;
+        /*horiz-align: left;*/
+    }
+}
+@media (max-width: 1440px) {
+    .phonedataTitle{
+        font-size: 0.5em;
+        /*text-align: left;*/
+        padding: 0;
+        /*margin-right: 20px;*/
+        /*padding-right: 30px;*/
+    }
+    .phonedata{
+        /*text-align: left;*/
+        padding: 0;
+        margin: 0 auto;
+        font-size: 0.5em;
+        /*margin-right: 20px;*/
+    }
+    #editPhoneArea label{
+        font-size: 0.9em;
+        /*float: left;*/
+        /*margin-left: 20px;*/
+    }
+
+}
+
+@media (max-width: 1920px) {
+    #editPhoneArea input{
+        max-width: 404.78px;
+    }
+}
+
+@media (min-width: 1440px){
+    .phonedataTitle{
+        font-size: 0.8em;
+        /*text-align: left;*/
+        padding: 0;
+        /*margin-right: 20px;*/
+        /*padding-right: 30px;*/
+        /*color: purple;*/
+    }
+    .phonedata{
+        /*text-align: left;*/
+        padding: 0;
+        margin: 0 auto;
+        font-size: 0.8em;
+        /*margin-right: 20px;*/
+    }
+    .phoneedit input{
+        padding: 2px;
+        margin-right: 10px;
+        font-size: 18px;
+        position: relative;
+        top:-3px;
+        max-width: 298.11px;
+        /*horiz-align: left;*/
+    }
+    .editusercontainer h2{
+        font-size: 0.93em;
+    }
+}
 .phoneedit,
 .phonedelete{
     font-size: 16px;
@@ -192,7 +317,7 @@ html{
     font-size: 18px;
     position: relative;
     top:-3px;
-    max-width: 401.44px;
+    /*max-width: 401.44px;*/
     /*horiz-align: left;*/
 }
 
@@ -346,7 +471,7 @@ html{
     text-align: center;
     margin: 0 auto;
     margin-bottom: 20px;
-    font-size: 1.4em;
+    /*font-size: 1.4em;*/
     margin-top: 10px;
 }
 
