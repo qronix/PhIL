@@ -485,6 +485,19 @@ html{
 .fa-trash{
     color: darkred;
 }
+#role-group label{
+    margin-bottom: 17px;
+}
+
+.btngrp{
+    float: left;
+}
+
+#editUserBtn{
+    position: relative;
+    top:5px;
+    margin-left: 20px;
+}
 
 /*Bestbuy blue color: #003B64*/
 /*Bestbuy blue shade: #004B7F*/
@@ -517,6 +530,46 @@ html{
     text-decoration: none;
     color: #FFF200;
 }
+
+/****************************/
+/********EDIT PHONES*********/
+/***************************/
+
+.phoneeditRow{
+    justify-content: left;
+}
+.phoneeditRow:nth-child(1){
+    border-bottom: 1px solid antiquewhite;
+    margin-bottom: 10px;
+    /*background: #1e5799; !* Old browsers *!*/
+    border-radius: 4px;
+    padding-left: 5px;
+    /*background: #cedbe9; !* Old browsers *!*/
+    /*background: -moz-linear-gradient(-45deg, #cedbe9 0%, #aac5de 5%, #3a84c3 21%, #3a84c3 21%, #6199c7 50%, #419ad6 59%, #4bb8f0 71%, #3a8bc2 84%, #26558b 100%); !* FF3.6-15 *!*/
+    /*background: -webkit-linear-gradient(-45deg, #cedbe9 0%,#aac5de 5%,#3a84c3 21%,#3a84c3 21%,#6199c7 50%,#419ad6 59%,#4bb8f0 71%,#3a8bc2 84%,#26558b 100%); !* Chrome10-25,Safari5.1-6 *!*/
+    /*background: linear-gradient(135deg, #cedbe9 0%,#aac5de 5%,#3a84c3 21%,#3a84c3 21%,#6199c7 50%,#419ad6 59%,#4bb8f0 71%,#3a8bc2 84%,#26558b 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedbe9', endColorstr='#26558b',GradientType=1 ); !* IE6-9 fallback on horizontal gradient *!*/
+}
+.phoneeditRow:nth-child(2){
+    text-transform: uppercase;
+}
+.editPhoneRow{
+    margin-top: 20px;
+    border-bottom: 2px dashed #cccccc;
+}
+
+.editPhoneRow:last-child{
+    border: none;
+}
+
+
+#editPhoneBtn{
+    margin-top:50px;
+}
+#editphoneForm h2{
+    font-size: 20px;
+}
+
 
 /**********************/
 /********EDIT USERS*********/

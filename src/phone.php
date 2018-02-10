@@ -465,19 +465,32 @@ class Phone
         }
         return($returnData);
     }
-    function pullPhone($phoneid){
+    function updatePhone($phoneData){
 
         $returnData = "";
+        $isRealManager = $this->user->verifyManager($phoneData['manager'],$phoneData['managerpassword']);
+        if($isRealManager){
+            try{
+                $sql = "UPDATE phones SET designation=:designation, employee=:employee, manager=:manager, date=:date WHERE id=:id LIMIT 1";
+                $statement = $this->pdo->prepare($sql);
+                $statement->bindValue(':designation',$phoneData['designation']);
+                $statement->bindValue(':employee',$_SESSION['username']);
+                $statement->bindValue(':manager',$phoneData['manager']);
+                $statement->bindValue(':date',date("Y-m-d H:i:s"));
+                $statement->bindValue(':id',$phoneData['phoneid']);
+//                $statement->execute();
 
-        try{
-            $sql = "UPDATE phones SET pulled = :pulled WHERE id=:id LIMIT 1";
-            $statement = $this->pdo->prepare($sql);
-            $statement->bindValue(':pulled','1');
-            $statement->bindValue('id',$phoneid);
-            $statement->execute();
+                if($statement->execute()){
+                    $returnData = "Phone updated successfully";
+                }else{
+                    $returnData = "Could not update phone";
+                }
 
-        }catch (PDOException $exc){
-            $returnData = "<div class='alert alert-danger'>Could not update phone</div>";
+            }catch (PDOException $exc){
+                $returnData = "Could not update phone";
+            }
+        }else{
+            $returnData="Could not verify manager ".$phoneData['manager'];
         }
         return ($returnData);
     }
