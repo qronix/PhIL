@@ -68,7 +68,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
         if($error==""){
             $message = $user->updateUser($userid,$username,$role,$email,$activeaccount);
             //$user->loadUser($userid);
-            header("Location: edituser.php?userid=".$userid);
+//            header("Location: edituser.php?userid=".$userid);
         }
     }
 }
@@ -78,7 +78,7 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
 
 <div class="container editUserFormArea <?php if($error!=""){echo " hidden \"";}?>col-md-6">
 
-        <div class='container' id='form-message'>
+        <div class='container' id='form-error'>
             <?if($error!=""){echo "<div class='alert alert-danger'>".$error."</div>";}?>
         </div>
     <div class='container' id='form-message'>
@@ -110,10 +110,17 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
                                         <option>user</option>
                                 </select>
                         </div>
-                        <button type='submit' class='btn'>Submit</button>
+                        <button type='submit' class='btn' id="updateBtn">Submit</button>
                 </form>
         </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
+        $("#form-message").slideUp(500);
+    });
+});
+</script>
 </body>
 </html>
 
