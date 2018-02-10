@@ -69,6 +69,7 @@ html{
     float: left;
     display: inline-block;
     margin-right: 4px;
+    font-size: 16px !important;
 }
 /**********************/
 /********ICONS*********/
@@ -698,7 +699,7 @@ display: block;
     background-color: #002640;
     margin: 0 auto;
     float: left;
-    height: 90vh;
+    height: 100vh;
     color:white;
     display: inline-block;
     overflow: hidden;
