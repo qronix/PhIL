@@ -48,10 +48,22 @@ html{
 /**********************/
 .btn{
     padding: 0;
-    background-color: #FFF200;
+    background-color: rgba(255,242,0,1);
     color: #004B7F;
     padding: 2px 10px;
     border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+    outline: 0;
+}
+
+.btn:hover,
+.btn:active{
+    background-color: rgba(255,242,0,1);
+    box-shadow: 0 0px 15px rgba(255,242,0,0.7);
+    outline: none;
+}
+.btn:focus{
+    outline: none;
 }
 .userbtn{
     float: left;
@@ -122,6 +134,18 @@ html{
     /*padding: 0;*/
 }
 
+
+.col-md-2,
+.col-md-1{
+    margin-right: 10px;
+    /*border-right:1px solid white;*/
+    transition: all 0.3s;
+}
+.col-md-2:hover,
+.col-md-1:hover{
+    color: #FFF200;
+}
+
 @keyframes fadein {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -163,6 +187,12 @@ html{
     /*horiz-align: left;*/
 }
 
+@media (min-width: 1024px){
+    #editPhoneArea input{
+        max-width: 154.26px;
+    }
+}
+
 @media (max-width: 1024px){
     .phonedataTitle{
         font-size: 0.5em;
@@ -184,7 +214,7 @@ html{
         font-size: 18px;
         position: relative;
         top:-3px;
-        max-width: 205.68px;
+        /*max-width: 205.68px;*/
         /*horiz-align: left;*/
     }
     .editusercontainer h2{
@@ -207,6 +237,7 @@ html{
     }
     #editPhoneArea input{
         transform: scale(0.8);
+        /*max-width: 10.26px;*/
         /*float: left;*/
     }
     #editPhoneArea label{
@@ -225,6 +256,64 @@ html{
 
 }
 
+@media (max-width: 1366px){
+    #editPhoneArea input{
+        /*transform: scale(0.8);*/
+        /*max-width: 10.26px;*/
+        /*float: left;*/
+        width: 276.11px;
+        font-size: 14px;
+    }
+    #editPhoneArea select{
+        font-size: 14px;
+        /*transform: scale(0.6);*/
+        /*margin-left: -45px;*/
+        height: 35px;
+
+    }
+   .editusercontainer h2{
+       font-size: 0.9em;
+   }
+    #addPhoneBtn{
+        /*transform: scale(0.7);*/
+        font-size: 0.8em;
+    }
+    #phonesearchBtn{
+        font-size: 0.8em;
+    }
+    .phonedataTitle{
+        font-size: 0.8em;
+        /*text-align: left;*/
+        /*padding-left: 10px;*/
+        /*margin-right: 20px;*/
+        /*padding-right: 30px;*/
+    }
+    .phonedata{
+        /*text-align: left;*/
+        padding: 0;
+        /*margin: 0 auto;*/
+        font-size: 0.8em;
+        /*margin-right: 20px;*/
+    }
+    div{
+        /*border: 1px solid blueviolet;*/
+    }
+    .row {
+       /*border: 1px solid red;*/
+        padding: 0;
+        justify-content: center;
+        margin:0 auto;
+    }
+    .row .container{
+        /*margin-right: 10px;*/
+        justify-content: left;
+        text-align: left;
+        align-content: left;
+        padding-right: 10px;
+        /*margin-right: 200px;*/
+    }
+}
+
 @media (max-width: 768px){
     .phoneedit input{
         padding: 2px;
@@ -236,28 +325,28 @@ html{
         /*horiz-align: left;*/
     }
 }
-@media (max-width: 1440px) {
-    .phonedataTitle{
-        font-size: 0.5em;
-        /*text-align: left;*/
-        padding: 0;
-        /*margin-right: 20px;*/
-        /*padding-right: 30px;*/
-    }
-    .phonedata{
-        /*text-align: left;*/
-        padding: 0;
-        margin: 0 auto;
-        font-size: 0.5em;
-        /*margin-right: 20px;*/
-    }
-    #editPhoneArea label{
-        font-size: 0.9em;
-        /*float: left;*/
-        /*margin-left: 20px;*/
-    }
+/*@media (max-width: 1440px) {*/
+    /*.phonedataTitle{*/
+        /*font-size: 0.5em;*/
+        /*!*text-align: left;*!*/
+        /*padding: 0;*/
+        /*!*margin-right: 20px;*!*/
+        /*!*padding-right: 30px;*!*/
+    /*}*/
+    /*.phonedata{*/
+        /*!*text-align: left;*!*/
+        /*padding: 0;*/
+        /*margin: 0 auto;*/
+        /*font-size: 0.5em;*/
+        /*!*margin-right: 20px;*!*/
+    /*}*/
+    /*#editPhoneArea label{*/
+        /*font-size: 0.9em;*/
+        /*!*float: left;*!*/
+        /*!*margin-left: 20px;*!*/
+    /*}*/
 
-}
+/*}*/
 
 @media (max-width: 1920px) {
     #editPhoneArea input{

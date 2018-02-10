@@ -51,7 +51,7 @@ class Phone
                         $display .= "<span class='phonedata'>".$result['carrier']."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
-                        $display .= "<div class='col-md-1 phonedata'>";
+                        $display .= "<div class='col-md-2 phonedata'>";
                         $display .= "<div class='row container'>";
                         $display .= "<p class='phonedataTitle'>Phone:</p>";
                         $display .= "</div>";
@@ -83,7 +83,7 @@ class Phone
                         $display .= "<span class='phonedata'>".$result['manager']."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
-                        $display .= "<div class='col-md-1 phonedata'>";
+                        $display .= "<div class='col-md-2 phonedata'>";
                         $display .= "<div class='row container'>";
                         $display .= "<p class='phonedataTitle'>Date:</p>";
                         $display .= "</div>";
