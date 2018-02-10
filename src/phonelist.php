@@ -18,7 +18,13 @@ $phone = new Phone();
 ?>
 
 
-<?php include ("phoneform.php");?>
+<?php
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
+    ($_SESSION['role']==="admin"||$_SESSION['role']==="manager"
+    ||$_SESSION['role']==="superuser")){
+    include ("phoneform.php");
+}
+?>
 
 <div class="container editusercontainer col-sm-11">
     <div class="row">
@@ -85,8 +91,8 @@ $phone = new Phone();
                 'phone' : document.querySelector("#phone").value,
                 'imei' : $('input[name=imei]').val(),
                 // 'employee' : $('input[name=employee]').val(),
-                'manager' : $('input[name=manager]').val(),
-                'managerPassword' : $('input[name=managerPassword]').val(),
+                // 'manager' : $('input[name=manager]').val(),
+                // 'managerPassword' : $('input[name=managerPassword]').val(),
                 'designation' : $('input[name=designation]:checked').val()
             };
             $.ajax({
@@ -131,8 +137,8 @@ $phone = new Phone();
             $('#phone').val('');
             $('#imei').val('');
             $('#employee').val('');
-            $('#manager').val('');
-            $('#managerPassword').val('');
+            // $('#manager').val('');
+            // $('#managerPassword').val('');
 
             event.preventDefault();
             // $(".userrow").remove();

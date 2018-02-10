@@ -12,7 +12,8 @@ $phoneData = array();
 
 
 
-if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&($_SESSION['role']==="admin"
+        ||$_SESSION['role']==="manager"||$_SESSION['role']==="superuser")){
     if($_SERVER['REQUEST_METHOD']==="POST"){
         if(isset($_POST['vendor'])&&!empty($_POST['vendor'])){
             $phoneData['vendor'] = filter_input(INPUT_POST,'vendor');

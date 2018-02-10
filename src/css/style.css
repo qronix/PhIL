@@ -187,6 +187,10 @@ html{
     /*horiz-align: left;*/
 }
 
+.editusercontainer input{
+    margin-top: 7px;
+}
+
 @media (min-width: 1024px){
     #editPhoneArea input{
         max-width: 154.26px;
@@ -481,11 +485,21 @@ html{
 .fa-trash{
     color: darkred;
 }
+
+/*Bestbuy blue color: #003B64*/
+/*Bestbuy blue shade: #004B7F*/
+/*Bestbuy blue shade: #0096FF*/
+/*Bestbuy blue shade: #002640*/
+/*Bestbuy blue shade: #0087E5*/
+
 .useredit{
     color: #ccc;
     /*transform: scale(100);*/
     margin-left: 10px;
     transition: all 0.4s;
+    border: 1px solid #FFF200;
+    border-radius: 5px;
+    padding: 0px 5px;
 }
 .useredit:hover{
     text-decoration: none;

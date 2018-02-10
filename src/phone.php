@@ -107,7 +107,7 @@ class Phone
 //                        $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
 //                        $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
-//                        $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
+                        $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
 //                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                         $display .= "</div>";
                         $display .= "</div>";
@@ -432,6 +432,37 @@ class Phone
             $returnData = "<div class='alert alert-danger'>Search could not be completed.</div>";
         }
 
+        return($returnData);
+    }
+    function loadPhone($phoneid){
+        $returnData = array();
+        $phoneData = array();
+
+        try{
+            $sql = "SELECT * FROM phones WHERE id=:id LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':id',$phoneid);
+            $statement->execute();
+
+            if(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                $phoneData['vendor'] = $result['vendor'];
+                $phoneData['carrier'] = $result['carrier'];
+                $phoneData['phonetype'] = $result['phonetype'];
+                $phoneData['imei'] = $result['imei'];
+                $phoneData['employee'] = $result['employee'];
+                $phoneData['manager'] = $result['manager'];
+                if($result['manager']==''){
+                    $phoneData['manager'] = "System";
+                }
+                $phoneData['date'] = $result['date'];
+                $phoneData['designation'] = $result['designation'];
+            }else{
+                $returnData['error'] = "<div class='alert alert-danger'>Could not edit phone</div>";
+            }
+            $returnData['phonedata']=$phoneData;
+        }catch (PDOException $exc){
+            $returnData['error']="<div class='alert alert-danger'>Could not edit phone</div>";
+        }
         return($returnData);
     }
     function pullPhone($phoneid){
