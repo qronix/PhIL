@@ -111,7 +111,9 @@ function displayUsers(){
                         $display .= "<div class='col-md-1 userdata'>";
                         $display .= "<p>Active: </br><span class='active'>".$result['activeaccount']."</span></p>";
                         $display .= "</div>";
-                        $display .= "<div class='col-md-2 btngrp'>";
+                        $display .= "</div>";
+                        $display .= "<div class='row'>";
+                        $display .= "<div class='btngrp'>";
                         $display .= "<a class='userbtn useredit' href='edituser.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
                         $display .= "<a class='userbtn userdelete' href='deleteuser.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
                         $display .= "</div>";

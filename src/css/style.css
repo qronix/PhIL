@@ -489,8 +489,20 @@ html{
     margin-bottom: 17px;
 }
 
-.btngrp{
-    float: left;
+.row .btngrp{
+  margin-right: -90%;
+}
+.btngrp a{
+    display: inline;
+    justify-content: right !important;
+    align-content: right;
+}
+.btngrp .userbtn{
+    border: 1px solid #FFF200;
+    padding: 0px 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #cccccc;
 }
 
 #editUserBtn{
@@ -576,7 +588,7 @@ html{
 /**********************/
 .editUserFormArea{
     margin: 0 auto;
-    margin-top:26vh;
+    margin-top:2vh;
     border-radius: 10px;
     width: 40%;
     max-width: 380px;
