@@ -10,6 +10,7 @@
 
 *{
     font-family: 'Lato', sans-serif;
+    /*font-family: Lato; src:url("../vendor/fonts/Lato/Lato-Regular.ttf");*/
     font-size: 20px;
     text-rendering: optimizeLegibility;
 }
@@ -276,6 +277,9 @@ html{
         height: 35px;
 
     }
+    #editPhoneArea label{
+        font-size: 0.8em;
+    }
    .editusercontainer h2{
        font-size: 0.9em;
    }
@@ -308,6 +312,7 @@ html{
         padding: 0;
         justify-content: center;
         margin:0 auto;
+        margin-right: 0;
     }
     .row .container{
         /*margin-right: 10px;*/
@@ -398,6 +403,10 @@ html{
 .phoneedit{
     /*float: left;*/
     /*display: inline-block;*/
+}
+
+#phonedesignation{
+    /*margin-right: 10px;*/
 }
 
 .phoneedit label{
@@ -539,6 +548,10 @@ html{
     transition: all 0.4s;
 }
 
+.userdata{
+    font-size: 0.8em;
+}
+
 .userdelete:hover{
     text-decoration: none;
     color: #FFF200;
@@ -578,6 +591,8 @@ html{
 
 #editPhoneBtn{
     margin-top:50px;
+    margin-left: 2rem;
+    font-size: 1em;
 }
 #editphoneForm h2{
     font-size: 20px;
@@ -621,6 +636,22 @@ html{
 }
 #editUserArea{
     margin: 0 auto;
+}
+
+#editUserArea input{
+    font-size: 0.8em;
+}
+#editUserArea select{
+    font-size: 0.8em;
+    transform: scale(0.9);
+    margin-top:-3px;
+}
+#editUserArea label{
+    font-size: 0.8em;
+}
+
+#editUserArea label[for="role"]{
+    margin-left: 5px;
 }
 
 .editusercontainer{

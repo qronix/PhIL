@@ -54,7 +54,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                 <input type="password" class="form-control" name="password" id="password">
             </div>
             <button type="submit" class="btn">Submit</button>
-            <a href="forgot.php" id="forgotLink">Forgot password?</a>
+<!--            <a href="forgot.php" id="forgotLink">Forgot password?</a>-->
         </form>
     </div>
 </div>
