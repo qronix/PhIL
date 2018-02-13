@@ -771,6 +771,37 @@ html{
 display: block;
 }
 /**********************/
+/********VENDORPANEL*********/
+/**********************/
+
+#vendorPanel{
+    background-color: #002640;
+    color: white;
+    margin-left: 16.66%;
+    border: 1px solid white;
+}
+.vendorData p{
+    font-size: 0.8em;
+    margin-right: 30px;
+    padding: 5px;
+    border: 1px green solid;
+    display: inline-block;
+    white-space: nowrap;
+    float: left;
+}
+.vendorRow{
+    border: 1px red solid;
+
+}
+.vendorRow .row{
+    float: left;
+    justify-content: left;
+    /*text-align: left;*/
+}
+
+
+
+/**********************/
 /********SIDENAVBAR*********/
 /**********************/
 

@@ -221,7 +221,8 @@ class Phone
 
     function getVendors(){
         try{
-            $sql = "SELECT DISTINCT vendor FROM phones";
+//            $sql = "SELECT DISTINCT vendor FROM phones";
+            $sql = "SELECT vendorname FROM vendors";
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
 
@@ -240,6 +241,21 @@ class Phone
         }catch(PDOException $exc){
             return $error['vendors'] = ['error','error','error'];
         }
+    }
+
+    function loadVendorTable(){
+        try{
+            $sql = "SELECT * FROM vendors";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+
+            while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+//                $display =
+            }
+        }catch (PDOException $exc){
+            $returnData = "Could not contact database";
+        }
+        return($returnData);
     }
 
     function getCarriers($vendor){
