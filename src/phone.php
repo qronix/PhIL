@@ -32,6 +32,26 @@ class Phone
                     $returnData = "";
 
                     while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                        $vendorImg = "";
+                        $carrierImg = "";
+
+                        if(strtolower($result['vendor'])=="android"){
+                            $vendorImg = "<i class=\"fa fa-android\"></i>";
+                        }
+                        else if(strtolower($result['vendor'])=="apple"){
+                            $vendorImg = "<i class=\"fa fa-apple\"></i>";
+                        }else{
+                            $vendorImg = "<i class=\"fa fa-credit-card\"></i>";
+                        }
+                        if(strtolower($result['carrier'])=="sprint"){
+                            $carrierImg = "<img src='vendor/icons/Sprint.svg' class='sprintLogo'>";
+                        }else if(strtolower($result['carrier'])=="verizon"){
+                            $carrierImg = "<img src='vendor/icons/verizon.svg' class='verizonLogo'>";
+                        }else if(strtolower($result['carrier'])=='att'){
+                            $carrierImg = "<img src='vendor/icons/AT&T.svg' class='attLogo'>";
+                        }else{
+                            $carrierImg = "<i class=\"fa fa-globe\"></i>";
+                        }
                         //$date = date_format($result['date'],"d/m/Y");
                         $display =  "<div class='container phonerow col-md-12'>";
                         $display .= "<div class='row'>";
@@ -40,7 +60,7 @@ class Phone
                         $display .= "<p class='phonedataTitle'>Vendor:</p>";
                         $display .= "</div>";
                         $display .= "<div class='row container'>";
-                        $display .= "<span class='phonedata clearfix'>".$result['vendor']."</span>";
+                        $display .= "<span class='phonedata clearfix'>".$vendorImg."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-1 phonedata'>";
@@ -48,7 +68,7 @@ class Phone
                         $display .= "<p class='phonedataTitle'>Carrier:</p>";
                         $display .= "</div>";
                         $display .= "<div class='row container'>";
-                        $display .= "<span class='phonedata'>".$result['carrier']."</span>";
+                        $display .= "<span class='phonedata'>".$carrierImg."</span>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "<div class='col-md-2 phonedata'>";
@@ -381,42 +401,103 @@ class Phone
 
 
             while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                $vendorImg = "";
+                $carrierImg = "";
+
+                if(strtolower($result['vendor'])=="android"){
+                    $vendorImg = "<i class=\"fa fa-android\"></i>";
+                }
+                else if(strtolower($result['vendor'])=="apple"){
+                    $vendorImg = "<i class=\"fa fa-apple\"></i>";
+                }else{
+                    $vendorImg = "<i class=\"fa fa-credit-card\"></i>";
+                }
+                if(strtolower($result['carrier'])=="sprint"){
+                    $carrierImg = "<img src='vendor/icons/Sprint.svg' class='sprintLogo'>";
+                }else if(strtolower($result['carrier'])=="verizon"){
+                    $carrierImg = "<img src='vendor/icons/verizon.svg' class='verizonLogo'>";
+                }else if(strtolower($result['carrier'])=='att'){
+                    $carrierImg = "<img src='vendor/icons/AT&T.svg' class='attLogo'>";
+                }else{
+                    $carrierImg = "<i class=\"fa fa-globe\"></i>";
+                }
                 //$date = date_format($result['date'],"d/m/Y");
                 $display =  "<div class='container phonerow col-md-12'>";
                 $display .= "<div class='row'>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Vendor: </br><span class='phonedata'>".$result['vendor']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Vendor:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata clearfix'>".$vendorImg."</span>";
+                $display .= "</div>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Carrier: </br><span class='phonedata'>".$result['carrier']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Carrier:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$carrierImg."</span>";
+                $display .= "</div>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-2 phonedata'>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Phone:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$result['phonetype']."</span>";
+                $display .= "</div>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Phone: </br><span class='phonedata'>".$result['phonetype']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>IMEI:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$result['imei']."</span>";
+                $display .= "</div>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>IMEI: </br><span class='phonedata'>".$result['imei']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Employee:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata clearfix'>".$result['employee']."</span>";
+                $display .= "</div>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Employee: </br><span class='phonedata'>".$result['employee']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Manager:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$result['manager']."</span>";
+                $display .= "</div>";
+                $display .= "</div>";
+                $display .= "<div class='col-md-2 phonedata'>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Date:</p>";
+                $display .= "</div>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$result['date']."</span>";
+                $display .= "</div>";
                 $display .= "</div>";
                 $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Manager: </br><span class='phonedata'>".$result['manager']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<p class='phonedataTitle'>Designation:</p>";
                 $display .= "</div>";
-                $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Date: </br><span class='phonedata'>".$result['date']."</span></p>";
+                $display .= "<div class='row container'>";
+                $display .= "<span class='phonedata'>".$result['designation']."</span>";
                 $display .= "</div>";
-                $display .= "<div class='col-md-1 phonedata'>";
-                $display .= "<p class='phonedataTitle'>Designation: </br><span class='phonedata'>".$result['designation']."</span></p>";
                 $display .= "</div>";
-//                $display .= "<div class='col-md-1 phonedata'>";
-//                $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
-//                $display .= "</div>";
-//                $display .= "<div class='col-md-1 phonedata'>";
-//                $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
-//                $display .= "</div>";
+                $display .= "</div>";
+//                        $display .= "<div class='col-md-1 phonedata'>";
+//                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
+//                        $display .= "</div>";
+//                        $display .= "<div class='col-md-1 phonedata'>";
+//                        $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
+//                        $display .= "</div>";
                 $display .= "<div class='col-md-2 btngrp'>";
-//                $display .= "<a class='userbtn useredit phoneedit' href='pullphone.php?phoneid=".$result['id']."'><i class='fa fa-check'></i>Pull</a></br>";
-//                $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
+                $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
+//                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";

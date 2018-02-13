@@ -47,6 +47,7 @@ $user = new User();
                     <label for="role">Role</label>
                     <select id="role" class="form-control" name="role">
                         <option selected>user</option>
+                        <option>superuser</option>
                         <option>manager</option>
                         <option>admin</option>
                     </select>

@@ -134,6 +134,24 @@ function displayUsers(){
         }
 }
 
+private function checkUserExists($username){
+    try{
+        //check user existence
+        $sql="SELECT id FROM users WHERE username = :username";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':username',$username);
+        $statement->execute();
+
+        if($statement->rowCount()>0){
+            return(true); //user exits
+        }else{
+            return(false);
+        }
+    }catch (PDOException $exc){
+        return("An error occurred while contacting database");
+    }
+}
+
 function createUser($username, $password, $passwordVerify, $email, $role){
 
         //ENSURE THESE VARIABLES ARE SANITIZED!
@@ -154,7 +172,8 @@ function createUser($username, $password, $passwordVerify, $email, $role){
             // 0 : id
 
             //user does not exist
-            if(!($id=$statement->fetchColumn(0))>0){
+//            if(!($id=$statement->fetchColumn(0))>0){
+            if(!$this->checkUserExists($username)){
                 //if all values have content
                 if(!empty($username)&&!empty($password)&&!empty($passwordVerify)&&
                 !empty($email)&&!empty($role)){
@@ -248,22 +267,24 @@ function loadUser($id){
 function updateUser($id,$username,$role,$email,$activeaccount){
 
         $message = "";
-
         if(isset($_SESSION['role'])&&$_SESSION['role']==='admin'){
-            try{
-                $sql = "UPDATE users SET username=:username, role=:role,email=:email,activeaccount=:activeaccount WHERE id=:id";
-                $statement = $this->pdo->prepare($sql);
-                $statement->bindValue(':id',$id);
-                $statement->bindValue(':username',$username);
-                $statement->bindValue(':role',$role);
-                $statement->bindValue(':email',$email);
-                $statement->bindValue(':activeaccount',$activeaccount);
-                $statement->execute();
-            }catch (PDOException $exc){
-                $message = 'An error occurred during update';
+            if(!$this->checkUserExists($username)){
+                try{
+                    $sql = "UPDATE users SET username=:username, role=:role,email=:email,activeaccount=:activeaccount WHERE id=:id";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue(':id',$id);
+                    $statement->bindValue(':username',$username);
+                    $statement->bindValue(':role',$role);
+                    $statement->bindValue(':email',$email);
+                    $statement->bindValue(':activeaccount',$activeaccount);
+                    $statement->execute();
+                }catch (PDOException $exc){
+                    $message = 'An error occurred during update';
+                }
+                $message =  'User successfully updated';
+            }else{
+                $message = "Username already exists";
             }
-            $message =  'User successfully updated';
-
         }else{
             $message = 'You do not have permission';
         }

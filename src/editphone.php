@@ -119,6 +119,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                                 <option>Brightstar</option>
                                 <option>Pickup</option>
                                 <option>Walkin</option>
+                                <option>Transfer</option>
                             </select>
                         </div>
                     </div>

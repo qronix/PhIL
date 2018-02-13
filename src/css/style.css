@@ -83,6 +83,41 @@ html{
 /********PHONES*********/
 /**********************/
 
+.fa-android{
+    color: #A4C639;
+    font-size: 2em !important;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+.fa-apple{
+    font-size: 2em !important;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+.fa-globe{
+    font-size: 2em !important;
+    margin-left: 18px !important;
+    position: relative;
+    top:-3px;
+}
+.fa-credit-card{
+    font-size: 1.7em !important;
+    padding-bottom: 10px;
+    margin-left: 10px;
+}
+.sprintLogo{
+    width: 100%;
+    height: auto;
+}
+.verizonLogo{
+    width: 100%;
+    height: auto;
+}
+.attLogo{
+    width: 100%;
+    height: auto;
+}
+
 .selectbox{
     /*padding: 0;*/
     padding-top: 0px;
@@ -171,6 +206,9 @@ html{
     /*align-content: left;*/
     /*float: left;*/
     display: block;
+    align-content: left;
+    justify-content: left;
+    text-align: left;
 }
 
 /*.phonedata p{*/
@@ -403,6 +441,7 @@ html{
 .phoneedit{
     /*float: left;*/
     /*display: inline-block;*/
+    /*margin-bottom: 40px !important;*/
 }
 
 #phonedesignation{
@@ -501,6 +540,8 @@ html{
 
 .row .btngrp{
   margin-right: -90%;
+  margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
 }
 .btngrp a{
     display: inline;
@@ -582,6 +623,7 @@ html{
 .editPhoneRow{
     margin-top: 20px;
     border-bottom: 2px dashed #cccccc;
+    /*padding-bottom: 10px !important;*/
 }
 
 .editPhoneRow:last-child{
@@ -732,6 +774,9 @@ display: block;
 /********SIDENAVBAR*********/
 /**********************/
 
+.dbIcon{
+    padding-right: 4px !important;
+}
 #sideNav{
     background-color: #002640;
     margin: 0 auto;

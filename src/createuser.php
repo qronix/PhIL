@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
         if(isset($_POST['username'])&&!empty($_POST['username'])){
             $username = filter_input(INPUT_POST,'username');
+            $username = strip_tags($username);
         }else{
             $errors['username'] = "Username cannot be empty";
         }
