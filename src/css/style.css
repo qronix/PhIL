@@ -773,12 +773,16 @@ display: block;
 /**********************/
 /********VENDORPANEL*********/
 /**********************/
+.vendorDataRow{
+    /*display: block;*/
+}
 
 #vendorPanel{
     background-color: #002640;
     color: white;
     margin-left: 16.66%;
     border: 1px solid white;
+    margin-bottom: 30px;
 }
 .vendorData p{
     font-size: 0.8em;
@@ -789,14 +793,27 @@ display: block;
     white-space: nowrap;
     float: left;
 }
+.vendorDataCol{
+    white-space: nowrap;
+    margin-right: 20px;
+}
 .vendorRow{
-    border: 1px red solid;
-
+    border: none;
+    border-radius: 10px;
+    background-color: #002640;
+    margin-bottom: 20px;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    transition: all 0.1s ease-in-out;
+}
+.vendorRow:hover{
+    border: 1px white solid;
+    color:white;
+    text-shadow: none;
 }
 .vendorRow .row{
     float: left;
     justify-content: left;
-    /*text-align: left;*/
 }
 
 
@@ -805,6 +822,25 @@ display: block;
 /********SIDENAVBAR*********/
 /**********************/
 
+.dropdown-toggle{
+    text-decoration: none;
+    font-size: 0.8em;
+    color: white;
+}
+.dropdown-toggle:hover{
+    color: #FFF200;
+    text-decoration: none;
+}
+.dbDropMenu{
+    margin-left: -60px;
+    font-size: 0.8em;
+    background-color: #002640;
+    border: none;
+}
+.dropdown-item{
+    color: white;
+    font-size: 0.8em;
+}
 .dbIcon{
     padding-right: 4px !important;
 }
