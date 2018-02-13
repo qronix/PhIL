@@ -114,8 +114,8 @@ function displayUsers(){
                         $display .= "</div>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='btngrp'>";
-                        $display .= "<a class='userbtn useredit' href='edituser.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>edit</a></br>";
-                        $display .= "<a class='userbtn userdelete' href='deleteuser.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>delete</a>";
+                        $display .= "<a class='userbtn useredit' href='edituser.php?userid=".$result['id']."'><i class='fa fa-pencil' aria-hidden='true'></i>Edit</a></br>";
+                        $display .= "<a class='userbtn userdelete' href='deleteuser.php?userid=".$result['id']."'><i class='fa fa-trash' aria-hidden='true'></i>Delete</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
