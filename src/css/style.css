@@ -615,6 +615,12 @@ html{
     -moz-box-shadow:    0px 10px 20px 0px rgba(50, 50, 50, 0.52);
     box-shadow:         0px 10px 20px 0px rgba(150, 150, 150, 0.22);
 }
+.editUserFormArea form{
+    display: inline;
+}
+#resetpassBtn{
+    color: darkred;
+}
 
 .formHeader{
     align-content: center;

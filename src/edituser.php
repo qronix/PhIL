@@ -105,13 +105,18 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
                                 <label for='role'>Role</label>
                                 <select id='role' class='form-control' name='role'>
 <!--                                        <option selected>--><?php //if(!empty($userdata)){echo $userdata['role'];}?><!--</option>-->
-                                        <option>manager</option>
                                         <option>admin</option>
+                                        <option>manager</option>
+                                        <option>superuser</option>
                                         <option>user</option>
                                 </select>
                         </div>
                         <button type='submit' class='btn' id="updateBtn">Submit</button>
                 </form>
+            <form id="resetpass-form" action="resetpass.php" method="POST">
+                <span hidden id="userid"><?php echo $userid;?></span>
+                <button type="submit" class="btn" id="resetpassBtn">Reset password</button>
+            </form>
         </div>
 </div>
 <script type="text/javascript">
@@ -119,6 +124,16 @@ $(document).ready(function(){
     $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
         $("#form-message").slideUp(500);
     });
+});
+$("#resetpass-form").submit(function(event){
+    var userid = document.getElementById("userid").textContent;
+
+    $.post("resetpass.php",{
+        userid:userid
+    },function(data){
+       console.log(data);
+    });
+    event.preventDefault();
 });
 </script>
 </body>

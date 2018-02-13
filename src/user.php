@@ -190,6 +190,28 @@ function createUser($username, $password, $passwordVerify, $email, $role){
         }
 }
 
+function resetPass($userid){
+
+        $returnMsg = "";
+
+        try{
+            $sql = "UPDATE users SET password=:password WHERE id=:id LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $newPassHash = password_hash("password",PASSWORD_DEFAULT,['cost'=>12]);
+            $statement->bindValue(':password',$newPassHash);
+            $statement->bindValue(':id',$userid);
+            if($statement->execute()){
+                $returnMsg = "Password successfully reset";
+            }else{
+                $returnMsg = "Could not reset password";
+            }
+        }catch(PDOException $exc){
+            $returnMsg = "Could not contact database";
+        }
+        return ($returnMsg);
+
+}
+
 function loadUser($id){
 
         $userdata = array();
@@ -197,7 +219,7 @@ function loadUser($id){
         if(isset($_SESSION['role'])&&$_SESSION['role']==='admin'){
             try{
                 if($id!==false&&$id!==null&&!empty($id)){
-                    $sql = "SELECT username, role, email, activeaccount FROM users WHERE id=:id";
+                    $sql = "SELECT username, role, email, activeaccount,id FROM users WHERE id=:id";
                     $statement = $this->pdo->prepare($sql);
                     $statement->bindValue(':id',$id);
                     $statement->execute();
@@ -208,6 +230,7 @@ function loadUser($id){
                     $userdata['role'] = $result['role'];
                     $userdata['email'] = $result['email'];
                     $userdata['activeaccount'] = $result['activeaccount'];
+                    $userdata['userid'] = $result['id'];
                     $userdata['message'] = "User successfully loaded";
                 }
             }catch (PDOException $exc){
