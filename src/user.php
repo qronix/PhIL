@@ -283,7 +283,19 @@ function updateUser($id,$username,$role,$email,$activeaccount){
                 }
                 $message =  'User successfully updated';
             }else{
-                $message = "Username already exists";
+                //user already exists then this must be an account update
+                try{
+                    $sql = "UPDATE users SET role=:role,email=:email,activeaccount=:activeaccount WHERE id=:id";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue(':id',$id);
+                    $statement->bindValue(':role',$role);
+                    $statement->bindValue(':email',$email);
+                    $statement->bindValue(':activeaccount',$activeaccount);
+                    $statement->execute();
+                }catch (PDOException $exc){
+                    $message = 'An error occurred during update';
+                }
+                $message =  'User successfully updated';
             }
         }else{
             $message = 'You do not have permission';
