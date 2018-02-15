@@ -244,20 +244,129 @@ class Phone
     }
 
     function loadVendorTable(){
+        $returnData = "";
+
         try{
             $sql = "SELECT * FROM vendors";
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
 
+
+
             while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
-//                $display =
+                $display ="<div class='card'>";
+                if(strtolower($result['vendorname'])=="apple"){
+                    $display.="<img class='card-img-top' src='vendor/icons/Apple_logo_black.svg'>";
+                }else if(strtolower($result['vendorname'])=="android"){
+                    $display.="<img class='card-img-top' src='vendor/icons/Android_robot.svg'>";
+                }else{
+                    $display.="<img class='card-img-top' src='vendor/icons/prepaid_logo.svg'>";
+                }
+                $display.="<div class='card-body'>";
+                $display.="<h5 class='card-title'>".$result['vendorname']."</h5>";
+                $display.="<p class='card-text'>Carriers</p>";
+                $display.="<div class='vendorCarriers'>";
+
+                foreach($result as $key => $value){
+                    if(strpos($key,'supportedcarrier')!==false){
+                        if($value!=""){
+                            $display.="<p class='carrierName'>".$value."</p>";
+                            $display.="<a href='removeCarrier.php?vendorid=".$result['vendorname']."&carrierid=".$value."' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+                            $display.="<div class='clearfix'></div>";
+                        }
+                    }
+                }
+//                if($result['supportedcarrier1']!=""){
+//                    $display.="<p class='carrierName'>".$result['supportedcarrier1']."</p>";
+//                    $display.="<a href='removeCarrier.php?vendorid=".$result['vendorname']."&carrierid=".$result['supportedcarrier1']."' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//                    $display.="<div class='clearfix'></div>";
+//                }
+
+//                $display.="<p class='carrierName'>Verizon</p>";
+//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//                $display.="<div class='clearfix'></div>";
+//                $display.="<p class='carrierName'>ATT</p>";
+//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//                $display.="<div class='clearfix'></div>";
+//                $display.="<p class='carrierName'>New Carrier</p>";
+                $display.="<input type='text' class='carrierName form-control' placeholder='New Carrier' name='newCarrier'></input>";
+                $display.="<a href='#' class='btn carrierAddBtn'><i class='fa fa-plus'></i>Add</a>";
+        $display.="</div>";
+    $display.="</div>";
+$display.="</div>";
+$returnData.=$display;
             }
+            //To be implemented - add vendors
+//            if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
+//                $display ="<div class='card'>";
+//                $display.="<img class='card-img-top' src='vendor/icons/Apple_logo_black.svg'>";
+//                $display.="<div class='card-body'>";
+//                $display.="<h5 class='card-title'>Apple</h5>";
+//                $display.="<p class='card-text'>Carriers</p>";
+//                $display.="<div class='vendorCarriers'>";
+//                $display.="<p class='carrierName'>Sprint</p>";
+//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//                $display.="<div class='clearfix'></div>";
+//                $display.="<p class='carrierName'>Verizon</p>";
+//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//            $display.="<div class='clearfix'></div>";
+//            $display.="<p class='carrierName'>ATT</p>";
+//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
+//            $display.="<div class='clearfix'></div>";
+//            $display.="<p class='carrierName'>New Carrier</p>";
+//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierAddBtn'><i class='fa fa-plus'></i>Add</a>";
+//        $display.="</div>";
+//    $display.="</div>";
+//$display.="</div>";
+//            }
         }catch (PDOException $exc){
-            $returnData = "Could not contact database";
+            $returnData = "<div class='alert alert-danger'>Could not contact database</div>";
         }
         return($returnData);
     }
 
+    function removeCarrier($vendor, $carrier){
+        $returnData = "";
+
+        try{
+            $sql = "SELECT * FROM vendors";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+
+            $carrierColumnName = "";
+
+
+            while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                foreach ($result as $key=>$value){
+                    if($value==$carrier){
+                        $carrierColumnName=$key;
+                        break;
+                    }
+                }
+            }
+            if($carrierColumnName==""){
+                $returnData = "Could not find carrier ".$carrier." for vendor ".$vendor;
+            }else{
+                try{
+                    $sql ="UPDATE vendors SET ".$carrierColumnName."=:carrierValue WHERE vendorname=:vendor LIMIT 1";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue('vendor',$vendor);
+                    $statement->bindValue('carrierValue','');
+                    if($statement->execute()){
+                        $returnData = "Carrier removed";
+                    }else{
+//                        $returnData = "Carrier could not be removed";
+                        $returnData =  $sql;
+                    }
+                }catch (PDOException $exc){
+                   $returnData = "Could not contact database.";
+                }
+            }
+        }catch (PDOException $exc){
+            $returnData = "Could not contact database.";
+        }
+        return($returnData);
+    }
     function getCarriers($vendor){
         try{
             $sql = "SELECT DISTINCT carrier FROM phones WHERE vendor=:vendor";

@@ -869,6 +869,7 @@ display: block;
     width: auto;
     /*border: 1px solid red;*/
     margin-left: 16.66%;
+    padding-left: 10%;
 }
 .card-img-top{
     width: 100px;
@@ -882,7 +883,13 @@ display: block;
 }
 .card{
     float: left;
+    margin-bottom: 30px;
     margin-right: 40px;
+    animation: cardAppear 2s ease-in-out;
+}
+@keyframes cardAppear {
+    0% {opacity: 0}
+    100% {opacity: 1}
 }
 .carrierName{
     float: left;
