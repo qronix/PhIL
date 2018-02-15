@@ -80,6 +80,54 @@ html{
 .fa{
     margin-right:4px;
 }
+
+
+/***************************/
+/********DASHBOARD*********/
+/*************************/
+#dashArea{
+    width: 400px;
+    height: 100px;
+    margin: 0 auto;
+    padding-top: 25vh;
+}
+#dashPhilContainer{
+    text-align: center;
+}
+#dashPhil{
+    font-size: 10em;
+    color: rgba(255,255,255,0.4);
+    text-shadow: 0 0px 20px rgba(123,0,188,0.3);
+    animation: philDashboard 20s infinite;
+    position: relative;
+}
+
+@keyframes philDashboard {
+    0% {opacity: 0;
+        text-shadow: 0 0px 20px rgba(0,0,0,0.3);
+    }
+    10% {
+        text-shadow: 0 0px 20px rgba(123,0,188,0.3);
+    }
+    20% {
+        text-shadow: 0 0px 20px rgba(0,75,98,0.3);
+    }
+    40% {
+        text-shadow: 0 0px 20px rgba(0,180,0,0.3);
+        opacity: 1;
+    }
+    60% {
+        text-shadow: 0 0px 20px rgba(255,0,0,0.3);
+    }
+    80% {
+        text-shadow: 0 0px 20px rgba(0,0,255,0.3);
+    }
+    100% {
+        text-shadow: 0 0px 20px rgba(255,255,0,0.3);
+        opacity: 0;
+    }
+}
+
 /**********************/
 /********PHONES*********/
 /**********************/
@@ -799,16 +847,16 @@ display: block;
     margin-right: 20px;
 }
 .vendorRow{
-    border: none;
     border-radius: 10px;
     background-color: #002640;
+    border: 1px white solid;
     margin-bottom: 20px;
-    color: transparent;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    color: white;
+    /*text-shadow: 0 0 5px rgba(0,0,0,0.5);*/
     transition: all 0.1s ease-in-out;
 }
 .vendorRow:hover{
-    border: 1px white solid;
+
     color:white;
     text-shadow: none;
 }
@@ -817,6 +865,58 @@ display: block;
     justify-content: left;
 }
 
+.vendorContainer{
+    width: auto;
+    /*border: 1px solid red;*/
+    margin-left: 16.66%;
+}
+.card-img-top{
+    width: 100px;
+    height: 120px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.card-text{
+    color: #cccccc;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.card{
+    float: left;
+    margin-right: 40px;
+}
+.carrierName{
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.carrierDeleteBtn{
+    float: right;
+    horiz-align: left;
+    margin-bottom: 30px;
+    /*background-color: #e74c3c;*/
+}
+
+.carrierDeleteBtn:hover{
+    color:#e74c3c;
+}
+.carrierAddBtn{
+    float: right;
+}
+.carrierAddBtn:hover{
+    color:#16a085;
+}
+.card-title{
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+.fa-plus{
+    color: #2ecc71;
+}
 
 
 /**********************/
