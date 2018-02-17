@@ -9,7 +9,7 @@ $returnData = "";
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin"){
     include("includes/header.php");
     include("includes/sidebar.php");
-    include("phone.php");
+    include_once("phone.php");
     $phone = new Phone();
     $returnData = $phone->loadVendorTable();
 }else{
@@ -63,8 +63,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
 
         var vendor = this.href.match(/(?<=vendorid=).*(?=&)/);
         var carrier = this.href.match(/(?<=&carrierid=).*(?=)/);
-        console.log("Vendor: " + vendor);
-        console.log(carrier[0]);
+        carrier[0]=carrier[0].replace(/%20/g," ");
+
         var formData = {
             vendor: vendor[0],
             carrier: carrier[0]
@@ -76,8 +76,34 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
             dataType:'json',
             encode: true
         }).done(function(data){
-            location.reload();
+            // location.reload();
+             console.log(data);
         });
         event.preventDefault();
+    });
+
+    var addCarrierBtns = document.querySelectorAll("a[id*='addCarrierBtnFor']");
+
+    addCarrierBtns.forEach(function(btn){
+       btn.addEventListener("click",function(event){
+           var vendorName = btn.id.match(/(?<=addCarrierBtnFor).*(?=)/);
+           var carrierInputId = "newCarrierNameFor"+vendorName[0];
+           var newCarrierName = document.getElementById(carrierInputId).value;
+           // console.log("DING");
+          $.ajax({
+             type:"POST",
+              url:'addCarrier.php',
+             data:{
+                 vendor:vendorName[0],
+                 newCarrier:newCarrierName
+             },
+              dataType: 'json',
+              encode:true
+          }).done(function(data){
+                 // location.reload();
+              console.log(data);
+          });
+          event.preventDefault();
+       });
     });
 </script>

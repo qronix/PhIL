@@ -2,6 +2,7 @@
 session_start();
 
 $returnData = array();
+$carrier = "";
 
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin"){
     if(isset($_POST['vendor'])&&!empty($_POST['vendor'])

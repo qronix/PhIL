@@ -4,7 +4,8 @@ if(!isset($_SESSION)){
     session_start();
 }
 
-include("includes/dbcon.php");
+//include("includes/dbcon.php");
+require_once ('includes/dbcon.php');
 
 class User{
     private $dbCon;

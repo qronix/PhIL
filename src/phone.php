@@ -6,7 +6,7 @@ if(!isset($_SESSION)){
 }
 
 //include("includes/dbcon.php");
-include("user.php");
+include_once("user.php");
 
 
 class Phone
@@ -289,8 +289,8 @@ class Phone
 //                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
 //                $display.="<div class='clearfix'></div>";
 //                $display.="<p class='carrierName'>New Carrier</p>";
-                $display.="<input type='text' class='carrierName form-control' placeholder='New Carrier' name='newCarrier'></input>";
-                $display.="<a href='#' class='btn carrierAddBtn'><i class='fa fa-plus'></i>Add</a>";
+                $display.="<input type='text' id='newCarrierNameFor".$result['vendorname']."'class='carrierName form-control' placeholder='New Carrier' name='newCarrier'></input>";
+                $display.="<a href='#' class='btn carrierAddBtn' id='addCarrierBtnFor".$result['vendorname']."'><i class='fa fa-plus'></i>Add</a>";
         $display.="</div>";
     $display.="</div>";
 $display.="</div>";
@@ -329,8 +329,9 @@ $returnData.=$display;
         $returnData = "";
 
         try{
-            $sql = "SELECT * FROM vendors";
+            $sql = "SELECT * FROM vendors WHERE vendorname=:vendor";
             $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('vendor',$vendor);
             $statement->execute();
 
             $carrierColumnName = "";
@@ -354,9 +355,10 @@ $returnData.=$display;
                     $statement->bindValue('carrierValue','');
                     if($statement->execute()){
                         $returnData = "Carrier removed";
+//                        $returnData = $carrierColumnName;
                     }else{
-//                        $returnData = "Carrier could not be removed";
-                        $returnData =  $sql;
+                        $returnData = "Carrier could not be removed";
+//                        $returnData =  $sql;
                     }
                 }catch (PDOException $exc){
                    $returnData = "Could not contact database.";
@@ -408,6 +410,51 @@ $returnData.=$display;
             return $returnData;
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
+        }
+    }
+    function addCarrier($vendor, $newCarrier){
+
+        try{
+            //check carrier does not exist for vendor
+            $sql = "SELECT * from vendors WHERE vendorname=:vendorname";
+            $statement = $this->pdo->prepare($sql);
+            $statement ->bindValue('vendorname',$vendor);
+            $canAddCarrier = false;
+            $availableCarrierSlot = "";
+
+            if($statement->execute()){
+                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false) {
+                    foreach($result as $key=>$value){
+                        if($value==$newCarrier){
+                            return "Carrier already exists";
+                        }
+                        if(strpos($key,'supportedcarrier')!==false){
+                            //a carrier slot is available
+                            if($value==""){
+                                $availableCarrierSlot = $key;
+                                $canAddCarrier = true;
+                            }
+                        }
+                    }
+                }
+                if($canAddCarrier){
+                    $sql = "UPDATE vendors SET ".$availableCarrierSlot."=:carriername WHERE vendorname=:vendorname LIMIT 1";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue('carriername',$newCarrier);
+                    $statement->bindValue('vendorname',$vendor);
+                    if($statement->execute()){
+                        return("Carrier was successfully added to ".$vendor);
+                    }else{
+                        return("Could not add carrier to database for vendor ".$vendor);
+                    }
+                }else{
+                    return "Carrier limit reached";
+                }
+            }else{
+                return "Could not check for existence of carrier";
+            }
+        }catch (PDOException $exc){
+            return ("Could not contact database");
         }
     }
     function searchPhone($searchTerm){

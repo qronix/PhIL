@@ -3,37 +3,6 @@ include("includes/header.php");
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
     header("Location: dashboard.php");
 }
-//session_destroy();
-//print_r($_SESSION);
-//include("user.php");
-//
-//$errormsg = "";
-//$username = "";
-//$password = "";
-//$user = new User();
-//
-//if($_SERVER['REQUEST_METHOD']=='POST'){
-//    if(isset($_POST['username'])&&!empty($_POST['username'])){
-//        $username = filter_input(INPUT_POST,'username');
-//    }else{
-//        $errormsg = "Username cannot be empty";
-//    }
-//    if(isset($_POST['password'])&&!empty($_POST['password'])){
-//        $password = filter_input(INPUT_POST,'password');
-//    }else{
-//        $errormsg .= "\nPassword cannot be empty";
-//
-//    }
-//    if(!empty($username) && !empty($password)){
-//        $errormsg = "Got data";
-//    }
-////    if(!empty($username) && !empty($password) && empty($errormsg)){
-////        $errormsg = $user->login($username,$password);
-////    }
-//
-//    echo $errormsg;
-//}
-
 ?>
 <div class="container main col-md-6">
     <div class="container" id="form-message">
