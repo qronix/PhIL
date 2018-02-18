@@ -925,6 +925,81 @@ display: block;
     color: #2ecc71;
 }
 
+/****************************/
+/********PHONEPANEL*********/
+/**************************/
+.phoneDataRow{
+    /*display: block;*/
+}
+
+#phonePanel{
+    background-color: #002640;
+    color: white;
+    margin-left: 16.66%;
+    border: 1px solid white;
+    margin-bottom: 30px;
+}
+.phoneData p{
+    font-size: 0.8em;
+    margin-right: 30px;
+    padding: 5px;
+    border: 1px green solid;
+    display: inline-block;
+    white-space: nowrap;
+    float: left;
+}
+.phoneDataCol{
+    white-space: nowrap;
+    margin-right: 20px;
+}
+.phoneRow{
+    border-radius: 10px;
+    background-color: #002640;
+    border: 1px white solid;
+    margin-bottom: 20px;
+    color: white;
+    /*text-shadow: 0 0 5px rgba(0,0,0,0.5);*/
+    transition: all 0.1s ease-in-out;
+}
+.phoneRow:hover{
+
+    color:white;
+    text-shadow: none;
+}
+.phoneRow .row{
+    float: left;
+    justify-content: left;
+}
+
+.phoneContainer{
+    width: auto;
+    /*border: 1px solid red;*/
+    margin-left: 16.66%;
+    padding-left: 10%;
+}
+.phonePanelPhoneName{
+    color: black;
+    margin-right: 20px;
+}
+.badge{
+margin-bottom: 12px;
+}
+.phoneSearchField{
+    max-width: 200px;
+    float: left;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+.phonePanelSearchBtn{
+    float: left;
+    margin-top: 5px;
+}
+.phoneSearchContainer{
+    float: left;
+    margin-bottom: 20px;
+
+}
+
 
 /**********************/
 /********SIDENAVBAR*********/

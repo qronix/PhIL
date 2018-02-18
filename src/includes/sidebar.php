@@ -10,7 +10,7 @@
 <!--        </button>-->
         <div class="dropdown-menu dbDropMenu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="vendorpanel.php">Vendors</a>
-            <a class="dropdown-item" href="carrierpanel.php">Carriers</a>
+<!--            <a class="dropdown-item" href="carrierpanel.php">Carriers</a>-->
             <a class="dropdown-item" href="phonepanel.php">Phones</a>
         </div>
     </div>

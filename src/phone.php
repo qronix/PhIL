@@ -222,21 +222,28 @@ class Phone
     function getVendors(){
         try{
 //            $sql = "SELECT DISTINCT vendor FROM phones";
-            $sql = "SELECT vendorname FROM vendors";
+            $sql = "SELECT DISTINCT vendorname FROM vendors";
             $statement = $this->pdo->prepare($sql);
-            $statement->execute();
 
             $vendors = array();
 
             $resultData = "<option>Select..</option>";
 
-            while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
-                array_push($vendors,$result['vendor']);
+            if($statement->execute()){
+
+
+                while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+                    array_push($vendors,$result['vendorname']);
+                }
+
+                foreach($vendors as $vendor){
+                    $resultData.="<option>".$vendor."</option>";
+                }
+            }else{
+                $resultData.="<option>Error</option>";
             }
 
-            foreach($vendors as $vendor){
-                $resultData.="<option>".$vendor."</option>";
-            }
+
             return $resultData;
         }catch(PDOException $exc){
             return $error['vendors'] = ['error','error','error'];
@@ -371,7 +378,7 @@ $returnData.=$display;
     }
     function getCarriers($vendor){
         try{
-            $sql = "SELECT DISTINCT carrier FROM phones WHERE vendor=:vendor";
+            $sql = "SELECT * FROM vendors WHERE vendorname=:vendor";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(':vendor',$vendor);
             $statement->execute();
@@ -380,7 +387,13 @@ $returnData.=$display;
             $returnData = "<option>Select...</option>";
 
             while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
-                array_push($carriers,$result['carrier']);
+                foreach ($result as $key => $value){
+                    if(strpos($key,'supportedcarrier')!==false){
+                        if($value!==""){
+                            array_push($carriers,$value);
+                        }
+                    }
+                }
             }
             foreach ($carriers as $carrier){
                 $returnData.= "<option>".$carrier."</option>";
@@ -389,6 +402,9 @@ $returnData.=$display;
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
         }
+    }
+    function loadPhonePanel(){
+
     }
     function getPhones($vendor,$carrier){
         try{
