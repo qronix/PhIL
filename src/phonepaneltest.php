@@ -242,6 +242,11 @@ include_once("includes/sidebar.php");
                     if(listElement.parentElement.classList.contains("hidden")){
                         listElement.parentElement.classList.remove("hidden");
                     }
+                    var regexTerm = searchTerm;
+                    var regexp = new RegExp(regexTerm,"ig");
+                    // var targetElementHTML = document.getElementsByClassName("searchLine")[0];
+
+                    listElement.innerHTML = listElement.innerText.replace(regexp,"<span class='searchHighlight'>"+searchTerm+"</span>");
                 }
             });
        };

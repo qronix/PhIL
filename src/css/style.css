@@ -1020,6 +1020,11 @@ display: block;
 .hidden{
     display: none !important;
 }
+
+.searchHighlight{
+    color: #8e44ad;
+    text-shadow: 0 0 10px rgba(255,255,0,0.9);
+}
 /**********************/
 /********SIDENAVBAR*********/
 /**********************/
