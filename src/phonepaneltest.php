@@ -225,10 +225,53 @@ include_once("includes/sidebar.php");
 
         var vendorNameMatches = searchField.id.match(/^.*(?=PhoneSearch)/);
         var vendorName = vendorNameMatches[0];
-        var phoneListTarget = document.getElementById(vendorName+"PhoneList");
-        
-       searchField.onkeydown = function(){
+        var phoneListTargets = document.querySelectorAll(".phonePanelPhoneName");
 
+
+        searchField.onkeyup = function(){
+            var searchTerm = searchField.value;
+            phoneListTargets.forEach(function(listElement){
+                var phoneName = listElement.innerText;
+                // console.log("Phone name is: " + phoneName);
+                // console.log("search term is: " + searchTerm);
+
+                if(phoneName.toLowerCase().indexOf(searchTerm)==-1) {
+                    // listElement.parentElement.classList.add("hidden");
+                    listElement.parentElement.classList.add("hidden");
+                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
+                    if(listElement.parentElement.classList.contains("hidden")){
+                        listElement.parentElement.classList.remove("hidden");
+                    }
+                }
+            });
        };
+        searchField.onchange = function(){
+            var searchTerm = searchField.value;
+            phoneListTargets.forEach(function(listElement){
+                var phoneName = listElement.innerText;
+                console.log("Phone name is: " + phoneName);
+                console.log("search term is: " + searchTerm);
+
+                if(phoneName.toLowerCase().indexOf(searchTerm)==-1) {
+                    // listElement.parentElement.classList.add("hidden");
+                    listElement.parentElement.classList.add("hidden");
+                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
+                    if(listElement.parentElement.classList.contains("hidden")){
+                        listElement.parentElement.classList.remove("hidden");
+                    }
+                }
+                // }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
+                //     if(listElement.parentElement.classList.contains("hidden")){
+                //         listElement.parentElement.classList.remove("hidden");
+                //     }
+                // }
+            });
+        };
+        // if(searchField.length==0){
+        //     phoneListTargets.forEach(function(listElement){
+        //         listElement.parentElement.classList.remove("hidden");
+        //     });
+        //     console.log("DING0");
+        // }
     });
 </script>
