@@ -1025,6 +1025,15 @@ display: block;
     color: #8e44ad;
     text-shadow: 0 0 10px rgba(255,255,0,0.9);
 }
+.addPhoneBtn{
+    margin-top: 10px;
+}
+.phoneNameLabel{
+    color:black;
+}
+.phoneAddContainer{
+    margin-top: 20px;
+}
 /**********************/
 /********SIDENAVBAR*********/
 /**********************/

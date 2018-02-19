@@ -36,8 +36,8 @@ include_once("includes/sidebar.php");
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <div class="container phoneSearchContainer">
-                                <input type="text" id="applePhoneSearch" class="form-control phoneSearchField" placeholder="Enter phone name...">
-                                <button class="btn userbtn phonePanelSearchBtn"><i class="fa fa-search"></i>Search</button>
+                                <label for="searchInput">Search:</label>
+                                <input type="text" name="searchInput" id="applePhoneSearch" class="form-control phoneSearchField" placeholder="Enter phone name...">
                             </div>
                             <div class="clearfix"></div>
                             <ul class="list-group" id="applePhoneList">
@@ -155,6 +155,11 @@ include_once("includes/sidebar.php");
                                     <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
                                     <span class="badge badge-primary badge-pill">1</span>
                                 </li>
+                                <div class="container phoneAddContainer">
+                                    <label for="phoneName" class="phoneNameLabel">Add new phone type:</label>
+                                    <input type="text" name="phoneName" class="form-control" id="appleNewPhoneName">
+                                    <button class="btn userbtn addPhoneBtn"><i class="fa fa-plus"></i>Add</button>
+                                </div>
                             </ul>
                         </div>
                     </div>
