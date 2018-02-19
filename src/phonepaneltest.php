@@ -36,35 +36,40 @@ include_once("includes/sidebar.php");
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <div class="container phoneSearchContainer">
-                                <input type="text" class="form-control phoneSearchField" placeholder="Enter phone name...">
+                                <input type="text" id="applePhoneSearch" class="form-control phoneSearchField" placeholder="Enter phone name...">
                                 <button class="btn userbtn phonePanelSearchBtn"><i class="fa fa-search"></i>Search</button>
                             </div>
                             <div class="clearfix"></div>
-                            <ul class="list-group">
+                            <ul class="list-group" id="applePhoneList">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Apple phone 1</p>
                                     <span class="badge badge-primary badge-pill">14</span>
-                                    <i class="fa fa-trash">Delete</i>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
                                     <span class="badge badge-primary badge-pill">2</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
                                     <span class="badge badge-primary badge-pill">1</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Apple phone 1</p>
                                     <span class="badge badge-primary badge-pill">14</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
                                     <span class="badge badge-primary badge-pill">2</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
                                     <span class="badge badge-primary badge-pill">1</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <p class="phonePanelPhoneName">Apple phone 1</p>
@@ -202,16 +207,28 @@ include_once("includes/sidebar.php");
 </div>
 
 <script type="text/javascript">
-    var searchBtns = document.querySelectorAll(".phonePanelSearchBtn");
+    // var searchBtns = document.querySelectorAll(".phonePanelSearchBtn");
+    //
+    // searchBtns.forEach(function(searchButton){
+    //    searchButton.addEventListener("click",function(event){
+    //        //add regex to get vendor name
+    //         var searchButtonVendor = searchButton.id.match()
+    //        //construct vendor name based id for search input id
+    //
+    //        //filter out all list items without a corresponding search value
+    //        event.preventDefault();
+    //    });
+    // });
+    var searchFields = document.querySelectorAll(".phoneSearchField");
 
-    searchBtns.forEach(function(searchButton){
-       searchButton.addEventListener("click",function(event){
-           //add regex to get vendor name
-            var searchButtonVendor = searchButton.id.match()
-           //construct vendor name based id for search input id
+    searchFields.forEach(function(searchField){
 
-           //filter out all list items without a corresponding search value
-           event.preventDefault();
-       });
+        var vendorNameMatches = searchField.id.match(/^.*(?=PhoneSearch)/);
+        var vendorName = vendorNameMatches[0];
+        var phoneListTarget = document.getElementById(vendorName+"PhoneList");
+        
+       searchField.onkeydown = function(){
+
+       };
     });
 </script>

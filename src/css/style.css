@@ -980,9 +980,11 @@ display: block;
 .phonePanelPhoneName{
     color: black;
     margin-right: 20px;
+    float: left;
 }
 .badge{
-margin-bottom: 12px;
+    margin-bottom: 12px;
+    margin-right: 20px;
 }
 .phoneSearchField{
     max-width: 200px;
@@ -997,9 +999,23 @@ margin-bottom: 12px;
 .phoneSearchContainer{
     float: left;
     margin-bottom: 20px;
-
+}
+.phonePanelTrashIcon{
+    margin-right: 10px;
 }
 
+.phonePanelDeleteBtn:hover{
+    color: #e74c3c;
+}
+
+.phonePanelDeleteBtn{
+    position: relative;
+    top: -6px;
+}
+.phoneNameContainer{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
 /**********************/
 /********SIDENAVBAR*********/
