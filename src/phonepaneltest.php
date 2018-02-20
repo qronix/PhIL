@@ -22,6 +22,7 @@ include_once("includes/sidebar.php");
 <div class="container col-md-10" id="phonePanel">
     <div id="phonePanelHeader" class="row">
         <h2>Phones</h2>
+
         <div class="container">
             <div id="accordion">
                 <div class="card">
@@ -36,7 +37,7 @@ include_once("includes/sidebar.php");
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <div class="container phoneSearchContainer">
-                                <label for="searchInput">Search:</label>
+                                <label for="searchInput" class="phoneSearchLabel">Search:</label>
                                 <input type="text" name="searchInput" id="applePhoneSearch" class="form-control phoneSearchField" placeholder="Enter phone name...">
                             </div>
                             <div class="clearfix"></div>
@@ -164,6 +165,7 @@ include_once("includes/sidebar.php");
                         </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-header" id="headingTwo">
                         <h5 class="mb-0">
@@ -172,9 +174,135 @@ include_once("includes/sidebar.php");
                             </button>
                         </h5>
                     </div>
+
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <div class="container phoneSearchContainer">
+                                <label for="searchInput" class="phoneSearchLabel">Search:</label>
+                                <input type="text" name="searchInput" id="androidPhoneSearch" class="form-control phoneSearchField" placeholder="Enter phone name...">
+                            </div>
+                            <div class="clearfix"></div>
+                            <ul class="list-group" id="androidPhoneList">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                    <button class="btn userbtn phonePanelDeleteBtn"><i class="fa fa-trash phonePanelTrashIcon"></i>Delete</button>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone 1</p>
+                                    <span class="badge badge-primary badge-pill">14</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Super extravagent apple phone name 2</p>
+                                    <span class="badge badge-primary badge-pill">2</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p class="phonePanelPhoneName">Apple phone superbig 256gb 3</p>
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <div class="container phoneAddContainer">
+                                    <label for="phoneName" class="phoneNameLabel">Add new phone type:</label>
+                                    <input type="text" name="phoneName" class="form-control" id="appleNewPhoneName">
+                                    <button class="btn userbtn addPhoneBtn"><i class="fa fa-plus"></i>Add</button>
+                                </div>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -235,22 +363,22 @@ include_once("includes/sidebar.php");
 
         searchField.onkeyup = function(){
             var searchTerm = searchField.value;
+
             phoneListTargets.forEach(function(listElement){
                 var phoneName = listElement.innerText;
-                // console.log("Phone name is: " + phoneName);
-                // console.log("search term is: " + searchTerm);
+                var phoneListVendorRegex = listElement.parentElement.parentElement.id.match(/^(.*)(?=PhoneList)/);
+                var phoneListVendor = phoneListVendorRegex[0];
 
-                if(phoneName.toLowerCase().indexOf(searchTerm)==-1) {
-                    // listElement.parentElement.classList.add("hidden");
+                console.log("vendorName: " + vendorName + " AND phoneListVendor: " + phoneListVendor);
+
+                if(phoneName.toLowerCase().indexOf(searchTerm)==-1 && phoneListVendor==vendorName) {
                     listElement.parentElement.classList.add("hidden");
-                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
+                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1 && phoneListVendor == vendorName){
                     if(listElement.parentElement.classList.contains("hidden")){
                         listElement.parentElement.classList.remove("hidden");
                     }
                     var regexTerm = searchTerm;
                     var regexp = new RegExp(regexTerm,"ig");
-                    // var targetElementHTML = document.getElementsByClassName("searchLine")[0];
-
                     listElement.innerHTML = listElement.innerText.replace(regexp,"<span class='searchHighlight'>"+searchTerm+"</span>");
                 }
             });
@@ -259,29 +387,21 @@ include_once("includes/sidebar.php");
             var searchTerm = searchField.value;
             phoneListTargets.forEach(function(listElement){
                 var phoneName = listElement.innerText;
-                console.log("Phone name is: " + phoneName);
-                console.log("search term is: " + searchTerm);
+                var phoneListVendorRegex = listElement.parentElement.parentElement.id.match(/^(.*)(?=PhoneList)/);
+                var phoneListVendor = phoneListVendorRegex[0];
+                console.log("vendorName: " + vendorName + " AND phoneListVendor: " + phoneListVendor);
 
-                if(phoneName.toLowerCase().indexOf(searchTerm)==-1) {
-                    // listElement.parentElement.classList.add("hidden");
+                if(phoneName.toLowerCase().indexOf(searchTerm)==-1 && phoneListVendor==vendorName) {
                     listElement.parentElement.classList.add("hidden");
-                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
+                }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1 && phoneListVendor == vendorName){
                     if(listElement.parentElement.classList.contains("hidden")){
                         listElement.parentElement.classList.remove("hidden");
                     }
+                    var regexTerm = searchTerm;
+                    var regexp = new RegExp(regexTerm,"ig");
+                    listElement.innerHTML = listElement.innerText.replace(regexp,"<span class='searchHighlight'>"+searchTerm+"</span>");
                 }
-                // }else if(phoneName.toLowerCase().indexOf(searchTerm)!=-1){
-                //     if(listElement.parentElement.classList.contains("hidden")){
-                //         listElement.parentElement.classList.remove("hidden");
-                //     }
-                // }
             });
         };
-        // if(searchField.length==0){
-        //     phoneListTargets.forEach(function(listElement){
-        //         listElement.parentElement.classList.remove("hidden");
-        //     });
-        //     console.log("DING0");
-        // }
     });
 </script>

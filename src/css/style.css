@@ -1034,6 +1034,11 @@ display: block;
 .phoneAddContainer{
     margin-top: 20px;
 }
+
+.phoneSearchLabel{
+    color: black;
+    display: block;
+}
 /**********************/
 /********SIDENAVBAR*********/
 /**********************/
