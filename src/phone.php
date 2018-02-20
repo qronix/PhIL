@@ -468,6 +468,105 @@ $returnData.=$display;
             return $error = ['error','error','error'];
         }
     }
+    function loadPhoneTypesPanel(){
+
+        include_once ("phonetype.php");
+
+        $resultData = "";
+        $vendorList = array();
+        $display = "";
+
+        try{
+            //grab vendor list
+            $sql = "SELECT DISTINCT vendorname FROM vendors";
+            $statement = $this->pdo->prepare($sql);
+            if($statement->execute()){
+                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                    if(!in_array($result['vendorname'],$vendorList)){
+                        array_push($vendorList,$result['vendorname']);
+                    }
+                }
+                foreach ($vendorList as $vendorname){
+
+
+
+
+                    $display.="<div class='card'>";
+                    $display.="<div class='card-header' id='headingOne'>";
+                    $display.="<h5 class='mb-0'>";
+                    $display.="<button class='btn btn-link' data-toggle='collapse' data-target='#collapse".$vendorname."' aria-expanded='true' aria-controls='collapseOne'>";
+                    $display.=$vendorname;
+                    $display.="</button>";
+                    $display.="</h5>";
+                    $display.="</div>";
+
+                    $display.="<div id='collapse".$vendorname."' class='collapse show' aria-labelledby='headingOne' data-parent='#accordion'>";
+                    $display.="<div class='card-body'>";
+                    $display.="<div class='container phoneSearchContainer'>";
+                    $display.="<label for='searchInput' class='phoneSearchLabel'>Search:</label>";
+                    $display.="<input type='text' name='searchInput' id='".$vendorname."PhoneSearch' class='form-control phoneSearchField' placeholder='Enter phone name...'>";
+                    $display.="</div>";
+                    $display.="<div class='clearfix'></div>";
+                    $display.="<ul class='list-group' id='".$vendorname."PhoneList'>";
+
+                    $sql = "SELECT phonetype FROM phonetypes WHERE vendor=:vendorname";
+                    $statement = $this->pdo->prepare($sql);
+                    $statement->bindValue('vendorname',$vendorname);
+
+
+
+
+                    if($statement->execute()){
+                        $phonetypes = array();
+
+                        while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+
+                            if(!isset($phonetypes[$result['phonetype']])){
+                                $newPhoneType = new Phonetype($result['phonetype']);
+                                $phonetypes[$result['phonetype']] = $newPhoneType;
+
+                            }else{
+                                $phonetypes[$result['phonetype']]->addtoCount();
+                            }
+                        }
+
+                        foreach ($phonetypes as $phonetype){
+                            //while loop
+                            $display.="<li class='list-group-item d-flex justify-content-between align-items-center'>";
+                            $display.="<p class='phonePanelPhoneName'>".$phonetype->getPhoneType()."</p>";
+                            $display.="<span class='badge badge-primary badge-pill'>".$phonetype->getCount()."</span>";
+                            $display.="<button class='btn userbtn phonePanelDeleteBtn' id='".$vendorname.":".$phonetype->getPhoneType()."'><i class='fa fa-trash phonePanelTrashIcon'></i>Delete</button>";
+                            $display.="</li>";
+
+                        }
+                        $display.="<div class='container phoneAddContainer'>";
+                        $display.="<label for='phoneName' class='phoneNameLabel'>Add new phone type:</label>";
+                        $display.="<input type='text' name='phoneName' class='form-control' id='".$vendorname."NewPhoneName'>";
+                        $display.="<button class='btn userbtn addPhoneBtn'><i class='fa fa-plus'></i>Add</button>";
+                        $display.="</div>";
+                        $display.="</ul>";
+                        $display.="</div>";
+                        $display.="</div>";
+                        $display.="</div>";
+                    }else{
+                        $resultData = "Could not retreive phones for vendor: " .$vendorname;
+                        return($resultData);
+                    }
+                }
+            }else{
+                $resultData = "Could not load vendors.";
+            }
+            //for each vendor in vendor list, generate a phonetype 'card' section for the accordion display
+            //ensure all vendor specific parts of the card section pertain to the correct vendor
+            //return the generated display
+        }catch (PDOException $exc){
+            $resultData = "Could not contact database";
+        }
+        if($resultData==""){
+            $resultData=$display;
+        }
+        return($resultData);
+    }
     function addCarrier($vendor, $newCarrier){
 
         try{
