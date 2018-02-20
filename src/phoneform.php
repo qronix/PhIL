@@ -77,6 +77,7 @@ $phone = new Phone();
 </div>
 <script type="text/javascript">
 $('#vendor').change(function(){
+    $("#phone").html("");
     var formData={
         'vendor' : document.querySelector("#vendor").value
     };
@@ -91,6 +92,7 @@ $('#vendor').change(function(){
     });
 });
 $('#carrier').change(function(){
+    $("#phone").html("");
     var formData={
         'vendor' : document.querySelector("#vendor").value,
         'carrier' : document.querySelector("#carrier").value

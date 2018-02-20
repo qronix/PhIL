@@ -25,7 +25,7 @@ include_once("includes/sidebar.php");
         <div class="container">
             <div id="accordion">
                 <?php
-                    $result = $phone ->loadPhoneTypesPanel();
+                    $result = $phone->loadPhoneTypesPanel();
                     echo $result;
                 ?>
 <!--                <div class="card">-->
@@ -405,10 +405,11 @@ include_once("includes/sidebar.php");
            var vendorNameResults = addBtn.parentElement.parentElement.id.match(/^(.*)(?=PhoneList)/);
            var vendorName = vendorNameResults[0];
            var phoneType = document.getElementById(vendorName+"NewPhoneName").value;
-
+           var carrierName = document.querySelector("#"+vendorName+"carrierNames").value;
 
            var data = {
              vendorname: vendorName,
+               carrier: carrierName,
                newphonetype: phoneType
            };
 
@@ -421,8 +422,43 @@ include_once("includes/sidebar.php");
               dataType:'json'
            }).done(function (data) {
                console.log(data);
+               // location.reload();
            });
 
+           event.preventDefault();
+       });
+    });
+
+
+    var deleteBtns = document.querySelectorAll(".phonePanelDeleteBtn");
+
+    deleteBtns.forEach(function(deleteBtn){
+       deleteBtn.addEventListener("click",function(event){
+
+           var vendorNameMatches = deleteBtn.id.match(/(.*)(?=:)/);
+           var phonetypeMatches = deleteBtn.id.match(/(?<=:)(.*)/);
+
+           var vendorName = vendorNameMatches[0];
+           var phonetype  = phonetypeMatches[0];
+
+           console.log(phonetype);
+
+           var data = {
+                vendorname:vendorName,
+                phonetype:phonetype
+           };
+
+            $.ajax({
+                type:'POST',
+                url:'removephonetype.php',
+                data:data,
+                dataType:'json',
+                encode:true
+
+            }).done(function(data){
+                location.reload();
+                // console.log(data);
+            });
            event.preventDefault();
        });
     });

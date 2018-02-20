@@ -1039,6 +1039,19 @@ display: block;
     color: black;
     display: block;
 }
+.vendorPhonePanel li{
+    color: black;
+}
+
+.sprintLogoPhonePanel,
+.verizonLogoPhonePanel,
+.attLogoPhonePanel{
+    width: 100px;
+    height: auto;
+    margin:0 40px;
+    position: relative;
+    top:-10px;
+}
 /**********************/
 /********SIDENAVBAR*********/
 /**********************/

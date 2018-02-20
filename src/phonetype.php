@@ -5,15 +5,18 @@ class Phonetype{
 
     private $phonetypeName;
     private $phoneCount;
+    private $carrier;
 
-    function __construct($phonetypeName)
+    function __construct($phonetypeName,$carrier)
     {
         $this->phonetypeName= $phonetypeName;
+        $this->carrier = $carrier;
         $this->phoneCount = 1;
 
         $phoneInfo = [
             'phoneType'=>$this->phonetypeName,
-            'phoneCount'=>$this->phoneCount
+            'phoneCount'=>$this->phoneCount,
+            'carrier'=>$this->carrier
         ];
         return($phoneInfo);
     }
@@ -22,10 +25,15 @@ class Phonetype{
 
         $phoneInfo = [
           'phoneType'=>$this->phonetypeName,
-            'phoneCount'=>$this->phoneCount
+            'phoneCount'=>$this->phoneCount,
+            'carrier'=>$this->carrier
         ];
 
         return($phoneInfo);
+    }
+
+    function getCarrier(){
+        return $this->carrier;
     }
 
     function getPhoneType(){

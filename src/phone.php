@@ -199,16 +199,19 @@ class Phone
         return $message;
     }
 
-    function createPhoneType($vendorname,$newPhoneType){
+    function createPhoneType($vendorname,$newPhoneType,$carrier){
 
         //check existence of phone type
         $resultData = "";
 
         try{
-            $sql = "SELECT * FROM phonetypes WHERE vendor=:vendorname";
+            $sql = "SELECT * FROM phonetypes WHERE vendor=:vendorname AND carrier=:carriername";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue('vendorname',$vendorname);
+            $statement->bindValue('carriername',$carrier);
             $phoneTypeIsNew = false;
+            $count = 0;
+
 
             if($statement->execute()){
                 while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
@@ -219,20 +222,27 @@ class Phone
                     }else{
                         $phoneTypeIsNew = true;
                     }
+                    $count++;
+                }
+                if($count==0){
+                    $phoneTypeIsNew = true;
                 }
             }else{
                 $resultData = "Could not contact database.";
             }
-            if($phoneTypeIsNew){
-                $sql = "INSERT INTO phonetypes (vendor,phonetype) VALUES (:vendor, :phonetype)";
+            if($phoneTypeIsNew || $count==0){
+                $sql = "INSERT INTO phonetypes (vendor,phonetype,carrier) VALUES (:vendor, :phonetype, :carrier)";
                 $statement = $this->pdo->prepare($sql);
                 $statement->bindValue('vendor',$vendorname);
+                $statement->bindValue('carrier',$carrier);
                 $statement->bindValue('phonetype',$newPhoneType);
                 if($statement->execute()){
                     $resultData = "Phone type: ". $newPhoneType. " was added to vendor: ".$vendorname;
                 }else{
                     $resultData = "Could not add phone type to database.";
                 }
+            }else{
+//                $resultData = "Phone already exists";
             }
         }catch (PDOException $exc){
             $resultData = "Could not contact database.";
@@ -446,12 +456,12 @@ $returnData.=$display;
     function loadPhonePanel(){
 
     }
-    function getPhones($vendor,$carrier){
+    function getPhones($vendor){
         try{
-            $sql = "SELECT DISTINCT phonetype FROM phones WHERE vendor=:vendor AND carrier=:carrier";
+            $sql = "SELECT DISTINCT phonetype FROM phones WHERE vendor=:vendor";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(':vendor',$vendor);
-            $statement->bindValue(':carrier',$carrier);
+//            $statement->bindValue(':carrier',$carrier);
             $statement->execute();
 
             $phones = array();
@@ -488,9 +498,6 @@ $returnData.=$display;
                 }
                 foreach ($vendorList as $vendorname){
 
-
-
-
                     $display.="<div class='card'>";
                     $display.="<div class='card-header' id='headingOne'>";
                     $display.="<h5 class='mb-0'>";
@@ -507,9 +514,9 @@ $returnData.=$display;
                     $display.="<input type='text' name='searchInput' id='".$vendorname."PhoneSearch' class='form-control phoneSearchField' placeholder='Enter phone name...'>";
                     $display.="</div>";
                     $display.="<div class='clearfix'></div>";
-                    $display.="<ul class='list-group' id='".$vendorname."PhoneList'>";
+                    $display.="<ul class='list-group vendorPhonePanel' id='".$vendorname."PhoneList'>";
 
-                    $sql = "SELECT phonetype FROM phonetypes WHERE vendor=:vendorname";
+                    $sql = "SELECT phonetype, carrier FROM phonetypes WHERE vendor=:vendorname";
                     $statement = $this->pdo->prepare($sql);
                     $statement->bindValue('vendorname',$vendorname);
 
@@ -522,9 +529,13 @@ $returnData.=$display;
                         while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
 
                             if(!isset($phonetypes[$result['phonetype']])){
-                                $newPhoneType = new Phonetype($result['phonetype']);
+                                $newPhoneType = new Phonetype($result['phonetype'],$result['carrier']);
                                 $phonetypes[$result['phonetype']] = $newPhoneType;
 
+                            }else if(isset($phonetypes[$result['phonetype']])&&
+                                $phonetypes[$result['phonetype']]->getCarrier()!=$result['carrier']){
+                                $newPhoneType = new Phonetype($result['phonetype'],$result['carrier']);
+                                $phonetypes[$result['phonetype']] = $newPhoneType;
                             }else{
                                 $phonetypes[$result['phonetype']]->addtoCount();
                             }
@@ -534,6 +545,18 @@ $returnData.=$display;
                             //while loop
                             $display.="<li class='list-group-item d-flex justify-content-between align-items-center'>";
                             $display.="<p class='phonePanelPhoneName'>".$phonetype->getPhoneType()."</p>";
+                            $thisPhoneCarrier = $phonetype->getCarrier();
+                            $carrierImg = "";
+                            if(strtolower($thisPhoneCarrier)=="sprint"){
+                                $carrierImg = "<img src='vendor/icons/Sprint.svg' class='sprintLogoPhonePanel'>";
+                            }else if(strtolower($thisPhoneCarrier)=="verizon"){
+                                $carrierImg = "<img src='vendor/icons/verizon.svg' class='verizonLogoPhonePanel'>";
+                            }else if(strtolower($thisPhoneCarrier)=='att'){
+                                $carrierImg = "<img src='vendor/icons/AT&T.svg' class='attLogoPhonePanel'>";
+                            }else{
+                                $carrierImg = "<i class=\"fa fa-globe\"></i>";
+                            }
+                            $display.=$carrierImg;
                             $display.="<span class='badge badge-primary badge-pill'>".$phonetype->getCount()."</span>";
                             $display.="<button class='btn userbtn phonePanelDeleteBtn' id='".$vendorname.":".$phonetype->getPhoneType()."'><i class='fa fa-trash phonePanelTrashIcon'></i>Delete</button>";
                             $display.="</li>";
@@ -542,6 +565,10 @@ $returnData.=$display;
                         $display.="<div class='container phoneAddContainer'>";
                         $display.="<label for='phoneName' class='phoneNameLabel'>Add new phone type:</label>";
                         $display.="<input type='text' name='phoneName' class='form-control' id='".$vendorname."NewPhoneName'>";
+                        $display.="<label for=$vendorname.'carrierName' class='phoneNameLabel'>Carrier:</label>";
+                        $display.="<select id='".$vendorname."carrierNames' class='form-control selectbox' name='carrier' required>";
+                        $display.=$this->getCarriers($vendorname);
+                        $display.="</select>";
                         $display.="<button class='btn userbtn addPhoneBtn'><i class='fa fa-plus'></i>Add</button>";
                         $display.="</div>";
                         $display.="</ul>";
@@ -564,6 +591,27 @@ $returnData.=$display;
         }
         if($resultData==""){
             $resultData=$display;
+        }
+        return($resultData);
+    }
+
+    function removePhoneType($vendor,$phonetype){
+        $resultData = "";
+
+        try{
+
+            $sql = "DELETE FROM phonetypes WHERE vendor=:vendor AND phonetype=:phonetype LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('vendor',$vendor);
+            $statement->bindValue('phonetype',$phonetype);
+
+            if($statement->execute()){
+                $resultData = $phonetype." was successfully removed from " .$vendor;
+            }else{
+                $resultData = "Could not remove phone type.";
+            }
+        }catch (PDOException $exception){
+            $resultData = "Could not contact database.";
         }
         return($resultData);
     }

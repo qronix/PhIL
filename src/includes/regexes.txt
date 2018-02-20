@@ -8,3 +8,4 @@
 (?<=storepickup:)(\s?.\S*)
 (?<=brightstar:)(\s?.\S*)
 (?<=walkin:)(\s?.\S*)
+[^a-zA-Z0-9-_\.] //sanitize input
