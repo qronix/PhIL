@@ -193,11 +193,51 @@ class Phone
             }
         }else{
             $message = "Could not verify manager " .$phoneData['manager']. " phone not added.";
-//            $message = $isRealManager;
 
         }
 
         return $message;
+    }
+
+    function createPhoneType($vendorname,$newPhoneType){
+
+        //check existence of phone type
+        $resultData = "";
+
+        try{
+            $sql = "SELECT * FROM phonetypes WHERE vendor=:vendorname";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('vendorname',$vendorname);
+            $phoneTypeIsNew = false;
+
+            if($statement->execute()){
+                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                    if(strtolower($result['phonetype'])==strtolower($newPhoneType)){
+                        $resultData = "Phone type: ".$newPhoneType." already exists.";
+                        $phoneTypeIsNew = false;
+                        break;
+                    }else{
+                        $phoneTypeIsNew = true;
+                    }
+                }
+            }else{
+                $resultData = "Could not contact database.";
+            }
+            if($phoneTypeIsNew){
+                $sql = "INSERT INTO phonetypes (vendor,phonetype) VALUES (:vendor, :phonetype)";
+                $statement = $this->pdo->prepare($sql);
+                $statement->bindValue('vendor',$vendorname);
+                $statement->bindValue('phonetype',$newPhoneType);
+                if($statement->execute()){
+                    $resultData = "Phone type: ". $newPhoneType. " was added to vendor: ".$vendorname;
+                }else{
+                    $resultData = "Could not add phone type to database.";
+                }
+            }
+        }catch (PDOException $exc){
+            $resultData = "Could not contact database.";
+        }
+        return($resultData);
     }
 
     function checkPhoneExists($imei){

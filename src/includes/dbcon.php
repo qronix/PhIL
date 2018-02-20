@@ -28,6 +28,7 @@ class DBConn{
             $this->settings->settings['username'],
             $this->settings->settings['password']
         );
+        $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 }
 

@@ -5,9 +5,12 @@ session_start();
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin"){
     if(isset($_POST['vendor'])&&!empty($_POST['vendor']) && isset($_POST['newCarrier'])&&!empty($_POST['newCarrier'])){
          $newCarrier = filter_input(INPUT_POST,'newCarrier',FILTER_SANITIZE_SPECIAL_CHARS);
-         $vendor = filter_input(INPUT_POST,'vendor',FILTER_SANITIZE_SPECIAL_CHARS);
+         $newCarrier = preg_replace('/[^a-zA-Z0-9-_\.]/','',$newCarrier);
 
-         include_once("phone.php");
+         $vendor = filter_input(INPUT_POST,'vendor',FILTER_SANITIZE_SPECIAL_CHARS);
+         $newVendor = preg_replace('/[^a-zA-Z0-9-_\.]/','',$vendor);
+
+        include_once("phone.php");
          $phone = new Phone();
          $returnData['message'] = $phone->addCarrier($vendor,$newCarrier);
     }

@@ -340,18 +340,6 @@ include_once("includes/sidebar.php");
 </div>
 
 <script type="text/javascript">
-    // var searchBtns = document.querySelectorAll(".phonePanelSearchBtn");
-    //
-    // searchBtns.forEach(function(searchButton){
-    //    searchButton.addEventListener("click",function(event){
-    //        //add regex to get vendor name
-    //         var searchButtonVendor = searchButton.id.match()
-    //        //construct vendor name based id for search input id
-    //
-    //        //filter out all list items without a corresponding search value
-    //        event.preventDefault();
-    //    });
-    // });
     var searchFields = document.querySelectorAll(".phoneSearchField");
 
     searchFields.forEach(function(searchField){
@@ -403,5 +391,36 @@ include_once("includes/sidebar.php");
                 }
             });
         };
+    });
+
+    var addBtns = document.querySelectorAll(".addPhoneBtn");
+
+
+    addBtns.forEach(function(addBtn){
+       addBtn.addEventListener("click",function(event){
+
+           var vendorNameResults = addBtn.parentElement.parentElement.id.match(/^(.*)(?=PhoneList)/);
+           var vendorName = vendorNameResults[0];
+           var phoneType = document.getElementById(vendorName+"NewPhoneName").value;
+
+
+           var data = {
+             vendorname: vendorName,
+               newphonetype: phoneType
+           };
+
+
+           $.ajax({
+              type:'POST',
+               url:"createphonetype.php",
+              data:data,
+              encode:true,
+              dataType:'json'
+           }).done(function (data) {
+               console.log(data);
+           });
+
+           event.preventDefault();
+       });
     });
 </script>

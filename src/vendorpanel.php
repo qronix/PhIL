@@ -76,8 +76,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
             dataType:'json',
             encode: true
         }).done(function(data){
-            // location.reload();
-             console.log(data);
+             location.reload();
+             // console.log(data);
         });
         event.preventDefault();
     });
@@ -100,8 +100,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
               dataType: 'json',
               encode:true
           }).done(function(data){
-                 // location.reload();
-              console.log(data);
+                 location.reload();
+              // console.log(data);
           });
           event.preventDefault();
        });
