@@ -17,5 +17,4 @@ $returnData = "";
         $returnData = $phone->getPhones($vendor,$carrier);
     }
 
-
 echo $returnData;

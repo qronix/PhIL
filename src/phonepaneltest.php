@@ -421,8 +421,8 @@ include_once("includes/sidebar.php");
               encode:true,
               dataType:'json'
            }).done(function (data) {
-               console.log(data);
-               // location.reload();
+               // console.log(data);
+               location.reload();
            });
 
            event.preventDefault();
@@ -436,16 +436,19 @@ include_once("includes/sidebar.php");
        deleteBtn.addEventListener("click",function(event){
 
            var vendorNameMatches = deleteBtn.id.match(/(.*)(?=:)/);
-           var phonetypeMatches = deleteBtn.id.match(/(?<=:)(.*)/);
+           var phonetypeMatches = deleteBtn.id.match(/(?<=:)(.*)(?=#)/);
+           var carrierMatches = deleteBtn.id.match(/(?<=#)(.*)/);
 
            var vendorName = vendorNameMatches[0];
            var phonetype  = phonetypeMatches[0];
+           var carrier = carrierMatches[0];
 
            console.log(phonetype);
 
            var data = {
                 vendorname:vendorName,
-                phonetype:phonetype
+                phonetype:phonetype,
+                carrier:carrier
            };
 
             $.ajax({

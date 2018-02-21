@@ -881,6 +881,34 @@ display: block;
     color: #cccccc;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 }
+.col-md-3,
+.col-md-1{
+    display: inline;
+}
+.phoneTypeRow{
+    float: left;
+    margin-left: 0;
+    justify-content: left;
+    align-content: left;
+    text-align: left;
+
+}
+.carrierSelectBox{
+    max-width: 300px;
+    /*display: block;*/
+    margin-left: -28px;
+}
+.phonePanelLi{
+    width: 100%;
+}
+.phonePanelNameInput{
+    max-width: 400px;
+}
+.phonePanelContainer{
+    justify-content: left;
+    align-content: left;
+    text-align: left;
+}
 .card{
     float: left;
     margin-bottom: 30px;
@@ -930,6 +958,11 @@ display: block;
 /**************************/
 .phoneDataRow{
     /*display: block;*/
+}
+
+.panelListGlobe{
+    padding-left: 35px ;
+    color: rebeccapurple;
 }
 
 #phonePanel{
@@ -1030,6 +1063,8 @@ display: block;
 }
 .phoneNameLabel{
     color:black;
+    display: block;
+    margin-top: 20px;
 }
 .phoneAddContainer{
     margin-top: 20px;
@@ -1049,6 +1084,7 @@ display: block;
     width: 100px;
     height: auto;
     margin:0 40px;
+    margin-right: 140px;
     position: relative;
     top:-10px;
 }

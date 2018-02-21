@@ -50,17 +50,17 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&($_SESSION['role']==="ad
         }else{
             $errors['employee'] = "Invalid employee";
         }
-        if(isset($_POST['manager'])&&!empty($_POST['manager'])){
-            $phoneData['manager'] = filter_input(INPUT_POST,'manager');
-
-        }else{
-            $errors['manager'] = "Manager cannot be empty";
-        }
-        if(isset($_POST['managerPassword'])&&!empty($_POST['managerPassword'])){
-            $phoneData['managerPassword'] = $_POST['managerPassword'];
-        }else{
-            $errors['managerPassword'] = "Manager password cannot be empty";
-        }
+//        if(isset($_POST['manager'])&&!empty($_POST['manager'])){
+//            $phoneData['manager'] = filter_input(INPUT_POST,'manager');
+//
+//        }else{
+//            $errors['manager'] = "Manager cannot be empty";
+//        }
+//        if(isset($_POST['managerPassword'])&&!empty($_POST['managerPassword'])){
+//            $phoneData['managerPassword'] = $_POST['managerPassword'];
+//        }else{
+//            $errors['managerPassword'] = "Manager password cannot be empty";
+//        }
 //        if(isset($_POST['designation'])&&!empty($_POST['designation'])){
 //            if($_POST['designation'] === "pickup"|| $_POST['designation']==="brightstar"
 //                ||$_POST['designation']==="walkin"){
@@ -71,7 +71,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&($_SESSION['role']==="ad
 //        }else{
 //            $errors['designation'] = "Designation cannot be empty";
 //        }
-        $phoneData['designation'] = "Inventory";
+        $phoneData['designation'] = "inventory";
     }else{
         $errors['request'] = "Invalid request";
     }
