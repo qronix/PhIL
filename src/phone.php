@@ -205,32 +205,35 @@ class Phone
         $resultData = "";
 
         try{
-            $sql = "SELECT * FROM phonetypes WHERE vendor=:vendorname AND carrier=:carriername";
+            $sql = "SELECT DISTINCT phonetype FROM phonetypes WHERE vendor=:vendorname AND carrier=:carriername";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue('vendorname',$vendorname);
             $statement->bindValue('carriername',$carrier);
             $phoneTypeIsNew = false;
-            $count = 0;
+            $count = -1;
 
 
             if($statement->execute()){
-                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
-                    if(strtolower($result['phonetype'])==strtolower($newPhoneType)){
-                        $resultData = "Phone type: ".$newPhoneType." already exists.";
-                        $phoneTypeIsNew = false;
-                        break;
-                    }else{
-                        $phoneTypeIsNew = true;
-                    }
-                    $count++;
-                }
-                if($count==0){
+                if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
                     $phoneTypeIsNew = true;
                 }
+                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false) {
+                    if (strtolower($result['phonetype']) == strtolower($newPhoneType)) {
+                        $resultData = "Phone type: " . $newPhoneType . " already exists.";
+                        $phoneTypeIsNew = false;
+                        return("Phonetype already exists.");
+                    }
+                }
+                $phoneTypeIsNew=true;
+//                if($count>=0){
+//                    $phoneTypeIsNew = true;
+//                }else{
+//                    $resultData = "Phonetype already exists.";
+//                }
             }else{
                 $resultData = "Could not contact database.";
             }
-            if($phoneTypeIsNew || $count==0){
+            if($phoneTypeIsNew){
                 $sql = "INSERT INTO phonetypes (vendor,phonetype,carrier) VALUES (:vendor, :phonetype, :carrier)";
                 $statement = $this->pdo->prepare($sql);
                 $statement->bindValue('vendor',$vendorname);
@@ -540,7 +543,7 @@ $returnData.=$display;
                             } else if (isset($phonetypes[$result['phonetype']]) &&
                                 $phonetypes[$result['phonetype']]->getCarrier() != $result['carrier']) {
                                 $newPhoneType = new Phonetype($result['phonetype'], $result['carrier']);
-                                $phonetypes[$result['phonetype']] = $newPhoneType;
+                                $phonetypes['('.$result['carrier'].')'.$result['phonetype']] = $newPhoneType;
                             } else {
                                 $phonetypes[$result['phonetype']]->addtoCount();
                             }

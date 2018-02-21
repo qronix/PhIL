@@ -3,7 +3,7 @@
 session_start();
 
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
-    ($_SESSION['role']=="admin"||$_SESSION['role']=="superuser"||$_SESSION['role']=="manager")){
+    ($_SESSION['role']=="admin")){
     if(isset($_POST['vendorname'])&&!empty($_POST['vendorname'])){
         if(isset($_POST['phonetype'])&&!empty($_POST['phonetype'])){
             if(isset($_POST['carrier'])&&!empty($_POST['carrier'])){
