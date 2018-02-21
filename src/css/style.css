@@ -1088,6 +1088,24 @@ display: block;
     position: relative;
     top:-10px;
 }
+
+.vendorlistIcon{
+    font-size: 1.3em !important;
+    margin: 10px 10px 0px 0px !important;
+    /*display: inline !important;*/
+}
+.vendorlistGlobeIcon{
+    display: block;
+    padding: 3px 0 4px 0;
+}
+.unlockedVendorList{
+    display: inline;
+    position: relative;
+    top:-6px;
+}
+.btn-link {
+    text-decoration: none !important;
+}
 /**********************/
 /********SIDENAVBAR*********/
 /**********************/

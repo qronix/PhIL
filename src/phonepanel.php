@@ -421,8 +421,8 @@ include_once("includes/sidebar.php");
               encode:true,
               dataType:'json'
            }).done(function (data) {
-               console.log(data);
-               // location.reload();
+               // console.log(data);
+               location.reload();
            });
 
            event.preventDefault();

@@ -205,10 +205,12 @@ class Phone
         $resultData = "";
 
         try{
-            $sql = "SELECT DISTINCT phonetype FROM phonetypes WHERE vendor=:vendorname AND carrier=:carriername";
+            $sql = "SELECT id FROM phonetypes WHERE vendor=:vendorname AND 
+              carrier=:carriername AND phonetype=:phonetype";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue('vendorname',$vendorname);
             $statement->bindValue('carriername',$carrier);
+            $statement->bindValue('phonetype',$newPhoneType);
             $phoneTypeIsNew = false;
             $count = -1;
 
@@ -216,20 +218,20 @@ class Phone
             if($statement->execute()){
                 if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
                     $phoneTypeIsNew = true;
+                    $resultData = $result['id'];
                 }
-                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false) {
-                    if (strtolower($result['phonetype']) == strtolower($newPhoneType)) {
-                        $resultData = "Phone type: " . $newPhoneType . " already exists.";
-                        $phoneTypeIsNew = false;
-                        return("Phonetype already exists.");
+                else{
+                    while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false) {
+                        if ($result['phonetype'] == $newPhoneType) {
+                            $resultData = "Phone type: " . $newPhoneType . " already exists.";
+                            $phoneTypeIsNew = false;
+//                            return("Phonetype already exists.");
+                        }
+
                     }
-                }
-                $phoneTypeIsNew=true;
-//                if($count>=0){
 //                    $phoneTypeIsNew = true;
-//                }else{
-//                    $resultData = "Phonetype already exists.";
-//                }
+//                    $resultData = "Phone type: " . $newPhoneType . " already exists.";
+                }
             }else{
                 $resultData = "Could not contact database.";
             }
@@ -511,7 +513,14 @@ $returnData.=$display;
                     $display .= "<div class='card-header' id='headingOne'>";
                     $display .= "<h5 class='mb-0'>";
                     $display .= "<button class='btn btn-link' data-toggle='collapse' data-target='#collapse" . $vendorname . "' aria-expanded='true' aria-controls='collapseOne'>";
-                    $display .= $vendorname;
+                    if(strtolower($vendorname)=="apple"){
+                        $display .= "<i class='fa fa-apple vendorlistIcon'></i>".$vendorname;
+                    }else if(strtolower($vendorname)=="android"){
+                        $display .= "<i class='fa fa-android vendorlistIcon'></i>".$vendorname;
+                    }else{
+                        $display .= "<i class='fa fa-globe vendorlistIcon vendorlistGlobeIcon'></i><p class='unlockedVendorList'>".$vendorname."</p>";
+                    }
+
                     $display .= "</button>";
                     $display .= "</h5>";
                     $display .= "</div>";
