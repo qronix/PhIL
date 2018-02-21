@@ -10,7 +10,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
                 $vendorname = filter_input(INPUT_POST,'vendorname',FILTER_SANITIZE_SPECIAL_CHARS);
                 $phonetype = filter_input(INPUT_POST,'phonetype',FILTER_SANITIZE_SPECIAL_CHARS);
                 $carrier = filter_input(INPUT_POST,'carrier',FILTER_SANITIZE_SPECIAL_CHARS);
-//            $resultData = $newphonetype;
                 include_once ("phone.php");
                 $phone = new Phone();
                 $resultData = $phone->removePhoneType($vendorname,$phonetype,$carrier);
@@ -29,5 +28,4 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
     header("Location: index.php");
 }
 
-//$resultData = $_POST['phonetype'];
 echo json_encode($resultData);

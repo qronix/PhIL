@@ -2,8 +2,6 @@
 
 include('settings.php');
 
-
-
 class DBConn{
 
     private $settings;

@@ -52,7 +52,7 @@ class Phone
                         }else{
                             $carrierImg = "<i class=\"fa fa-globe\"></i>";
                         }
-                        //$date = date_format($result['date'],"d/m/Y");
+
                         $display =  "<div class='container phonerow col-md-12'>";
                         $display .= "<div class='row'>";
                         $display .= "<div class='col-md-1 phonedata'>";
@@ -120,33 +120,23 @@ class Phone
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
-//                        $display .= "<div class='col-md-1 phonedata'>";
-//                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
-//                        $display .= "</div>";
-//                        $display .= "<div class='col-md-1 phonedata'>";
-//                        $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
-//                        $display .= "</div>";
                         $display .= "<div class='col-md-2 btngrp'>";
                         $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
-//                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
 
-//                        echo $display;
+
                         $returnData.= $display;
                     }
                     return $returnData;
                 }catch (PDOException $exc){
-//                    echo "<div class='alert alert-danger'>Users could not be displayed</div>";
                     return "<div class='alert alert-danger'>Phones could not be displayed</div>";
                 }
             }else{
-//                echo "<div class='alert alert-warning'>You cannot view users</div>";
                 return "<div class='alert alert-warning'>You cannot view phones</div>";
             }
         }else{
-//            echo "<div class='alert alert-warning'>You are not logged in</div>";
             return "<div class='alert alert-warning'>You are not logged in</div>";
         }
     }
@@ -154,22 +144,12 @@ class Phone
     function createPhone($phoneData){
         $message = "";
 
-//        $isRealManager = $this->user->verifyManager($phoneData['manager'],$phoneData['managerPassword']);
-//        if($isRealManager){
             $phoneExists = $this->checkPhoneExists($phoneData['imei']);
             if(!$phoneExists){
                 try{
                     $sql = "INSERT INTO phones (vendor,carrier,phonetype,imei,employee,manager,date,designation)
                         VALUES (:vendor,:carrier,:phonetype,:imei,:employee,:manager,:date,:designation)";
                     $statement = $this->pdo->prepare($sql);
-//
-//                    if($phoneData['designation']==="pickup"){
-//                        $statement->bindValue(':designation',"pickup");
-//                    }elseif($phoneData['designation']==="brightstar"){
-//                        $statement->bindValue(':designation',"brightstar");
-//                    }elseif($phoneData['designation']==="walkin"){
-//                        $statement->bindValue(':designation',"walkin");
-//                    }elseif($phoneData)
                     $statement->bindValue('date',date("Y-m-d H:i:s"));
                     $statement->bindValue('vendor',$phoneData['vendor']);
                     $statement->bindValue('carrier',$phoneData['carrier']);
@@ -191,11 +171,6 @@ class Phone
             }else{
                 $message = "Phone already exists!";
             }
-//        }else{
-//            $message = "Could not verify manager " .$phoneData['manager']. " phone not added.";
-//
-//        }
-
         return $message;
     }
 
@@ -225,12 +200,8 @@ class Phone
                         if ($result['phonetype'] == $newPhoneType) {
                             $resultData = "Phone type: " . $newPhoneType . " already exists.";
                             $phoneTypeIsNew = false;
-//                            return("Phonetype already exists.");
                         }
-
                     }
-//                    $phoneTypeIsNew = true;
-//                    $resultData = "Phone type: " . $newPhoneType . " already exists.";
                 }
             }else{
                 $resultData = "Could not contact database.";
@@ -247,7 +218,7 @@ class Phone
                     $resultData = "Could not add phone type to database.";
                 }
             }else{
-//                $resultData = "Phone already exists";
+                $resultData = "Phone already exists";
             }
         }catch (PDOException $exc){
             $resultData = "Could not contact database.";
@@ -276,7 +247,6 @@ class Phone
 
     function getVendors(){
         try{
-//            $sql = "SELECT DISTINCT vendor FROM phones";
             $sql = "SELECT DISTINCT vendorname FROM vendors";
             $statement = $this->pdo->prepare($sql);
 
@@ -338,19 +308,6 @@ class Phone
                         }
                     }
                 }
-//                if($result['supportedcarrier1']!=""){
-//                    $display.="<p class='carrierName'>".$result['supportedcarrier1']."</p>";
-//                    $display.="<a href='removeCarrier.php?vendorid=".$result['vendorname']."&carrierid=".$result['supportedcarrier1']."' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//                    $display.="<div class='clearfix'></div>";
-//                }
-
-//                $display.="<p class='carrierName'>Verizon</p>";
-//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//                $display.="<div class='clearfix'></div>";
-//                $display.="<p class='carrierName'>ATT</p>";
-//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//                $display.="<div class='clearfix'></div>";
-//                $display.="<p class='carrierName'>New Carrier</p>";
                 $display.="<input type='text' id='newCarrierNameFor".$result['vendorname']."'class='carrierName form-control' placeholder='New Carrier' name='newCarrier'></input>";
                 $display.="<a href='#' class='btn carrierAddBtn' id='addCarrierBtnFor".$result['vendorname']."'><i class='fa fa-plus'></i>Add</a>";
         $display.="</div>";
@@ -358,29 +315,7 @@ class Phone
 $display.="</div>";
 $returnData.=$display;
             }
-            //To be implemented - add vendors
-//            if(($result=$statement->fetch(PDO::FETCH_ASSOC))===false){
-//                $display ="<div class='card'>";
-//                $display.="<img class='card-img-top' src='vendor/icons/Apple_logo_black.svg'>";
-//                $display.="<div class='card-body'>";
-//                $display.="<h5 class='card-title'>Apple</h5>";
-//                $display.="<p class='card-text'>Carriers</p>";
-//                $display.="<div class='vendorCarriers'>";
-//                $display.="<p class='carrierName'>Sprint</p>";
-//                $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//                $display.="<div class='clearfix'></div>";
-//                $display.="<p class='carrierName'>Verizon</p>";
-//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//            $display.="<div class='clearfix'></div>";
-//            $display.="<p class='carrierName'>ATT</p>";
-//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierDeleteBtn'><i class='fa fa-trash'></i>Delete</a>";
-//            $display.="<div class='clearfix'></div>";
-//            $display.="<p class='carrierName'>New Carrier</p>";
-//            $display.="<a href='removeCarrier.php?vendorid=&carrierid=' class='btn carrierAddBtn'><i class='fa fa-plus'></i>Add</a>";
-//        $display.="</div>";
-//    $display.="</div>";
-//$display.="</div>";
-//            }
+
         }catch (PDOException $exc){
             $returnData = "<div class='alert alert-danger'>Could not contact database</div>";
         }
@@ -417,10 +352,9 @@ $returnData.=$display;
                     $statement->bindValue('carrierValue','');
                     if($statement->execute()){
                         $returnData = "Carrier removed";
-//                        $returnData = $carrierColumnName;
                     }else{
                         $returnData = "Carrier could not be removed";
-//                        $returnData =  $sql;
+
                     }
                 }catch (PDOException $exc){
                    $returnData = "Could not contact database.";
@@ -457,9 +391,6 @@ $returnData.=$display;
         }catch(PDOException $exc){
             return $error = ['error','error','error'];
         }
-    }
-    function loadPhonePanel(){
-
     }
     function getPhones($vendor,$carrier){
         try{
@@ -520,11 +451,9 @@ $returnData.=$display;
                     }else{
                         $display .= "<i class='fa fa-globe vendorlistIcon vendorlistGlobeIcon'></i><p class='unlockedVendorList'>".$vendorname."</p>";
                     }
-
                     $display .= "</button>";
                     $display .= "</h5>";
                     $display .= "</div>";
-
                     $display .= "<div id='collapse" . $vendorname . "' class='collapse show' aria-labelledby='headingOne' data-parent='#accordion'>";
                     $display .= "<div class='card-body'>";
                     $display .= "<div class='container phoneSearchContainer'>";
@@ -538,13 +467,11 @@ $returnData.=$display;
                     $sql = "SELECT phonetype, carrier FROM phonetypes WHERE vendor=:vendorname";
                     $statement = $this->pdo->prepare($sql);
                     $statement->bindValue('vendorname', $vendorname);
-//
-//
+
                     if ($statement->execute()) {
                         $phonetypes = array();
 //
                         while (($result = $statement->fetch(PDO::FETCH_ASSOC)) !== false) {
-//
                             if (!isset($phonetypes[$result['phonetype']])) {
                                 $newPhoneType = new Phonetype($result['phonetype'], $result['carrier']);
                                 $phonetypes[$result['phonetype']] = $newPhoneType;
@@ -558,7 +485,6 @@ $returnData.=$display;
                             }
                         }
 //                        //get counts
-//
                         foreach ($phonetypes as $phonetype) {
                             try {
                                 $sql = "SELECT * FROM phones WHERE phonetype=:phonetype AND vendor=:vendor AND carrier=:carrier AND designation=:designation";
@@ -582,7 +508,6 @@ $returnData.=$display;
                             $display .= "<div class='row phoneTypeRow container-fluid'>";
                             $display .= "<li class=' phonePanelLi list-group-item d-flex justify-content-between align-items-center'>";
 
-//                            $display.="<div class='container-fluid'>";
                             $display .= "<div class='col-md-3'>";
                             $display .= "<p class='phonePanelPhoneName'>" . $phonetype->getPhoneType() . "</p>";
                             $display .= "</div>"; //end type col
@@ -607,7 +532,6 @@ $returnData.=$display;
 
                             $display .= "<button class='btn userbtn phonePanelDeleteBtn' id='" . $vendorname . ":" . $phonetype->getPhoneType() . "#" . $phonetype->getCarrier() . "'><i class='fa fa-trash phonePanelTrashIcon'></i>Delete</button>";
                             $display .= "</div>"; //end button col
-//                            $display.="</div>"; //end list container
                             $display .= "</li>"; //end list
                             $display .= "</div>"; //end row
 
@@ -721,8 +645,7 @@ $returnData.=$display;
         $managerTerm = "";
         $dateTerm = "";
         $designationTerm = "";
-//        $brightstarTerm = "";
-//        $walkinTerm = "";
+
 
         //regexs
         $vendorRegex = '/(?<=vendor:)(\s?.\S*)/';
@@ -733,9 +656,6 @@ $returnData.=$display;
         $managerRegex='/(?<=manager:)(\s?.\S*)/';
         $dateRegex='/(?<=date:)(\s?.\S*)/';
         $designationRegex='/(?<=designation:)(\s?.\S*)/';
-//        $brightstarRegex='/(?<=brightstar:)(\s?.\S*)/';
-//        $walkinRegex='/(?<=walkin:)(\s?.\S*)/';
-
 
         if(strpos($searchTerm, 'vendor:')!==false){
             preg_match($vendorRegex,$searchTerm,$vendorTerm);
@@ -761,16 +681,11 @@ $returnData.=$display;
         if(strpos($searchTerm, 'designation:')!==false){
             preg_match($designationRegex,$searchTerm,$designationTerm);
         }
-//        if(strpos($searchTerm, 'brightstar:')!==false){
-//            preg_match($brightstarRegex,$searchTerm,$brightstarTerm);
-//        }
-//        if(strpos($searchTerm, 'walkin:')!==false){
-//            preg_match($walkinRegex,$searchTerm,$walkinTerm);
-//        }
+
         try{
             $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier AND phonetype LIKE :phonetype AND imei LIKE :imei AND
                     employee LIKE :employee AND manager LIKE :manager AND date LIKE :date AND designation LIKE :designation";
-//            $sql = "SELECT * FROM phones WHERE vendor LIKE :vendor AND carrier LIKE :carrier";
+
             $statement = $this->pdo->prepare($sql);
 
             if(!empty($vendorTerm)){
@@ -811,15 +726,7 @@ $returnData.=$display;
                 $statement->bindValue(':designation',$designationTerm[0]);
             }else{
                 $statement->bindValue(':designation',"%");
-            }//if(!empty($brightstarTerm)){
-//                $statement->bindValue(':brightstar',$brightstarTerm[0]);
-//            }else{
-//                $statement->bindValue(':brightstar',"%");
-//            }if(!empty($walkinTerm)){
-//                $statement->bindValue(':walkin',$walkinTerm[0]);
-//            }else{
-//                $statement->bindValue(':walkin',"%");
-//            }
+            }
 
             $statement ->execute();
 
@@ -845,7 +752,7 @@ $returnData.=$display;
                 }else{
                     $carrierImg = "<i class=\"fa fa-globe\"></i>";
                 }
-                //$date = date_format($result['date'],"d/m/Y");
+
                 $display =  "<div class='container phonerow col-md-12'>";
                 $display .= "<div class='row'>";
                 $display .= "<div class='col-md-1 phonedata'>";
@@ -913,20 +820,11 @@ $returnData.=$display;
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";
-//                        $display .= "<div class='col-md-1 phonedata'>";
-//                        $display .= "<p class='phonedataTitle'>Brightstar: </br><span class='phonedata'>".$result['brightstar']."</span></p>";
-//                        $display .= "</div>";
-//                        $display .= "<div class='col-md-1 phonedata'>";
-//                        $display .= "<p class='phonedataTitle'>Walkin: </br><span class='phonedata'>".$result['walkin']."</span></p>";
-//                        $display .= "</div>";
                 $display .= "<div class='col-md-2 btngrp'>";
                 $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
-//                        $display .= "<a class='userbtn userdelete phonedelete' href='nopullphone.php?phoneid=".$result['id']."'><i class=\"fa fa-trash\"></i>No Pull</a>";
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";
-
-//                        echo $display;
                 $returnData.= $display;
             }
             return $returnData;
@@ -983,7 +881,6 @@ $returnData.=$display;
                 $statement->bindValue(':manager',$phoneData['manager']);
                 $statement->bindValue(':date',date("Y-m-d H:i:s"));
                 $statement->bindValue(':id',$phoneData['phoneid']);
-//                $statement->execute();
 
                 if($statement->execute()){
                     $returnData = "Phone updated successfully";

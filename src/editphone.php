@@ -74,10 +74,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                         <div class="row phoneeditRow">
                             <span id="phonetype"><?php echo $phoneData['phonetype'];?></span>
                         </div>
-
-<!--                        <select id='phone' class='form-control selectbox' name='phone' required>-->
-<!---->
-<!--                        </select>-->
                     </div>
                     <div class="form-group col-md-4 phoneedit" id="imei-group">
                         <div class="row phoneeditRow">
@@ -86,7 +82,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                         <div class="row phoneeditRow">
                             <span id="imei"><?php echo $phoneData['imei'];?></span>
                         </div>
-<!--                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="imei" id="imei" required>-->
                     </div>
                 </div>
                 <div class="form-row editPhoneRow">
@@ -123,11 +118,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                             </select>
                         </div>
                     </div>
-                    <!--                    <div class="form-group col-md-4 phoneedit" id="designation-group">-->
-                    <!--                        <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>-->
-                    <!--                        <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>-->
-                    <!--                        <input class="phoneradio" type="radio" name="designation" value="walkin"><span>Walk-in</span>-->
-                    <!--                    </div>-->
                     <div class="form-group">
                         <div class="row ">
                             <button type="submit" id="editPhoneBtn" class="btn">Update</button>

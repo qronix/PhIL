@@ -35,27 +35,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
         echo "<div class='alert alert-danger'>Could not load vendors</div>";
     }
     ?>
-
-    <!--<div class="card">-->
-    <!--    <img class="card-img-top" src="vendor/icons/Apple_logo_black.svg">-->
-    <!--    <div class="card-body">-->
-    <!--        <h5 class="card-title">Apple</h5>-->
-    <!--        <p class="card-text">Carriers</p>-->
-    <!--        <div class="vendorCarriers">-->
-    <!--            <p class="carrierName">Sprint</p>-->
-    <!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-    <!--            <div class="clearfix"></div>-->
-    <!--            <p class="carrierName">Verizon</p>-->
-    <!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-    <!--            <div class="clearfix"></div>-->
-    <!--            <p class="carrierName">ATT</p>-->
-    <!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-    <!--            <div class="clearfix"></div>-->
-    <!--            <p class="carrierName">New Carrier</p>-->
-    <!--            <a href="#" class="btn carrierAddBtn"><i class="fa fa-plus"></i>Add</a>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
 </div>
 
 <script type="text/javascript">
@@ -100,7 +79,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
                 dataType: 'json',
                 encode:true
             }).done(function(data){
-                // location.reload();
                 console.log(data);
             });
             event.preventDefault();

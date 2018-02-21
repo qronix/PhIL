@@ -51,22 +51,7 @@ $phone = new Phone();
                         <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="imei" id="imei" required>
                     </div>
                 </div>
-<!--                <div class="form-row">-->
-<!--                    <div class="form-group col-md-4 phoneedit" id="manager-group">-->
-<!--                        <label for="manager">Manager</label>-->
-<!--                        <input type="text" id="manager" class="form-control" name="manager" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group col-md-4 phoneedit" id="manager-password-group">-->
-<!--                        <label for="manager">Manager Password</label>-->
-<!--                        <input type="password" id="managerPassword" class="form-control" name="managerPassword" required>-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="form-row">
-<!--                    <div class="form-group col-md-4 phoneedit" id="designation-group">-->
-<!--                        <input class="phoneradio" type="radio" name="designation" value="pickup"><span>Pickup</span>-->
-<!--                        <input class="phoneradio" type="radio" name="designation" value="brightstar"><span>Brightstar</span>-->
-<!--                        <input class="phoneradio" type="radio" name="designation" value="walkin"><span>Walk-in</span>-->
-<!--                    </div>-->
                     <div class="form-group">
                         <button type="submit" id="addPhoneBtn" class="btn">Add</button>
                     </div>

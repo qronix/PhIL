@@ -1,5 +1,5 @@
 <nav class='navbar navbar-expand-lg navbar-dark'>
-    <a class='navbar-brand' href='#'><img src='img/logo.svg' id='navLogo'><p id='philLogoNav'>PhIL</p></a>
+    <a class='navbar-brand' href='#'><img src='vendor/icons/Best_Buy_Logo.svg' id='navLogo'><p id='philLogoNav'>PhIL</p></a>
     <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
         <span class='navbar-toggler-icon'></span>
     </button>

@@ -40,9 +40,6 @@ function login($username,$password){
                     //if account password is not default
                     if($result['needpasschange']!=1){
                         $URL="dashboard.php";
-                        //return "<script type='text/javascript'>document.location.href='{$URL}';</script>";
-                        //echo "<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">";
-                        //header("Location: dashboard.php");
                         return("login");
 
                     }else{
@@ -172,8 +169,7 @@ function createUser($username, $password, $passwordVerify, $email, $role){
             //cols
             // 0 : id
 
-            //user does not exist
-//            if(!($id=$statement->fetchColumn(0))>0){
+
             if(!$this->checkUserExists($username)){
                 //if all values have content
                 if(!empty($username)&&!empty($password)&&!empty($passwordVerify)&&

@@ -10,12 +10,19 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
         if(isset($_POST['newphonetype'])&&!empty($_POST['newphonetype'])){
             if(isset($_POST['carrier'])&&!empty($_POST['carrier'])){
                 $vendorname = filter_input(INPUT_POST,'vendorname',FILTER_SANITIZE_SPECIAL_CHARS);
-                $newphonetype = filter_input(INPUT_POST,'newphonetype',FILTER_SANITIZE_SPECIAL_CHARS);
+                $newVendorName = preg_replace('/[^a-zA-Z0-9-_\.]/','',$vendorname);
+
+                $phonetype = filter_input(INPUT_POST,'newphonetype',FILTER_SANITIZE_SPECIAL_CHARS);
+                $newPhonetype = preg_replace('/[^a-zA-Z0-9-_\.]/','',$phonetype);
+
+
                 $carrier = filter_input(INPUT_POST,'carrier',FILTER_SANITIZE_SPECIAL_CHARS);
-//            $resultData = $newphonetype;
+                $newCarrier= preg_replace('/[^a-zA-Z0-9-_\.]/','',$carrier);
+
+
                 include_once ("phone.php");
                 $phone = new Phone();
-                $resultData = $phone->createPhoneType($vendorname,$newphonetype,$carrier);
+                $resultData = $phone->createPhoneType($newVendorName,$newPhonetype,$newCarrier);
         }else{
                 $resultData = "Invalid carrier";
             }

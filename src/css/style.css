@@ -10,7 +10,6 @@
 
 *{
     font-family: 'Lato', sans-serif;
-    /*font-family: Lato; src:url("../vendor/fonts/Lato/Lato-Regular.ttf");*/
     font-size: 20px;
     text-rendering: optimizeLegibility;
 }
@@ -168,26 +167,13 @@ html{
 }
 
 .selectbox{
-    /*padding: 0;*/
     padding-top: 0px;
     padding-bottom: 0px;
     height: 0.5em;
     float: left;
     margin-left: -10%;
-    /*width: ;*/
     transform: scale(0.8);
 }
-
-/*#vendor-group label,*/
-/*#carrier-group label,*/
-/*#phone-group label{*/
-    /*!*position: relative;*!*/
-    /*top: 7px;*/
-/*}*/
-/*.fa-check{*/
-    /*color: green;*/
-/*}*/
-
 #phonelist{
     margin-top: 5vh;
     margin-left: 14%
@@ -200,31 +186,24 @@ html{
     max-width: 86%;
     margin-bottom: 10px;
     padding: 10px 5px 0px 5px;
-    /*align-content: center;*/
-    /*text-align: center;*/
-    /*vertical-align: middle;*/
-    /*padding-left: 3%;*/
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadein 2s; /* Firefox < 16 */
     -ms-animation: fadein 2s; /* Internet Explorer */
     -o-animation: fadein 2s; /* Opera < 12.1 */
     animation: fadein 2s;
     transition: all 0.2s;
-    /*font-size: 1px !important;*/
 }
 .phonedata .row{
     display: flex;
     align-items: left;
     text-align: left;
     align-content: left;
-    /*padding: 0;*/
 }
 
 
 .col-md-2,
 .col-md-1{
     margin-right: 10px;
-    /*border-right:1px solid white;*/
     transition: all 0.3s;
 }
 .col-md-2:hover,
@@ -240,40 +219,11 @@ html{
     transform: scale(1.1);
 }
 .phonedata{
-    /*border: 1px solid green;*/
-    /*font-size: 16px;*/
-     /*font-size: 0.8em;*/
-    /*padding: 10px;*/
-    /*text-align: center;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
-    /*display: block;*/
-    /*vertical-align: center;*/
-    /*horiz-align: left;*/
     padding: 0;
-    /*align-content: left;*/
-    /*float: left;*/
     display: block;
     align-content: left;
     justify-content: left;
     text-align: left;
-}
-
-/*.phonedata p{*/
-    /*font-size: 12px;*/
-/*}*/
-
-.phonedataTitle{
-    /*font-size: 18px;*/
-    /*margin-right: 10px;*/
-    /*font-size: 1em;*/
-    /*padding: 10px;*/
-    /*border:1px solid red;*/
-    /*text-align: center;*/
-    /*display: block;*/
-    /*vertical-align: center;*/
-    /*horiz-align: left;*/
 }
 
 .editusercontainer input{
@@ -289,17 +239,12 @@ html{
 @media (max-width: 1024px){
     .phonedataTitle{
         font-size: 0.5em;
-        /*text-align: left;*/
         padding: 0;
-        /*margin-right: 20px;*/
-        /*padding-right: 30px;*/
     }
     .phonedata{
-        /*text-align: left;*/
         padding: 0;
         margin: 0 auto;
         font-size: 0.5em;
-        /*margin-right: 20px;*/
     }
     .phoneedit input{
         padding: 2px;
@@ -307,8 +252,6 @@ html{
         font-size: 18px;
         position: relative;
         top:-3px;
-        /*max-width: 205.68px;*/
-        /*horiz-align: left;*/
     }
     .editusercontainer h2{
         font-size: 0.8em;
@@ -316,7 +259,6 @@ html{
     #phonesearchEntry{
         transform: scale(0.6);
         margin-right: -100px;
-        /*padding: 5px;*/
     }
     #phonesearchBtn{
         transform: scale(0.5);
@@ -325,22 +267,17 @@ html{
     }
     #editPhoneArea select{
         transform: scale(0.6);
-        /*float: left;*/
         margin-left: -30px;
     }
     #editPhoneArea input{
         transform: scale(0.8);
-        /*max-width: 10.26px;*/
-        /*float: left;*/
     }
     #editPhoneArea label{
         font-size: 0.8em;
-        /*float: left;*/
         margin-left: 20px;
     }
 
     #addPhoneBtn{
-        /*transform: scale(0.7);*/
         font-size: 0.8em;
     }
     .sideNavLink{
@@ -351,16 +288,11 @@ html{
 
 @media (max-width: 1366px){
     #editPhoneArea input{
-        /*transform: scale(0.8);*/
-        /*max-width: 10.26px;*/
-        /*float: left;*/
         width: 276.11px;
         font-size: 14px;
     }
     #editPhoneArea select{
         font-size: 14px;
-        /*transform: scale(0.6);*/
-        /*margin-left: -45px;*/
         height: 35px;
 
     }
@@ -371,7 +303,6 @@ html{
        font-size: 0.9em;
    }
     #addPhoneBtn{
-        /*transform: scale(0.7);*/
         font-size: 0.8em;
     }
     #phonesearchBtn{
@@ -379,35 +310,23 @@ html{
     }
     .phonedataTitle{
         font-size: 0.8em;
-        /*text-align: left;*/
-        /*padding-left: 10px;*/
-        /*margin-right: 20px;*/
-        /*padding-right: 30px;*/
     }
     .phonedata{
-        /*text-align: left;*/
         padding: 0;
-        /*margin: 0 auto;*/
         font-size: 0.8em;
-        /*margin-right: 20px;*/
     }
-    div{
-        /*border: 1px solid blueviolet;*/
-    }
+
     .row {
-       /*border: 1px solid red;*/
         padding: 0;
         justify-content: center;
         margin:0 auto;
         margin-right: 0;
     }
     .row .container{
-        /*margin-right: 10px;*/
         justify-content: left;
         text-align: left;
         align-content: left;
         padding-right: 10px;
-        /*margin-right: 200px;*/
     }
 }
 
@@ -419,32 +338,8 @@ html{
         position: relative;
         top:-3px;
         max-width: 148.79px;
-        /*horiz-align: left;*/
     }
 }
-/*@media (max-width: 1440px) {*/
-    /*.phonedataTitle{*/
-        /*font-size: 0.5em;*/
-        /*!*text-align: left;*!*/
-        /*padding: 0;*/
-        /*!*margin-right: 20px;*!*/
-        /*!*padding-right: 30px;*!*/
-    /*}*/
-    /*.phonedata{*/
-        /*!*text-align: left;*!*/
-        /*padding: 0;*/
-        /*margin: 0 auto;*/
-        /*font-size: 0.5em;*/
-        /*!*margin-right: 20px;*!*/
-    /*}*/
-    /*#editPhoneArea label{*/
-        /*font-size: 0.9em;*/
-        /*!*float: left;*!*/
-        /*!*margin-left: 20px;*!*/
-    /*}*/
-
-/*}*/
-
 @media (max-width: 1920px) {
     #editPhoneArea input{
         max-width: 404.78px;
@@ -454,18 +349,12 @@ html{
 @media (min-width: 1440px){
     .phonedataTitle{
         font-size: 0.8em;
-        /*text-align: left;*/
         padding: 0;
-        /*margin-right: 20px;*/
-        /*padding-right: 30px;*/
-        /*color: purple;*/
     }
     .phonedata{
-        /*text-align: left;*/
         padding: 0;
         margin: 0 auto;
         font-size: 0.8em;
-        /*margin-right: 20px;*/
     }
     .phoneedit input{
         padding: 2px;
@@ -474,7 +363,6 @@ html{
         position: relative;
         top:-3px;
         max-width: 298.11px;
-        /*horiz-align: left;*/
     }
     .editusercontainer h2{
         font-size: 0.93em;
@@ -484,22 +372,9 @@ html{
 .phonedelete{
     font-size: 16px;
 }
-.form-group{
-    /*border: 1px solid red;*/
-}
-.phoneedit{
-    /*float: left;*/
-    /*display: inline-block;*/
-    /*margin-bottom: 40px !important;*/
-}
-
-#phonedesignation{
-    /*margin-right: 10px;*/
-}
 
 .phoneedit label{
     font-size: 20px;
-    /*horiz-align: left;*/
 }
 
 .phoneedit input{
@@ -508,8 +383,6 @@ html{
     font-size: 18px;
     position: relative;
     top:-3px;
-    /*max-width: 401.44px;*/
-    /*horiz-align: left;*/
 }
 
 
@@ -578,7 +451,6 @@ html{
 }
 .fa-pencil{
     color:#fe9000;
-    /*background-color: #fe9000;*/
 }
 .fa-trash{
     color: darkred;
@@ -610,16 +482,8 @@ html{
     top:5px;
     margin-left: 20px;
 }
-
-/*Bestbuy blue color: #003B64*/
-/*Bestbuy blue shade: #004B7F*/
-/*Bestbuy blue shade: #0096FF*/
-/*Bestbuy blue shade: #002640*/
-/*Bestbuy blue shade: #0087E5*/
-
 .useredit{
     color: #ccc;
-    /*transform: scale(100);*/
     margin-left: 10px;
     transition: all 0.4s;
     border: 1px solid #FFF200;
@@ -633,7 +497,6 @@ html{
 
 .userdelete{
     color: #ccc;
-    /*transform: scale(100);*/
     margin-left: 10px;
     transition: all 0.4s;
 }
@@ -657,14 +520,8 @@ html{
 .phoneeditRow:nth-child(1){
     border-bottom: 1px solid antiquewhite;
     margin-bottom: 10px;
-    /*background: #1e5799; !* Old browsers *!*/
     border-radius: 4px;
     padding-left: 5px;
-    /*background: #cedbe9; !* Old browsers *!*/
-    /*background: -moz-linear-gradient(-45deg, #cedbe9 0%, #aac5de 5%, #3a84c3 21%, #3a84c3 21%, #6199c7 50%, #419ad6 59%, #4bb8f0 71%, #3a8bc2 84%, #26558b 100%); !* FF3.6-15 *!*/
-    /*background: -webkit-linear-gradient(-45deg, #cedbe9 0%,#aac5de 5%,#3a84c3 21%,#3a84c3 21%,#6199c7 50%,#419ad6 59%,#4bb8f0 71%,#3a8bc2 84%,#26558b 100%); !* Chrome10-25,Safari5.1-6 *!*/
-    /*background: linear-gradient(135deg, #cedbe9 0%,#aac5de 5%,#3a84c3 21%,#3a84c3 21%,#6199c7 50%,#419ad6 59%,#4bb8f0 71%,#3a8bc2 84%,#26558b 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedbe9', endColorstr='#26558b',GradientType=1 ); !* IE6-9 fallback on horizontal gradient *!*/
 }
 .phoneeditRow:nth-child(2){
     text-transform: uppercase;
@@ -672,7 +529,6 @@ html{
 .editPhoneRow{
     margin-top: 20px;
     border-bottom: 2px dashed #cccccc;
-    /*padding-bottom: 10px !important;*/
 }
 
 .editPhoneRow:last-child{
@@ -723,7 +579,6 @@ html{
 .editinput{
     display: inline-block;
     float: left;
-    /*border: 1px solid greenyellow;*/
     max-width: 200px;
     width: 16.66%;
     margin-right: 5px;
@@ -755,12 +610,9 @@ html{
     background-color: #002640;
     color: white;
     margin: 0 auto;
-    /*height: 20vh;*/
     margin-left: 16.66%;
     border: 1px solid white;
     margin-right: 5px;
-    /*padding-bottom: 20px;*/
-    /*height: 100%;*/
     max-width: 83.33%;
 
 }
@@ -768,14 +620,8 @@ html{
     text-align: center;
     margin: 0 auto;
     margin-bottom: 20px;
-    /*font-size: 1.4em;*/
     margin-top: 10px;
 }
-
-.btn{
-    /*border: 1px solid purple;*/
-}
-
 #editUserBtn{
     margin-top: 45px;
 }
@@ -784,18 +630,18 @@ html{
 /**********************/
 .navbar{
     background-color: #003B64;
-    /*border-bottom: 1px solid rgba(255,255,255,0.6);*/
 }
 .navbar-brand{
     color: #fff;
 }
 
 #navLogo{
-    width:20%;
+    width:10%;
     height: 20%;
     vertical-align: middle;
     display: inline-block;
     padding-bottom: 10px;
+    margin-right: 20px;
 }
 #philLogoNav{
     font-size: 200%;
@@ -813,18 +659,13 @@ html{
     position: relative;
     top:10px;
 }
-.navbar-collapse{
-    /*float: right;*/
-}
+
 .navbar-collapse li{
 display: block;
 }
 /**********************/
 /********VENDORPANEL*********/
 /**********************/
-.vendorDataRow{
-    /*display: block;*/
-}
 
 #vendorPanel{
     background-color: #002640;
@@ -852,7 +693,6 @@ display: block;
     border: 1px white solid;
     margin-bottom: 20px;
     color: white;
-    /*text-shadow: 0 0 5px rgba(0,0,0,0.5);*/
     transition: all 0.1s ease-in-out;
 }
 .vendorRow:hover{
@@ -867,7 +707,6 @@ display: block;
 
 .vendorContainer{
     width: auto;
-    /*border: 1px solid red;*/
     margin-left: 16.66%;
     padding-left: 10%;
 }
@@ -895,7 +734,6 @@ display: block;
 }
 .carrierSelectBox{
     max-width: 300px;
-    /*display: block;*/
     margin-left: -28px;
 }
 .phonePanelLi{
@@ -929,7 +767,6 @@ display: block;
     float: right;
     horiz-align: left;
     margin-bottom: 30px;
-    /*background-color: #e74c3c;*/
 }
 
 .carrierDeleteBtn:hover{
@@ -956,9 +793,6 @@ display: block;
 /****************************/
 /********PHONEPANEL*********/
 /**************************/
-.phoneDataRow{
-    /*display: block;*/
-}
 
 .panelListGlobe{
     padding-left: 35px ;
@@ -991,11 +825,9 @@ display: block;
     border: 1px white solid;
     margin-bottom: 20px;
     color: white;
-    /*text-shadow: 0 0 5px rgba(0,0,0,0.5);*/
     transition: all 0.1s ease-in-out;
 }
 .phoneRow:hover{
-
     color:white;
     text-shadow: none;
 }
@@ -1006,7 +838,6 @@ display: block;
 
 .phoneContainer{
     width: auto;
-    /*border: 1px solid red;*/
     margin-left: 16.66%;
     padding-left: 10%;
 }
@@ -1092,7 +923,6 @@ display: block;
 .vendorlistIcon{
     font-size: 1.3em !important;
     margin: 10px 10px 0px 0px !important;
-    /*display: inline !important;*/
 }
 .vendorlistGlobeIcon{
     display: block;
@@ -1106,9 +936,9 @@ display: block;
 .btn-link {
     text-decoration: none !important;
 }
-/**********************/
+/****************************/
 /********SIDENAVBAR*********/
-/**********************/
+/**************************/
 
 .dropdown-toggle{
     text-decoration: none;
@@ -1144,8 +974,6 @@ display: block;
 .sideNavLink{
     list-style: none;
     display: inline-block;
-    /*float: left;*/
-    /*border: 1px solid red;*/
     margin-bottom: 10px;
     text-align: left;
     vertical-align: middle;
@@ -1169,7 +997,6 @@ li a:hover{
 #sideNavLinks{
     float: left;
     margin: 0;
-    /*border: 1px solid green;*/
     text-align: left;
     padding: 0;
     vertical-align: middle;
@@ -1209,7 +1036,6 @@ li a:hover{
     box-shadow:         0px 10px 20px 0px rgba(150, 150, 150, 0.22);
 }
 body{
-    /*background-color: #858585;*/
     background-color: rgba(0,0,0,0.8);
 
 }

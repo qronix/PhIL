@@ -70,7 +70,6 @@ $user = new User();
                     user.parentNode.removeChild(user);
                 });
             }
-            //clearUsers();
         </script>
     <?php
         $user->displayUsers();

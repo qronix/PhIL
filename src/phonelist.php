@@ -8,10 +8,6 @@ include("includes/sidebar.php");
 include("phone.php");
 
 
-//if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']!="admin"){
-//    header("Location: dashboard.php");
-//}
-
 $phone = new Phone();
 
 
@@ -90,9 +86,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
                 'carrier' : document.querySelector("#carrier").value,
                 'phone' : document.querySelector("#phone").value,
                 'imei' : $('input[name=imei]').val(),
-                // 'employee' : $('input[name=employee]').val(),
-                // 'manager' : $('input[name=manager]').val(),
-                // 'managerPassword' : $('input[name=managerPassword]').val(),
                 'designation' : $('input[name=designation]:checked').val()
             };
             $.ajax({
@@ -137,14 +130,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
             $('#phone').val('');
             $('#imei').val('');
             $('#employee').val('');
-            // $('#manager').val('');
-            // $('#managerPassword').val('');
 
             event.preventDefault();
-            // $(".userrow").remove();
-            // $.ajax({url:"getphones.php"}).done(function(html){
-            //     $("#userlist").append(html);
-            // });
             $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
                 $("#form-message").slideUp(500);
             });

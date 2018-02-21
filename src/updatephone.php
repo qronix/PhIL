@@ -36,13 +36,11 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
     }
     if(sizeof($errors)==0){
         $returnData['message']= "<div class='alert alert-warning'>".$phone->updatePhone($phoneData)."</div>";
-//        $returnData['message']="TESTING";//$phone->updatePhone($phoneData);
     }
     if(sizeof($errors)!=0){
         $returnData['errors'] = $errors;
     }
 }else{
-//    $returnData = "<div class='alert alert-danger'>Invalid Session</div>";
     header("Location: index.php");
 }
 

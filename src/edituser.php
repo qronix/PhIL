@@ -67,8 +67,6 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
         }
         if($error==""){
             $message = $user->updateUser($userid,$username,$role,$email,$activeaccount);
-            //$user->loadUser($userid);
-//            header("Location: edituser.php?userid=".$userid);
         }
     }
 }
@@ -104,7 +102,6 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
                         <div class='form-group' id='role-group'>
                                 <label for='role'>Role</label>
                                 <select id='role' class='form-control' name='role'>
-<!--                                        <option selected>--><?php //if(!empty($userdata)){echo $userdata['role'];}?><!--</option>-->
                                         <option>admin</option>
                                         <option>manager</option>
                                         <option>superuser</option>

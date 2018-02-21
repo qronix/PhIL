@@ -6,7 +6,8 @@ if(!isset($_SESSION)){
 
 $returnData = "";
 
-if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin"){
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
+($_SESSION['role']=="admin"||$_SESSION['role']=="superuser")){
     include("includes/header.php");
     include("includes/sidebar.php");
     include_once("phone.php");
@@ -35,27 +36,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
             echo "<div class='alert alert-danger'>Could not load vendors</div>";
         }
     ?>
-
-<!--<div class="card">-->
-<!--    <img class="card-img-top" src="vendor/icons/Apple_logo_black.svg">-->
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title">Apple</h5>-->
-<!--        <p class="card-text">Carriers</p>-->
-<!--        <div class="vendorCarriers">-->
-<!--            <p class="carrierName">Sprint</p>-->
-<!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-<!--            <div class="clearfix"></div>-->
-<!--            <p class="carrierName">Verizon</p>-->
-<!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-<!--            <div class="clearfix"></div>-->
-<!--            <p class="carrierName">ATT</p>-->
-<!--            <a href="#" class="btn carrierDeleteBtn"><i class="fa fa-trash"></i>Delete</a>-->
-<!--            <div class="clearfix"></div>-->
-<!--            <p class="carrierName">New Carrier</p>-->
-<!--            <a href="#" class="btn carrierAddBtn"><i class="fa fa-plus"></i>Add</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 </div>
 
 <script type="text/javascript">
@@ -77,7 +57,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
             encode: true
         }).done(function(data){
              location.reload();
-             // console.log(data);
         });
         event.preventDefault();
     });
@@ -89,7 +68,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
            var vendorName = btn.id.match(/(?<=addCarrierBtnFor).*(?=)/);
            var carrierInputId = "newCarrierNameFor"+vendorName[0];
            var newCarrierName = document.getElementById(carrierInputId).value;
-           // console.log("DING");
           $.ajax({
              type:"POST",
               url:'addCarrier.php',
@@ -101,7 +79,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admi
               encode:true
           }).done(function(data){
                  location.reload();
-              // console.log(data);
           });
           event.preventDefault();
        });
