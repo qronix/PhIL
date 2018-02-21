@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2018 at 04:32 PM
+-- Generation Time: Feb 11, 2018 at 04:43 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -25,27 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carriers`
---
-
-CREATE TABLE `carriers` (
-  `id` int(11) NOT NULL,
-  `carriername` varchar(20) NOT NULL,
-  `supportedvendor1` varchar(20) NOT NULL,
-  `supportedvendor2` varchar(20) NOT NULL,
-  `supportedvendor3` int(11) NOT NULL,
-  `supportedvendor4` int(11) NOT NULL,
-  `supportedvendor5` int(11) NOT NULL,
-  `supportedvendor6` int(11) NOT NULL,
-  `supportedvendor7` int(11) NOT NULL,
-  `supportedvendor8` int(11) NOT NULL,
-  `supportedvendor9` int(11) NOT NULL,
-  `supportedvendor10` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `phones`
 --
 
@@ -54,7 +33,7 @@ CREATE TABLE `phones` (
   `vendor` varchar(255) NOT NULL,
   `carrier` varchar(255) NOT NULL,
   `phonetype` varchar(255) NOT NULL,
-  `imei` varchar(6) NOT NULL,
+  `imei` varchar(4) NOT NULL,
   `employee` varchar(255) NOT NULL,
   `manager` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
@@ -912,37 +891,7 @@ INSERT INTO `phones` (`id`, `vendor`, `carrier`, `phonetype`, `imei`, `employee`
 (842, 'android', 'sprint', 'Samsung Galaxy Note 8 Orchid Gray 64', '5555', 'test', 'test', '2018-02-06 21:29:38', 'inventory', 0),
 (843, 'android', 'sprint', 'Samsung Galaxy Note 8 Deepsea Blue 64', '5555', 'test', 'test', '2018-02-06 21:30:21', 'inventory', 0),
 (844, 'android', 'sprint', 'Samsung Galaxy Note 8 Orchid Gray 64', '7777', 'test', 'test', '2018-02-09 15:26:54', 'inventory', 0),
-(845, 'android', 'verizon', 'Samsung Galaxy J7 V 2017 SILVER 16', '8989', 'test', 'system', '2018-02-15 20:59:01', 'Lost', 0),
-(846, 'apple', 'Verizon', 'test2', '8898', 'test', 'SYSTEM', '2018-02-21 00:11:20', 'inventory', 0),
-(847, 'apple', 'unlocked', 'test8', '8565', 'test', 'SYSTEM', '2018-02-21 01:01:28', 'inventory', 0),
-(848, 'apple', 'unlocked', 'test8', '8568', 'test', 'system', '2018-02-21 01:02:34', 'Lost', 0),
-(849, 'apple', 'Sprint', 'test', '8886', 'test', 'SYSTEM', '2018-02-21 15:19:48', 'inventory', 0),
-(850, 'apple', 'Sprint', 'test', '8686', 'test', 'SYSTEM', '2018-02-21 15:20:16', 'inventory', 0),
-(851, 'apple', 'Verizon', 'test', '8586', 'supertest', 'SYSTEM', '2018-02-21 16:05:05', 'inventory', 0),
-(852, 'apple', 'Verizon', 'test', '858586', 'supertest', 'SYSTEM', '2018-02-21 16:06:07', 'inventory', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `phonetypes`
---
-
-CREATE TABLE `phonetypes` (
-  `id` int(11) NOT NULL,
-  `vendor` varchar(20) NOT NULL,
-  `carrier` varchar(20) NOT NULL,
-  `phonetype` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `phonetypes`
---
-
-INSERT INTO `phonetypes` (`id`, `vendor`, `carrier`, `phonetype`) VALUES
-(64, 'android', 'Sprint', 'test'),
-(65, 'apple', 'Verizon', 'test'),
-(66, 'apple', 'Sprint', 'test2'),
-(67, 'apple', 'unlocked', '393939393939test');
+(845, 'android', 'verizon', 'Samsung Galaxy J7 V 2017 SILVER 16', '8989', 'system', 'test', '2018-02-10 22:36:23', 'Brightstar', 0);
 
 -- --------------------------------------------------------
 
@@ -967,60 +916,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `needpasschange`, `passwordresettoken`, `activeaccount`) VALUES
 (13, 'test', '$2y$12$3.v4pVOqYznF9FJmCEgRTenX5fVIwjB.ygLMY3g3NXoVKLXB/DLzG', 'admin@bbyphil.com', 'admin', 0, '', 1),
-(27, 'system', '$2y$12$EDIBvwKGxDSNeJBVkxEKUeNWaORO9zdaFAtZ86JNfVyAk2jrXDgke', 'admin@bbyphil.com', 'admin', 0, '', 1),
-(28, 'jimmy2', '$2y$12$U7HIIHBKtFMsIVVmzIa.Qejm6KrcS5WuCU.kihntwqC.KP8M87/ba', 'jimmy@bby.com', 'admin', 0, '', 1),
-(29, 'supertest', '$2y$12$H1Tuc/MQx7AFQ6h.KS1/D.agPFH42tM/T8SZ6Jof1.mTjVcI6BSyW', 'admin@bbyphil.com', 'superuser', 0, '', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vendors`
---
-
-CREATE TABLE `vendors` (
-  `id` int(11) NOT NULL,
-  `vendorname` varchar(20) NOT NULL,
-  `supportedcarrier1` varchar(20) NOT NULL,
-  `supportedcarrier2` varchar(20) NOT NULL,
-  `supportedcarrier3` varchar(20) NOT NULL,
-  `supportedcarrier4` varchar(20) NOT NULL,
-  `supportedcarrier5` varchar(20) NOT NULL,
-  `supportedcarrier6` varchar(20) NOT NULL,
-  `supportedcarrier7` varchar(20) NOT NULL,
-  `supportedcarrier8` varchar(20) NOT NULL,
-  `supportedcarrier9` varchar(20) NOT NULL,
-  `supportedcarrier10` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `vendors`
---
-
-INSERT INTO `vendors` (`id`, `vendorname`, `supportedcarrier1`, `supportedcarrier2`, `supportedcarrier3`, `supportedcarrier4`, `supportedcarrier5`, `supportedcarrier6`, `supportedcarrier7`, `supportedcarrier8`, `supportedcarrier9`, `supportedcarrier10`) VALUES
-(1, 'apple', 'Sprint', 'Verizon', '', '', '', 'derp derp', '', '', 'unlocked', 'att'),
-(2, 'android', 'Sprint', 'Verizon', 'ATT', '', '', '', '', '', '', 'dicksauce'),
-(3, 'prepaid', '', '', '', '', '', '', '', '', '', '');
+(27, 'system', '$2y$12$GUaX7VcQkF8K40tj6Mlb4OqHsqIEGdauytcq6puT.aYeycVbjaECC', 'admin@bbyphil.com', 'admin', 0, '', 1),
+(28, 'jimmy', '$2y$12$U7HIIHBKtFMsIVVmzIa.Qejm6KrcS5WuCU.kihntwqC.KP8M87/ba', 'jimmy@bby.com', 'user', 0, '', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `carriers`
---
-ALTER TABLE `carriers`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `phones`
 --
 ALTER TABLE `phones`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `phonetypes`
---
-ALTER TABLE `phonetypes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1030,44 +936,20 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vendors`
---
-ALTER TABLE `vendors`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `carriers`
---
-ALTER TABLE `carriers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `phones`
 --
 ALTER TABLE `phones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=853;
-
---
--- AUTO_INCREMENT for table `phonetypes`
---
-ALTER TABLE `phonetypes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT for table `vendors`
---
-ALTER TABLE `vendors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
