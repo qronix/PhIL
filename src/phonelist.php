@@ -43,6 +43,9 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
             </form>
         </div>
     </div>
+    <div class="container" id="phoneList-message">
+
+    </div>
 </div>
 <div class="container col-md-10" id="phonelist">
 </div>
@@ -50,6 +53,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
     $(document).ready(function(){
         $(".main").fadeIn(1000);
         loadPhones();
+
     });
     $("#phone-search").submit(function(event) {
         var searchTerm = document.querySelector("#phonesearchEntry").value;
@@ -72,8 +76,38 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
           encode:true
        }).done(function(data){
            $("#phonelist").html(data);
+           setupRemoveBtns();
        });
    }
+   function setupRemoveBtns(){
+       var removePhoneBtns = document.querySelectorAll(".phoneremove");
+
+       removePhoneBtns.forEach(function(btn){
+           btn.addEventListener("click",function(event){
+               var phoneIdMatches = btn.href.match(/(?<=\?phoneid=)(.*)/);
+               var phoneId = phoneIdMatches[0];
+
+               $.ajax({
+                   type:"POST",
+                   url:"deletephone.php",
+                   data:{'phoneid':phoneId},
+                   dataType:'json',
+                   encode:true
+               }).done(function (data) {
+                   var phoneListMessage =$('#phoneList-message');
+                   phoneListMessage.html("<div class='alert alert-warning'>"+data+"</div>");
+               });
+
+
+               event.preventDefault();
+               $("#phoneList-message").fadeTo(2000, 500).slideUp(500, function(){
+                   $("#phoneList-message").slideUp(500);
+               });
+               loadPhones();
+           });
+       });
+   }
+
     $(function(){
         var form=$('#edit-form-phone');
         var formMessage =$('#form-message');

@@ -72,15 +72,15 @@ if(isset($_SESSION['role'])&&$_SESSION['role']==="admin"){
 }
 ?>
 
-<?if($error!=""){header("Refresh:2;url=dashboard.php");}?>
+<?php if($error!=""){header("Refresh:2;url=dashboard.php");}?>
 
 <div class="container editUserFormArea <?php if($error!=""){echo " hidden \"";}?>col-md-6">
 
         <div class='container' id='form-error'>
-            <?if($error!=""){echo "<div class='alert alert-danger'>".$error."</div>";}?>
+            <?php if($error!=""){echo "<div class='alert alert-danger'>".$error."</div>";}?>
         </div>
     <div class='container' id='form-message'>
-        <?if($message!=""){echo "<div class='alert alert-success'>".$message."</div>";}?>
+        <?php if($message!=""){echo "<div class='alert alert-success'>".$message."</div>";}?>
     </div>
     <div class="container formHeader">
         <h2>Edit <?php if(!empty($userdata)){echo $userdata['username'];}?></h2>
@@ -129,8 +129,15 @@ $("#resetpass-form").submit(function(event){
         userid:userid
     },function(data){
        console.log(data);
+       var formMessageArea = document.querySelector("#form-message");
+       if(data!==undefined){
+           formMessageArea.innerHTML="<div class='alert alert-warning'>"+data+"</div>";
+       }
     });
     event.preventDefault();
+    $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
+        $("#form-message").slideUp(500);
+    });
 });
 </script>
 </body>

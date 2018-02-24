@@ -8,4 +8,14 @@
 (?<=storepickup:)(\s?.\S*)
 (?<=brightstar:)(\s?.\S*)
 (?<=walkin:)(\s?.\S*)
+(?<=\?phoneid=)(.*)
 [^a-zA-Z0-9-_\.] //sanitize input
+
+preg_replace('/[^a-zA-Z0-9-_\.]/','',$testImei); //clean input
+
+
+alert slide :
+
+$("#phoneList-message").fadeTo(2000, 500).slideUp(500, function(){
+                   $("#phoneList-message").slideUp(500);
+               });

@@ -19,6 +19,30 @@ html{
 
 }
 
+/*************************/
+/*********TEST STUFF******/
+/*************************/
+
+
+#helperPanel{
+    height: 100px;
+    width: 100px;
+    background-color: rebeccapurple;
+    margin-left: 10px;
+}
+#geofence{
+    height: 150px;
+    width: 150px;
+    border: 1px solid greenyellow;
+    border-radius: 50%;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 80px;
+}
+
+
 /**********************/
 /********ALERT REUSABLES*********/
 /**********************/
@@ -424,6 +448,9 @@ html{
     max-width: 83.33%;
 }
 
+.phoneremove{
+    margin-top: -30px;
+}
 /**********************/
 /********USERS*********/
 /**********************/
@@ -475,6 +502,8 @@ html{
     margin-bottom: 10px;
     border-radius: 5px;
     color: #cccccc;
+    display: inline;
+    /*vertical-align: center;*/
 }
 
 #editUserBtn{

@@ -4,7 +4,7 @@ session_start();
 $returnData = array();
 $carrier = "";
 
-if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&$_SESSION['role']=="admin"){
+if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&($_SESSION['role']=="admin"||$_SESSION['role']=="superuser")){
     if(isset($_POST['vendor'])&&!empty($_POST['vendor'])
     &&isset($_POST['carrier'])&&!empty($_POST['carrier'])){
         $vendor = filter_input(INPUT_POST,'vendor');

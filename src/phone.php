@@ -24,7 +24,7 @@ class Phone
 
     function displayPhones(){
         if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
-            if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"||$_SESSION['role']!=="user"){
+//            if($_SESSION['role']!=="manager"||$_SESSION['role']!=="admin"||$_SESSION['role']!=="user"){ //what the hell is this nonsense Jon?
                 try{
                     $sql = "SELECT * FROM phones ORDER BY date desc LIMIT 20";
                     $statement = $this->pdo->prepare($sql);
@@ -120,8 +120,12 @@ class Phone
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
-                        $display .= "<div class='col-md-2 btngrp'>";
+//                        $display .= "<div class='clearfix'></div>";
+                        $display .= "<div class='col-md-8 btngrp'>";
                         $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
+                        if($_SESSION['role']=="admin"||$_SESSION['role']=="superuser"){
+                            $display .= "<a class='userbtn useredit phoneremove' href='deletephone.php?phoneid=".$result['id']."'><i class='fa fa-trash'></i>Remove Phone</a></br>";
+                        }
                         $display .= "</div>";
                         $display .= "</div>";
                         $display .= "</div>";
@@ -133,9 +137,9 @@ class Phone
                 }catch (PDOException $exc){
                     return "<div class='alert alert-danger'>Phones could not be displayed</div>";
                 }
-            }else{
-                return "<div class='alert alert-warning'>You cannot view phones</div>";
-            }
+//            }else{
+//                return "<div class='alert alert-warning'>You cannot view phones</div>";
+//            }
         }else{
             return "<div class='alert alert-warning'>You are not logged in</div>";
         }
@@ -172,6 +176,24 @@ class Phone
                 $message = "Phone already exists!";
             }
         return $message;
+    }
+
+    function deletePhone($phoneId){
+        $resultData = "";
+
+        try{
+            $sql = "DELETE FROM phones WHERE id=:phoneid LIMIT 1";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('phoneid',$phoneId);
+            if($statement->execute()){
+                $resultData = "Phone was successfully removed";
+            }else{
+                $resultData = "Could not delete phone from database";
+            }
+        }catch (PDOException $exc){
+            $resultData = "Could not contact the database";
+        }
+        return($resultData);
     }
 
     function createPhoneType($vendorname,$newPhoneType,$carrier){
