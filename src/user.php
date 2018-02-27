@@ -337,6 +337,28 @@ function verifyManager($managerName, $managerPassword){
 }
 
 
+function loadProfile($userid){
+
+        $resultData = "";
+
+        try{
+            $sql = "SELECT * FROM users WHERE id=:userid";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('userid',$userid);
+            if($statement->execute()){
+
+                while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+
+                }
+            }else{
+                $resultData = "Could not load user from database";
+            }
+        }catch (PDOException $exc){
+            $resultData = "Could not contact database";
+        }
+        return($resultData);
+}
+
 function resetPassword($username){
 
 }

@@ -317,7 +317,7 @@ class Phone
                     $display.="<img class='card-img-top' src='vendor/icons/prepaid_logo.svg'>";
                 }
                 $display.="<div class='card-body'>";
-                $display.="<h5 class='card-title'>".$result['vendorname']."</h5>";
+                $display.="<h5 class='card-title'>".ucwords($result['vendorname'])."</h5>";
                 $display.="<p class='card-text'>Carriers</p>";
                 $display.="<div class='vendorCarriers'>";
 
@@ -467,11 +467,11 @@ $returnData.=$display;
                     $display .= "<h5 class='mb-0'>";
                     $display .= "<button class='btn btn-link' data-toggle='collapse' data-target='#collapse" . $vendorname . "' aria-expanded='true' aria-controls='collapseOne'>";
                     if(strtolower($vendorname)=="apple"){
-                        $display .= "<i class='fa fa-apple vendorlistIcon'></i>".$vendorname;
+                        $display .= "<i class='fa fa-apple vendorlistIcon'></i>".ucwords($vendorname);
                     }else if(strtolower($vendorname)=="android"){
-                        $display .= "<i class='fa fa-android vendorlistIcon'></i>".$vendorname;
+                        $display .= "<i class='fa fa-android vendorlistIcon'></i>".ucwords($vendorname);
                     }else{
-                        $display .= "<i class='fa fa-globe vendorlistIcon vendorlistGlobeIcon'></i><p class='unlockedVendorList'>".$vendorname."</p>";
+                        $display .= "<i class='fa fa-globe vendorlistIcon vendorlistGlobeIcon'></i><p class='unlockedVendorList'>".ucwords($vendorname)."</p>";
                     }
                     $display .= "</button>";
                     $display .= "</h5>";
@@ -842,8 +842,11 @@ $returnData.=$display;
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";
-                $display .= "<div class='col-md-2 btngrp'>";
+                $display .= "<div class='col-md-8 btngrp'>";
                 $display .= "<a class='userbtn useredit phoneedit' href='editphone.php?phoneid=".$result['id']."'><i class='fa fa-pencil'></i>Edit Phone</a></br>";
+                if($_SESSION['role']=="admin"||$_SESSION['role']=="superuser"){
+                    $display .= "<a class='userbtn useredit phoneremove' href='deletephone.php?phoneid=".$result['id']."'><i class='fa fa-trash'></i>Remove Phone</a></br>";
+                }
                 $display .= "</div>";
                 $display .= "</div>";
                 $display .= "</div>";

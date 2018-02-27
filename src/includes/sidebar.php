@@ -14,7 +14,7 @@
 
     if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&(
             $_SESSION['role']=='admin'||$_SESSION['role']=='manager'||$_SESSION['role']=='superuser')){
-        $display ="<div class='dropdown'>";
+        $display ="<div class='dropdown dbDropMenuContainer'>";
         $display.="<i class='fa fa-database sideNavIcon dbIcon aria-hidden='true'></i><a class='dropdown-toggle' data-toggle='dropdown' href='managedb.php'>Manage Database</a>";
         $display.="<div class='dropdown-menu dbDropMenu' aria-labelledby='dropdownMenuButton'>";
         $display.="<a class='dropdown-item' href='vendorpanel.php'>Vendors</a>";
@@ -26,5 +26,6 @@
     }
 
     ?>
+    <li class='sideNavLink'><i class='fa fa-user-circle sideNavIcon' aria-hidden='true'></i><a href='profile.php'>My Profile</a></li>
 </ul>
 </div>

@@ -65,6 +65,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
            encode:true
         }).done(function(data){
             $("#phonelist").html(data);
+            setupRemoveBtns();
         });
         event.preventDefault();
     });
@@ -78,6 +79,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
            $("#phonelist").html(data);
            setupRemoveBtns();
        });
+       console.log("ding");
    }
    function setupRemoveBtns(){
        var removePhoneBtns = document.querySelectorAll(".phoneremove");
