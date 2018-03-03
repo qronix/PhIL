@@ -339,7 +339,8 @@ function verifyManager($managerName, $managerPassword){
 
 function loadProfile($userid){
 
-        $resultData = "";
+        global $resultData;
+        global $display;
 
         try{
             $sql = "SELECT * FROM users WHERE id=:userid";
@@ -348,7 +349,27 @@ function loadProfile($userid){
             if($statement->execute()){
 
                 while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
-
+                    $display="<div class='container profileContainer col-md-5'>";
+                    $display.="<div class='row profileHeader'>";
+                    $display.="<h2>".ucwords(filter_var($result['username']))."'s Profile</h2>";
+                    $display.="</div>";
+                    $display.="<div class='row userDetailsContainer'>";
+                    $display.="<div class='col-md-5'>";
+                    $display.="<p>Role:</p>";
+                    $display.="</div>";
+                    $display.="<div class='col-md-5'>";
+                    $display.="<p>".ucwords(filter_var($result['role']))."</p>";
+                    $display.="</div>";
+                    $display.="<div class='clearfix'></div>";
+                    $display.="</div>";
+                    $display.="<div class='row changePasswordBtn'>";
+                    $display.="<div class='hidden' id='userid'>".filter_var($result['id'])."</div>";
+                    $display.="<a href='#' class='btn userbtn'>Change password</a>";
+                    $display.="</div>";
+                    $display.="</div>";
+                }
+                if(!empty($display)&&$display!==""){
+                    $resultData = $display;
                 }
             }else{
                 $resultData = "Could not load user from database";

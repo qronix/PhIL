@@ -20,7 +20,6 @@ include("includes/sidebar.php");
             <p>Admin</p>
         </div>
         <div class="clearfix"></div>
-
     </div>
     <div class="row changePasswordBtn">
         <a href="#" class="btn userbtn">Change password</a>
