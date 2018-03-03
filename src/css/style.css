@@ -108,7 +108,8 @@ html{
 /************************/
 
 .profileContainer{
-    height: 200px;
+    height: auto;
+    min-height: 200px;
     background-color: #004B7F;
     color: white;
     font-size: 0.8em;
@@ -124,12 +125,16 @@ html{
     justify-content: left;
 }
 
+.buttonPadding{
+    padding-bottom: 40px;
+}
+
 .userDetailsContainer{
     float: left;
     margin: 0 auto;
     border: 1px solid greenyellow;
 }
-.changePasswordBtn{
+.changePasswordBtnContainer{
     float: right;
     margin-top: 95px !important;
 }
@@ -137,6 +142,36 @@ html{
     justify-content: center;
 }
 
+.noMarginTop{
+    margin-top: 0 !important;
+}
+.profilePassRow:nth-of-type(even){
+    margin-bottom: 20px;
+    justify-content: left;
+}
+
+.profilePassRow label{
+    display: block;
+    float: left;
+}
+
+.profilePassRow{
+    align-content: left !important;
+    text-align: left !important;
+    justify-content: left !important;
+}
+
+.profilePassContainer row{
+    align-content: left !important;
+    justify-content: left !important;
+}
+.profilePassRow input[type=password]{
+    max-width: 300px;
+}
+
+#changePassArea{
+    margin-top: 100px !important;
+}
 
 /**********************/
 /********ALERT REUSABLES*********/

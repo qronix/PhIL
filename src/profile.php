@@ -20,3 +20,14 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&isset($_SESSION['userid'
 }
 
 echo $resultData;
+
+?>
+
+
+<script type="text/javascript">
+    var changePassBtn = document.getElementById("changePassBtn");
+
+    changePassBtn.addEventListener("click",function(event){
+
+    });
+</script>

@@ -364,7 +364,7 @@ function loadProfile($userid){
                     $display.="</div>";
                     $display.="<div class='row changePasswordBtn'>";
                     $display.="<div class='hidden' id='userid'>".filter_var($result['id'])."</div>";
-                    $display.="<a href='#' class='btn userbtn'>Change password</a>";
+                    $display.="<a href='#' class='btn userbtn' id='changePassBtn'>Change password</a>";
                     $display.="</div>";
                     $display.="</div>";
                 }
