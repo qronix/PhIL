@@ -380,6 +380,64 @@ function loadProfile($userid){
         return($resultData);
 }
 
+function changePassword($cleanData){
+        global $resultData;
+        global $currentUserPasswordHash;
+
+            if(isset($cleanData['currentPass'])&&!empty($cleanData['currentPass'])){
+                if(isset($cleanData['newPass'])&&!empty($cleanData['newPass'])){
+                    if(isset($cleanData['newPassConfirm'])&&!empty($cleanData['newPassConfirm'])){
+                        //check current password is correct
+                        try{
+                            $sql = "SELECT password FROM users WHERE id=:userid";
+                            $statement = $this->pdo->prepare($sql);
+                            $statement->bindValue('userid',$cleanData['userid']);
+                            if($statement->execute()){
+                                while(($result=$statement->fetch(PDO::FETCH_ASSOC))!==false){
+                                    $currentUserPasswordHash = $result['password'];
+                                    break;
+                                }
+                                if(password_verify($cleanData['currentPass'],$currentUserPasswordHash)){
+                                    if($cleanData['newPass']===$cleanData['newPassConfirm']){
+                                        $newPasswordHash = password_hash($cleanData['newPass'],PASSWORD_DEFAULT,['cost'=>12]);
+                                        try{
+                                            $sql = "UPDATE users SET password=:passwordHash WHERE id=:userid LIMIT 1";
+                                            $statement = $this->pdo->prepare($sql);
+                                            $statement->bindValue('passwordHash',$newPasswordHash);
+                                            $statement->bindValue('userid',$cleanData['userid']);
+                                            if($statement->execute()){
+                                                $resultData = "Password successfully changed!";
+                                            }else{
+                                                $resultData = "Could not update user settings.";
+                                            }
+                                        }catch (PDOException $exc){
+                                            $resultData = "Could not verify password. Password not changed.";
+
+                                        }
+                                    }else{
+                                        $resultData = "New passwords do not match.";
+                                    }
+                                }else{
+                                    $resultData = "Current password is not correct.";
+                                }
+                            }else{
+                                $resultData = "Could not change password. Database failure.";
+                            }
+                        }catch (PDOException $exc){
+                            $resultData = "Could not contact database.";
+                        }
+                    }else{
+                        return $resultData="Could not change password.";
+                    }
+                }else {
+                    return $resultData="Could not change password.";
+                }
+            }else{
+                return $resultData="Could not change password.";
+            }
+        return($resultData);
+}
+
 function resetPassword($username){
 
 }

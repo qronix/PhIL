@@ -1,27 +1,12 @@
 <?php
-
-include("includes/header.php");
-include("includes/sidebar.php");
+include_once ("includes/header.php");
 
 ?>
 
 
-
 <div class="container profileContainer col-md-5">
 
-    <div class="row profileHeader">
-        <h2>Test Profile</h2>
-    </div>
-    <div class="row userDetailsContainer">
-        <div class="col-md-5">
-            <p>Role:</p>
-        </div>
-        <div class="col-md-5">
-            <p>Admin</p>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="container row hidden" id="changePassArea">
+    <div class="container row" id="changePassArea">
         <div id="resultMessage" class="alert alert-warning hidden">
 
         </div>
@@ -47,9 +32,14 @@ include("includes/sidebar.php");
         </div>
     </div>
     <div class="changePasswordBtnContainer">
-        <a href="#changePassCollapse" id="changePassBtn" class="btn userbtn">Change password</a>
+        <a href="#" id="changePassBtn" class="btn userbtn">Submit</a>
     </div>
 </div>
+
+
+
+
+
 
 <script type="text/javascript">
     var changePassBtn = document.getElementById("changePassBtn");
@@ -62,25 +52,24 @@ include("includes/sidebar.php");
         if(this.innerText==="Submit"){
             console.log("ding");
             this.setAttribute("href","");
-                var currentPassword = document.getElementById("currentPass").value;
-                var newPassword     = document.getElementById("newPass").value;
-                var confirmPassword = document.getElementById("confirmNewPass").value;
+            var currentPassword = document.getElementById("currentPass").value;
+            var newPassword     = document.getElementById("newPass").value;
+            var confirmPassword = document.getElementById("confirmNewPass").value;
 
-                var queryData = {
-                    currentPass:    currentPassword,
-                    newPass:        newPassword,
-                    newPassConfirm: confirmPassword
-                };
-                console.log(queryData);
-                $.ajax({
-                    type:     'POST',
-                    url:      'changepass.php',
-                    data:      queryData,
-                    encode:    true
-                }).done(function(data){
-                    console.log(data);
-                    console.log("lame");
-                });
+            var queryData = {
+                currentPass:    currentPassword,
+                newPass:        newPassword,
+                newPassConfirm: confirmPassword
+            };
+            console.log(queryData);
+            $.ajax({
+                type:     'POST',
+                url:      'changepass.php',
+                data:      queryData,
+                encode:    true
+            }).done(function(data){
+                console.log(data);
+            });
             event.preventDefault();
         }
         if(changePassArea.classList.contains("hidden")){
