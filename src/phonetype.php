@@ -11,7 +11,7 @@ class Phonetype{
     {
         $this->phonetypeName= $phonetypeName;
         $this->carrier = $carrier;
-        $this->phoneCount = 1;
+        $this->phoneCount = 0;
 
         $phoneInfo = [
             'phoneType'=>$this->phonetypeName,
