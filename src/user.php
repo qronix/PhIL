@@ -341,7 +341,6 @@ function loadProfile($userid){
 
         global $resultData;
         global $display;
-
         try{
             $sql = "SELECT * FROM users WHERE id=:userid";
             $statement = $this->pdo->prepare($sql);
@@ -427,13 +426,13 @@ function changePassword($cleanData){
                             $resultData = "Could not contact database.";
                         }
                     }else{
-                        return $resultData="Could not change password.";
+                         $resultData="Could not change password.";
                     }
                 }else {
-                    return $resultData="Could not change password.";
+                     $resultData="Could not change password.";
                 }
             }else{
-                return $resultData="Could not change password.";
+                 $resultData="Could not change password.";
             }
         return($resultData);
 }

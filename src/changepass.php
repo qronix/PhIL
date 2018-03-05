@@ -11,6 +11,7 @@ global $functionMessage;
 
 $cleanData = array();
 $resultData = array();
+$message = array();
 $errors = array();
 
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
@@ -55,9 +56,7 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                     include_once ("user.php");
                     $user = new User();
                     $functionMessage = $user->changePassword($cleanData);
-                    if(isset($resultData['message'])){
-                        $resultData['message']=$functionMessage;
-                    }
+                    $resultData['errors'] = $functionMessage;
                 }else{
                     $resultData['errors']=$errors;
                 }
@@ -86,3 +85,4 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
 }
 
 echo json_encode($resultData);
+//echo print_r($resultData);

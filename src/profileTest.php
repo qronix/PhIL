@@ -61,7 +61,7 @@ include("includes/sidebar.php");
 
         if(this.innerText==="Submit"){
             console.log("ding");
-            this.setAttribute("href","");
+            //this.setAttribute("href","");
                 var currentPassword = document.getElementById("currentPass").value;
                 var newPassword     = document.getElementById("newPass").value;
                 var confirmPassword = document.getElementById("confirmNewPass").value;
@@ -79,7 +79,6 @@ include("includes/sidebar.php");
                     encode:    true
                 }).done(function(data){
                     console.log(data);
-                    console.log("lame");
                 });
             event.preventDefault();
         }
