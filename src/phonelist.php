@@ -25,7 +25,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
 <div class="container editusercontainer col-sm-11">
     <div class="row">
         <div class="container" id="form-message">
-
         </div>
     </div>
     <div class="row">
@@ -102,9 +101,9 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
 
 
                event.preventDefault();
-               $("#phoneList-message").fadeTo(2000, 500).slideUp(500, function(){
-                   $("#phoneList-message").slideUp(500);
-               });
+               // $("#phoneList-message").fadeTo(2000, 500).slideUp(500, function(){
+               //     $("#phoneList-message").slideUp(500);
+               // });
                loadPhones();
            });
        });
@@ -157,7 +156,8 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
                 }
                 if(data.message!==undefined){
                     console.log("here");
-                    $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
+                     // $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
+                     $(formMessage).append(data.message);
                 }
                 loadPhones();
             });

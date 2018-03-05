@@ -48,7 +48,8 @@ $phone = new Phone();
                     </div>
                     <div class="form-group col-md-4 phoneedit" id="imei-group">
                         <label for="imei">IMEI</label>
-                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="imei" id="imei" required>
+<!--                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control" name="imei" id="imei" required>-->
+                        <input type="text"  class="form-control" name="imei" id="imei" required>
                     </div>
                 </div>
                 <div class="form-row">

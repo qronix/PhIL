@@ -165,15 +165,15 @@ class Phone
                     $success = $statement->execute();
 
                     if($success){
-                        $message = "Phone was successfully added";
+                        $message = "Phone ".$phoneData['imei']." was successfully added";
                     }else{
-                        $message = "Could not add phone.";
+                        $message = "Error: Could not add phone ".$phoneData['imei'].".";
                     }
                 }catch(PDOException $exc){
-                    $message = "An error occurred. Phone was not entered.";
+                    $message = "Error: An error occurred. Phone ".$phoneData['imei']." was not entered.";
                 }
             }else{
-                $message = "Phone already exists!";
+                $message = "Error: Phone " .$phoneData['imei']." already exists!";
             }
         return $message;
     }

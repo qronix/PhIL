@@ -331,6 +331,10 @@ html{
     margin-top: 5vh;
     margin-left: 14%
 }
+#form-message{
+    /*width: 400px;*/
+    /*height: 400px;*/
+}
 .phonerow{
     background-color: #003B64;
     color: white;
@@ -353,6 +357,10 @@ html{
     align-content: left;
 }
 
+.phoneBulkMessages{
+    float: right !important;
+    max-width: 200px !important;
+}
 
 .col-md-2,
 .col-md-1{
