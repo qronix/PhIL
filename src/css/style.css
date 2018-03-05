@@ -132,7 +132,6 @@ html{
 .userDetailsContainer{
     float: left;
     margin: 0 auto;
-    border: 1px solid greenyellow;
 }
 .changePasswordBtnContainer{
     float: right;
@@ -173,9 +172,9 @@ html{
     margin-top: 100px !important;
 }
 
-/**********************/
+/*********************************/
 /********ALERT REUSABLES*********/
-/**********************/
+/*******************************/
 
 .alert{
     text-align: center;

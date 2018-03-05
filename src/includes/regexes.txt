@@ -10,6 +10,7 @@
 (?<=walkin:)(\s?.\S*)
 (?<=\?phoneid=)(.*)
 [^a-zA-Z0-9-_\.] //sanitize input
+(?!>)"((?!(<|;))) //select all quotes which need to be single
 
 preg_replace('/[^a-zA-Z0-9-_\.]/','',$testImei); //clean input
 

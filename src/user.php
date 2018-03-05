@@ -335,51 +335,7 @@ function verifyManager($managerName, $managerPassword){
             return (false);
         }
 }
-
-
-function loadProfile($userid){
-
-        global $resultData;
-        global $display;
-        try{
-            $sql = "SELECT * FROM users WHERE id=:userid";
-            $statement = $this->pdo->prepare($sql);
-            $statement->bindValue('userid',$userid);
-            if($statement->execute()){
-
-                while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
-                    $display="<div class='container profileContainer col-md-5'>";
-                    $display.="<div class='row profileHeader'>";
-                    $display.="<h2>".ucwords(filter_var($result['username']))."'s Profile</h2>";
-                    $display.="</div>";
-                    $display.="<div class='row userDetailsContainer'>";
-                    $display.="<div class='col-md-5'>";
-                    $display.="<p>Role:</p>";
-                    $display.="</div>";
-                    $display.="<div class='col-md-5'>";
-                    $display.="<p>".ucwords(filter_var($result['role']))."</p>";
-                    $display.="</div>";
-                    $display.="<div class='clearfix'></div>";
-                    $display.="</div>";
-                    $display.="<div class='row changePasswordBtn'>";
-                    $display.="<div class='hidden' id='userid'>".filter_var($result['id'])."</div>";
-                    $display.="<a href='#' class='btn userbtn' id='changePassBtn'>Change password</a>";
-                    $display.="</div>";
-                    $display.="</div>";
-                }
-                if(!empty($display)&&$display!==""){
-                    $resultData = $display;
-                }
-            }else{
-                $resultData = "Could not load user from database";
-            }
-        }catch (PDOException $exc){
-            $resultData = "Could not contact database";
-        }
-        return($resultData);
-}
-
-function changePassword($cleanData){
+    function changePassword($cleanData){
         //global $resultData;
         global $currentUserPasswordHash;
 
@@ -437,7 +393,76 @@ function changePassword($cleanData){
         return("An error occurred");
 }
 
-function resetPassword($username){
+
+
+    function loadProfile($userid){
+
+        $resultData = "";
+        $display="";
+
+        try{
+            $sql = "SELECT * FROM users WHERE id=:userid";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue('userid',$userid);
+            if($statement->execute()){
+
+                while(($result = $statement->fetch(PDO::FETCH_ASSOC))!==false){
+                    $display.="<div class='container profileContainer col-md-5'>";
+                    $display.="<div class='row profileHeader'>";
+                    $display.="<h2>".ucwords($result['username'])."'s Profile</h2>";
+                    $display.="</div>";
+                    $display.="<div class='row userDetailsContainer'>";
+                    $display.="<div class='col-md-5'>";
+                    $display.="<p>Role:</p>";
+                    $display.="</div>";
+                    $display.="<div class='col-md-5'>";
+                    $display.="<p>".ucwords($result['role'])."</p>";
+                    $display.="</div>";
+                    $display.="<div class='clearfix'></div>";
+                    $display.="</div>";
+                    $display.="<div class='container row hidden' id='changePassArea'>";
+                    $display.="<div id='resultMessage' class='alert alert-warning hidden'>";
+                    $display.="</div>";
+                    $display.="<div class='container profilePassContainer'>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<label for='currentPass'>Current password:</label>";
+                    $display.="</div>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<input type='password' class='form-control' id='currentPass' name='currentPass'>";
+                    $display.="</div>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<label for='newPass'>New password:</label>";
+                    $display.="</div>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<input type='password' class='form-control' id='newPass' name='newPass'>";
+                    $display.="</div>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<label for='confirmNewPass'>Confirm password:</label>";
+                    $display.="</div>";
+                    $display.="<div class='row profilePassRow'>";
+                    $display.="<input type='password' class='form-control' id='confirmNewPass' name='confirmNewPass'>";
+                    $display.="</div>";
+                    $display.="</div>";
+                    $display.="</div>";
+                    $display.="<div class='changePasswordBtnContainer'>";
+                    $display.="<a href='#changePassCollapse' id='changePassBtn' class='btn userbtn'>Change password</a>";
+                    $display.="</div>";
+                    $display.="</div>";
+
+                }
+                if(!empty($display)&&$display!==""){
+                    $resultData = $display;
+                }
+            }else{
+                $resultData = "Could not load user from database";
+            }
+        }catch (PDOException $exc){
+            $resultData = "Could not contact database";
+        }
+        return($resultData);
+    }
+
+    function resetPassword($username){
 
 }
 }
