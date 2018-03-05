@@ -7,12 +7,12 @@ global $currentPass;
 global $newPass;
 global $newPassConfirm;
 global $resultData;
-global $functionMessage;
+global $message;
 
 $cleanData = array();
 $resultData = array();
-$message = array();
 $errors = array();
+$message = array();
 
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
 
@@ -55,8 +55,9 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
                 if(sizeof($errors)===0){
                     include_once ("user.php");
                     $user = new User();
-                    $functionMessage = $user->changePassword($cleanData);
-                    $resultData['errors'] = $functionMessage;
+                    $message = $user->changePassword($cleanData);
+                    $cleanMessage = filter_var($message,FILTER_SANITIZE_SPECIAL_CHARS);
+                    $resultData['message']=$cleanMessage;
                 }else{
                     $resultData['errors']=$errors;
                 }
@@ -72,11 +73,13 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
 
     if(sizeof($errors)!==0){
         $cleanErrors = array();
-
         foreach ($errors as $key=>$value){
             $cleanErrors[$key]=strip_tags($value);
         }
         $resultData['errors']=$cleanErrors;
+        echo json_encode($resultData);
+    }else{
+        echo json_encode($resultData);
     }
 
 }else{
@@ -84,5 +87,5 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])){
     header("Location: index.php");
 }
 
-echo json_encode($resultData);
+
 //echo print_r($resultData);

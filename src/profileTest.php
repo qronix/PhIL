@@ -71,14 +71,21 @@ include("includes/sidebar.php");
                     newPass:        newPassword,
                     newPassConfirm: confirmPassword
                 };
-                console.log(queryData);
                 $.ajax({
                     type:     'POST',
                     url:      'changepass.php',
                     data:      queryData,
+                    dataType: 'json',
                     encode:    true
                 }).done(function(data){
-                    console.log(data);
+                    console.log(console.dir(data));
+
+                    //loop through object properties and values
+                    if(data.errors!==undefined){
+                        messageBuilder(data.errors,false);
+                    }else if(data.message!==undefined){
+                        messageBuilder(data.message,true);
+                    }
                 });
             event.preventDefault();
         }
@@ -94,4 +101,29 @@ include("includes/sidebar.php");
             // changePassBtn.innerText = "Change password";
         }
     });
+
+    function messageBuilder(messageObject,message){
+        var messageContainer = document.getElementById("resultMessage");
+        var errorMessage = "";
+
+        if(!message){
+            for(prop in messageObject){
+                if(errorMessage===""){
+                    errorMessage=messageObject[prop];
+                }else if(errorMessage!==""){
+                    errorMessage+="</br>"+messageObject[prop];
+                }
+            }
+        }else{
+            errorMessage=messageObject;
+        }
+        console.log(errorMessage);
+        var innerHTML = "<div class='alert alert-warning'>"+errorMessage+"</div>";
+        messageContainer.innerHTML = innerHTML;
+        messageContainer.classList.remove("hidden");
+
+        $(messageContainer).fadeTo(2000, 500).slideUp(500, function(){
+            $(messageContainer).slideUp(500);
+        });
+    }
 </script>
