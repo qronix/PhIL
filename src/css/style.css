@@ -445,6 +445,13 @@ html{
         font-size: 0.8em;
     }
 
+    .resultMessage{
+        justify-content: center !important;
+        font-size: 0.8em !important;
+        text-align: center !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
 }
 
 @media (max-width: 1366px){

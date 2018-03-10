@@ -5,6 +5,7 @@ session_start();
 $errors = array();
 $data = array();
 include("phone.php");
+$messages = array();
 
 
 $phone = new Phone();
@@ -78,32 +79,35 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&($_SESSION['role']==="ad
     $errors['session'] = "Invalid session";
 }
 if(sizeof($errors) === 0){
-    $display="<div class='modal phoneBulkMessages' role='dialog'>";
-    $display.="<div class='modal-dialog' role='document'>";
-    $display.="<div class='modal-content'>";
-    $display.="<div class='modal-header'>";
-    $display.="<h5 class='modal-title'>Create phone results</h5>";
-    $display.="<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
-    $display.="<span aria-hidden='true'>&times;</span>";
-    $display.="</button>";
-    $display.="</div>";
-    $display.="<div class='modal-body'>";
+//    $display="<div class='modal phoneBulkMessages' role='dialog' style=\"display: block\">";
+//    $display.="<div class='modal-dialog' role='document'>";
+//    $display.="<div class='modal-content'>";
+//    $display.="<div class='modal-header'>";
+//    $display.="<h5 class='modal-title'>Create phone results</h5>";
+//    $display.="<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+//    $display.="<span aria-hidden='true'>&times;</span>";
+//    $display.="</button>";
+//    $display.="</div>";
+//    $display.="<div class='modal-body'>";
     foreach ($cleanImeis as $imei=>$value){
         $phoneData['imei']=$value;
         $message = $phone->createPhone($phoneData);
-        $display.="<div class='container row'>";
-        $display.= "<p>".$message."</p>";
-//        $data['message'] = $phone->createPhone($phoneData);
+        if(strpos($message,"Error:")===false){
+            $display ="<div class='container row alert alert-success resultMessage resultMsgGood'>";
+            $display.= "<p>".$message."</p>";
+        }
         if(strpos($message,"Error:") !==false){
-            break;
+            $display ="<div class='container row alert alert-danger resultMessage resultMsgBad'>";
+            $display.= "<p>".$message."</p>";
+            //break;
         }
         $display.="</div>";
-
+        array_push($messages,$display);
     }
-    $display.="</div>";
-    $display.="</div>";
-    $display.="</div>";
-    $display.="</div>";
+//    $display.="</div>";
+//    $display.="</div>";
+//    $display.="</div>";
+//    $display.="</div>";
 //    foreach ($cleanImeis as $imei=>$value){
 //            $phoneData['imei']=$value;
 //            $data['message'] = $phone->createPhone($phoneData);
@@ -111,7 +115,7 @@ if(sizeof($errors) === 0){
 //                break;
 //            }
 //    }
-    $data['message']=$display;
+    $data['message']=$messages;
 }
 else if(sizeof($errors)!==0){
     $data['errors'] = $errors;

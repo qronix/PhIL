@@ -11,8 +11,11 @@ $phone = new Phone();
 
 <div class="container editusercontainer col-sm-11">
     <div class="row">
-        <div class="container" id="form-message">
-
+        <div class="container" id="form-message-good">
+        </div>
+    </div>
+    <div class="row">
+        <div class="container" id="form-message-bad">
         </div>
     </div>
     <div class="row">

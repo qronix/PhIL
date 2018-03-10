@@ -13,7 +13,6 @@ $phone = new Phone();
 
 ?>
 
-
 <?php
 if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
     ($_SESSION['role']==="admin"||$_SESSION['role']==="manager"
@@ -23,10 +22,6 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
 ?>
 
 <div class="container editusercontainer col-sm-11">
-    <div class="row">
-        <div class="container" id="form-message">
-        </div>
-    </div>
     <div class="row">
         <h2>Phone list</h2>
     </div>
@@ -155,9 +150,15 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
                     }
                 }
                 if(data.message!==undefined){
-                    console.log("here");
-                     // $(formMessage).append("<div class='alert alert-warning'>"+data.message+"</div>");
-                     $(formMessage).append(data.message);
+                    data.message.forEach(function(message){
+                        if(message.indexOf("Error")!==-1){
+                            $("#form-message-bad").append(message);
+                        }
+                        else{
+                            $("#form-message-good").append(message);
+                        }
+                    });
+
                 }
                 loadPhones();
             });
@@ -168,8 +169,9 @@ if(isset($_SESSION['role'])&&!empty($_SESSION['role'])&&
             $('#employee').val('');
 
             event.preventDefault();
-            $("#form-message").fadeTo(2000, 500).slideUp(500, function(){
-                $("#form-message").slideUp(500);
+
+            $("#form-message-good").fadeTo(2000, 500).slideUp(500, function(){
+                $("#form-message-good").slideUp(500);
             });
         });
     });
